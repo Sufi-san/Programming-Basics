@@ -1,3 +1,4 @@
+package Basic;
 import java.util.Scanner;
 public class TypeConversion_Casting {
     public static void main(String[] args) {
@@ -37,8 +38,8 @@ public class TypeConversion_Casting {
         float _float = 78.97f;
         long _long= 4500000L;
         double _double = 345678.98756;
-        double result = (_byte*_float) + (_double / _int) - (_long/_char);
-        // float + double - long = double
+        double result = (_byte*_float) + (_double / _int) - (_long/_char) + _short;
+        // float + double - long + short = double
         System.out.println((_byte*_float) +" + "+ (_double * _int) +" - "+ (_long/_char));
         System.out.println(result);
 

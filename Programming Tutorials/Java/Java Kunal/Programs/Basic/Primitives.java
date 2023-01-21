@@ -1,4 +1,7 @@
+package Basic;
 public class Primitives {  // Primitives are data types which cannot be further broken down
+    // Primitive data type objects are stored directly in Stack Memory instead of Heap.
+    // Non-primitive data type objects, have only reference variable stored in stack while object is in heap.
     public static void main(String[] args) {
         /* Reference variables, Class, Packages, Methods etc. are called Identifiers,
         the values assigned or objects are called literals. */
