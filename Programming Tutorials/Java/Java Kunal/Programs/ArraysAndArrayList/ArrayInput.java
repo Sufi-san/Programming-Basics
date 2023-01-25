@@ -1,5 +1,5 @@
 package ArraysAndArrayList;
-import java.util.Arrays;
+import java.util.Arrays;  // required for toString method.
 import java.util.Scanner;
 public class ArrayInput {
     public static void main(String[] args) {
@@ -19,7 +19,7 @@ public class ArrayInput {
         System.out.println();
         // printing using enhanced for loop: (bit closer to Python)
         System.out.println("Printing using enhanced for loop:");
-        for (int element : arr){  // Simply printing the elements: for every element print the element.
+        for (int element : arr){  // Simply printing the elements: for every element in array, print the element.
             System.out.print(" "+element);
         }
 

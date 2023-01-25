@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class TwoDArrays {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+        // 2D Arrays are Arrays containing more Arrays as elements.
         // 2D Arrays are matrix like structures, having rows and columns.
         int[][] arr = new int[3][]; // adding number of columns is not mandatory
         // Manually storing elements in 2D Array:
@@ -12,7 +13,7 @@ public class TwoDArrays {
                 {1,2,3},
                 {4,5,6},
                 {7,8,9}
-        };  // Each memory location is itself an array.
+        };  // Each element is itself an array.
         for (int[] element: arr2){
             System.out.println(Arrays.toString(element));
         }
@@ -25,7 +26,7 @@ public class TwoDArrays {
                 {3,4,5},  // 1st index (row)
                 {6,7,8,9}  // 2nd index (row)
         };
-        for(int[] element: arr3){
+        for(int[] element: arr3){  // Since each element is an array
             System.out.println(Arrays.toString(element));
         }
 

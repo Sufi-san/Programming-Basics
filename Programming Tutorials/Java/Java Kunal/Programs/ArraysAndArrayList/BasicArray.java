@@ -12,7 +12,7 @@ public class BasicArray {
         // when there is no element allocated, element at that index is 0
         // for directly:
         int[] roll_num2 = {23, 45, 67, 89, 34};
-        // Note: all elements must be of similar type
+        // Note: all elements must be of similar type in an array.
 
         String[] arr = new String[5];
         System.out.println(arr[3]); // will print 'null'.
@@ -23,7 +23,7 @@ public class BasicArray {
 
     /* Breakdown:
         int[] roll_num;
-          // declaration of array. roll_num is getting defined in stack as a reference variable. (compile time)
+          // declaration of array. roll_num is getting defined in stack as a reference variable of type array. (compile time)
         roll_num = new int[5];
           // initialization of array, the actual object is being created in heap memory. (run time)
           // This is known as dynamic memory allocation
@@ -32,7 +32,7 @@ public class BasicArray {
 
         Note:
         Primitives are directly stored in stack memory
-        Self-made or non-primitive types are stored heap memory
+        Self-made or non-primitive types are stored in heap memory
      */
     }
 }

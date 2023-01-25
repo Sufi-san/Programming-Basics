@@ -6,8 +6,10 @@ public class ArrayOfObjects {
         Scanner in = new Scanner(System.in);
         // array of strings:
         /* Here, an array object is created and stored in heap memory.
-           it contains reference variables as elements, these reference
-           variables point to other objects in the heap.
+           This object itself contains reference variables as elements,
+           these reference variables point to other objects in the heap.
+           This concept is similar to 2D arrays, as Strings themselves
+           are character arrays.
          */
         String[] str_arr = new String[8];
         for (int i = 0; i < str_arr.length; i++) {

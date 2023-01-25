@@ -4,13 +4,15 @@ import java.util.ArrayList;  // ArrayList Class for Dynamic Array
 public class DynamicArrays {
     public static void main(String[] args) {
         Scanner s1 = new Scanner(System.in);
-        // ArrayLists are slower than the standard array, however we can allocate memory for elements dynamically.
-        // Memory Storage of ArrayList is similar to array but not all elements inside are primitive
+        // ArrayLists are slower than the standard array, however in an array we can allocate memory for elements dynamically.
+        // Memory Storage of ArrayList is similar to array, but it does not accept primitive datatype.
+        // The elements inside an ArrayList are thus objects of 'wrapper classes'.
+        // Wrapper Classes are used when we require to store primitive data-types in structures requiring object inputs.
         /* Why size is not fixed for dynamic-arrays/arraylist.
            1) Size is actually fixed internally.
            2) When the initial arraylist is filled by some amount,
-              It will create a new arraylist of say, double the size.
-              Old elements form initial arraylist will be copied in the new one.
+              It will create a new arraylist of say, double the size(there exists a formula for that in ArrayList Class).
+              Old elements from initial arraylist will be copied in the new one.
               Old/Initial arraylist is deleted.
          */
         ArrayList<Integer> list = new ArrayList<>(10);  // Initial Capacity is the default capacity of array.
@@ -28,6 +30,13 @@ public class DynamicArrays {
         list.add(25);
         list.add(57);  // initial capacity does not matter.
         // Other methods in ArrayList Class can also be accessed using the 'list' object.
+        /* list.add(element)
+           list.set(index, element)
+           list.get(index)
+           list.contains(element)
+           list.remove(index)
+           list.size()
+         */
         System.out.println(list);
         boolean hasElement = list.contains(57);  // Checks if element exists in arraylist.
         System.out.println(hasElement);

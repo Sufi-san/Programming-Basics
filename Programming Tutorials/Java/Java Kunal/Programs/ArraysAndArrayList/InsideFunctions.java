@@ -8,9 +8,9 @@ public class InsideFunctions {
         System.out.println(Arrays.toString(nums));
         modify(nums);  // passed by value OF reference as Arrays are non-primitive
         System.out.println(Arrays.toString(nums));
-        // Thus, arrays are mutable.
+        // Thus, arrays are mutable in Java.
     }
-    static void modify(int[] arr){
+    static void modify(int[] arr){  //  as main function is static, the function to be called must also be static
         arr[0] = 23;  // changing array elements
         arr[3] = 34;
     }
