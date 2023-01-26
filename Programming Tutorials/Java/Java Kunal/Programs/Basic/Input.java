@@ -1,5 +1,5 @@
-import java.util.Scanner;  // Imported Scanner Class
-
+package Basic;
+import java.util.Scanner;
 public class Input {
     public static void main(String[] args) {
         // Basically, System.in corresponds to keyboard input, while System.out corresponds to display in cmd window
