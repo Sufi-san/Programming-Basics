@@ -30,7 +30,7 @@ public class Strings {
         System.out.println("name1: "+name1+" & name2: "+name2+" are the same object in String Pool.");
         // Why are Strings Immutable?
         // Short Answer: for security
-        /* If strings were immutable, then if one string object to which different objects were pointing
+        /* If strings were not immutable, then if one string object to which different variables were pointing
            was changed, then it would have been changed for all the reference variables. */
     }
 }
