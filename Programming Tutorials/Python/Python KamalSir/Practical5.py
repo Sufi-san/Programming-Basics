@@ -1,0 +1,5 @@
+length = float(input("Enter the length of the rectangle: "))
+breadth = float(input("Enter the breadth of the rectangle: "))
+perimeter = round(2*(length+breadth),3)
+area = round(length*breadth,3)
+print(f"Perimeter of Rectangle = {perimeter}\nArea of Rectangle = {area}")
