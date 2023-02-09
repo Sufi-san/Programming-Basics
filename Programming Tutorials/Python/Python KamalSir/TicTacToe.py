@@ -43,7 +43,7 @@ while(decision != "made"):
 	try:
 		position = int(input(f"Enter number to place {symbol} at: "))
 	except:
-		print("Please enter numbers only.")
+		print("Please enter integers only.")
 		i -= 1
 		continue
 	if position <= 9 and position > 0:
