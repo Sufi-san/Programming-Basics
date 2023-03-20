@@ -8,11 +8,11 @@ f1 = ("Times New Roman", 30, "bold")
 f2 = ("Calibri", 20, "bold")
 
 def find():
-	radius = float(ent_radius.get())
+	radius = float(ent_radius.get())  # .get() fetches data entered by user in an entry.
 	if radius > 0:
 		area = round(3.14*radius**2,2)
 		circumference = round(2*3.14*radius,2)
-		msg = "Area is "+str(area)+"\nCircumference is "+str(circumference)
+		msg = f"Area is {area}\nCircumference is {circumference}"
 		lab_ans.configure(text = msg)
 	else:
 		lab_ans.configure(text = "Please enter valid input")

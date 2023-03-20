@@ -12,7 +12,7 @@ def calc():
 	length = float(ent_length.get())
 	breadth = float(ent_breadth.get())
 	if length > 0 and breadth > 0:
-		perimeter = round(2*(length*breadth),2)
+		perimeter = round(2*(length+breadth),2)
 		area = round(length*breadth,2)
 		msg = "Area of Rectangle is "+str(area)+"\nPerimeter of Rectangle is "+str(perimeter)
 		lab_ans.configure(text = msg)

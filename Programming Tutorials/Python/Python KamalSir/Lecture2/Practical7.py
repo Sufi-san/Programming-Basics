@@ -5,7 +5,7 @@ def convert(rupees):
 	print(f"The amount in dollars is $ {dollars}")
 
 rupees = float(input("Enter amount in rupees: "))
-if rupees > 0:
+if rupees >= 0:
 	convert(rupees)
 else:
 	print("Enter valid amount.")

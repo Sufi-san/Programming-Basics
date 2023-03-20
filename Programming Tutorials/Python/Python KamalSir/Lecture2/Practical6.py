@@ -1,4 +1,4 @@
-# wapf to accept length and bradth print area and peri of rect
+# wapf to accept length and breadth print area and peri of rect
 
 def compute(length, breadth):
 	area = round(length*breadth,2)
@@ -7,7 +7,7 @@ def compute(length, breadth):
 
 length = float(input("Enter the length of the rectangle: "))
 breadth = float(input("Enter the breadth of the rectangle: "))
-if length > 0 and breadth > 0:
+if length >= 0 and breadth >= 0:
 	compute(length, breadth)
 else:
 	print("Enter valid data.")

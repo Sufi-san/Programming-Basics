@@ -7,7 +7,7 @@ def compute(radius):
 	print(f"Area of Circle = {area}\nCircumference of circle = {circumference}")
 
 radius = float(input("Enter the radius of circle: "))
-if radius > 0:
+if radius >= 0:
 	compute(radius)
 else:
 	print("Please enter valid input.")

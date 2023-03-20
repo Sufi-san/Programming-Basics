@@ -4,7 +4,8 @@
 
 name = input("Enter your name: ")
 sort_name = sorted(name)
-join_sort = "".join(sort_name)
+print(sort_name)  # Sorted List of Characters
+join_sort = "".join(sort_name)  # Joining All elements of sorted list with nothing in between
 print(f"Alphabetically sorted: {join_sort}")
 
 # What happens in the background?
