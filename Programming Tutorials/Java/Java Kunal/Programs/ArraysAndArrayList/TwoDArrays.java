@@ -7,7 +7,8 @@ public class TwoDArrays {
         Scanner in = new Scanner(System.in);
         // 2D Arrays are Arrays containing more Arrays as elements.
         // 2D Arrays are matrix like structures, having rows and columns.
-        int[][] arr = new int[3][]; // adding number of columns is not mandatory
+        int[][] arr = new int[3][]; // adding number of columns is not mandatory if we want a square matrix type.
+        // when column size is not given, it is assumed to be same as number of rows.
         // Manually storing elements in 2D Array:
         int[][] arr2 = {
                 {1,2,3},
@@ -22,17 +23,17 @@ public class TwoDArrays {
 
         // There can be variable number of columns, hence number of columns is not mandatory.
         int[][] arr3 = {
-                {1,2},  // 0th index (row)
-                {3,4,5},  // 1st index (row)
-                {6,7,8,9}  // 2nd index (row)
+                {1,2},  // 0th index (row 0)
+                {3,4,5},  // 1st index (row 1)
+                {6,7,8,9}  // 2nd index (row 2)
         };
         for(int[] element: arr3){  // Since each element is an array
             System.out.println(Arrays.toString(element));
         }
 
         int[][] arr4 = new int[4][3];  // 4 rows, 3 columns
-        System.out.println(arr4.length);  // number of rows
-        // Input for 2D arrays:
+        System.out.println(arr4.length);  // number of rows = number of sub arrays
+        // User (Dynamic) Input for 2D arrays:
         for (int row = 0; row < arr4.length; row++) {  // for loop for row
               for(int col = 0; col < arr4[row].length; col++){  // for loop for columns,
                   // here arr[row].length gives length of each array stored in initialized 2D array

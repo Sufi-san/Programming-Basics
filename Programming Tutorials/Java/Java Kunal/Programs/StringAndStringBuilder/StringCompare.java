@@ -2,6 +2,7 @@ package StringAndStringBuilder;
 
 public class StringCompare {
     public static void main(String[] args) {  // Command-line arguments are stored in 'args' which is a String type.
+        // These command line arguments consist of 'java', 'javac' etc.
         String a = "Sufiyan";
         String b = "Sufiyan";  // We know both variables are pointing to same object.
 

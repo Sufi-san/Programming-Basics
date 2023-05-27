@@ -1,7 +1,7 @@
 package FunctionsAndMethods;
 import java.util.Scanner;
 public class Functions_Methods {
-    /* As Java is a purely Object-Oriented Programming Language,
+    /* As Java is a mostly Object-Oriented Programming Language,
        functions are always created inside classes.
        These functions are known as methods.
      */

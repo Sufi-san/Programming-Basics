@@ -2,10 +2,10 @@ package StringAndStringBuilder;
 import java.util.Arrays;
 public class Strings {
     public static void main(String[] args) {
-        int[] arr = {2,3,4,5};  // can be changed
+        int[] arr = {2,3,4,5};  // can be changed, object in heap is modified
         arr[2] = 8;
         System.out.println(Arrays.toString(arr));
-        String name = "Sufiyan Chougule";  // Immutable
+        String name = "Sufiyan Chougule";  // Immutable, cannot be changed, object in heap cannot be modified.
         System.out.println(name);  // Simple Printing
 
         // String is the most commonly used class in java class library
@@ -23,7 +23,8 @@ public class Strings {
                                      change made via any reference variable.
                                      In case we change an old reference variable, a new object will be created
                                      in the pool, and it will point to that new object instead of changing the
-                                     old one. The old object will then be erased by the garbage collector.
+                                     old one. The old object will then be erased by the garbage collector if it
+                                     is not used by any other reference variable.
          */
         String name1 = "Shubham";
         String name2 = "Shubham";  // Pointing to same 'Shubham' in String Pool

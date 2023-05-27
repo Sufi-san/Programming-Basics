@@ -1,3 +1,4 @@
+package ConditionalsAndLoops;
 import java.util.Scanner;
 public class Q_CalculatorProgram {
     public static void main(String[] args) {

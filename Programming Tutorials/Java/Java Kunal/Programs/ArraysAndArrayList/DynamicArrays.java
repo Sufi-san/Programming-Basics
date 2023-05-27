@@ -4,7 +4,7 @@ import java.util.ArrayList;  // ArrayList Class for Dynamic Array
 public class DynamicArrays {
     public static void main(String[] args) {
         Scanner s1 = new Scanner(System.in);
-        // ArrayLists are slower than the standard array, however in an array we can allocate memory for elements dynamically.
+        // ArrayLists are slower than the standard array, however in an arraylist we can allocate memory for elements dynamically multiple times.
         // Memory Storage of ArrayList is similar to array, but it does not accept primitive datatype.
         // The elements inside an ArrayList are thus objects of 'wrapper classes'.
         // Wrapper Classes are used when we require to store primitive data-types in structures requiring object inputs.
@@ -30,12 +30,12 @@ public class DynamicArrays {
         list.add(25);
         list.add(57);  // initial capacity does not matter.
         // Other methods in ArrayList Class can also be accessed using the 'list' object.
-        /* list.add(element)
-           list.set(index, element)
-           list.get(index)
-           list.contains(element)
-           list.remove(index)
-           list.size()
+        /* list.add(element) -> adds element to the end of arraylist
+           list.set(index, element) -> updates element at a given index in arraylist
+           list.get(index) -> gets a single element at specified index in arraylist.
+           list.contains(element) -> returns boolean value depending on whether element is present in arraylist
+           list.remove(index) -> removes element at specified index in arraylist.
+           list.size() -> similar to .length for arrays, it returns the size of the arraylist.
          */
         System.out.println(list);
         boolean hasElement = list.contains(57);  // Checks if element exists in arraylist.

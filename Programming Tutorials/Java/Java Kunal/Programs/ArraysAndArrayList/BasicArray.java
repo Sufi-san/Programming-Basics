@@ -11,7 +11,8 @@ public class BasicArray {
         System.out.println(roll_num[4]);  // this will print 0
         // when there is no element allocated, element at that index is 0
         // for directly:
-        int[] roll_num2 = {23, 45, 67, 89, 34};
+        roll_num = new int[] {23, 45, 67, 89, 34};
+        System.out.println(roll_num[4]); // this will print 34
         // Note: all elements must be of similar type in an array.
 
         String[] arr = new String[5];
@@ -32,7 +33,7 @@ public class BasicArray {
 
         Note:
         Primitives are directly stored in stack memory
-        Self-made or non-primitive types are stored in heap memory
+        Self-made objects or non-primitive types are stored in heap memory
      */
     }
 }

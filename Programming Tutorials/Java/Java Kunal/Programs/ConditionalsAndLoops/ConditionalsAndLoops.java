@@ -1,3 +1,4 @@
+package ConditionalsAndLoops;
 import java.util.Scanner;
 public class ConditionalsAndLoops {
     public static void main(String[] args) {

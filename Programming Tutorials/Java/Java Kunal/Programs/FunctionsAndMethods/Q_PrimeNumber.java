@@ -25,7 +25,7 @@ public class Q_PrimeNumber {
                 }
                 divisor++;
             }
-            return true;
+            return true; // when the if condition is never true in all while loop iterations
         }
     }
 }
