@@ -1,2 +1,0 @@
-Try out Kotlin code at:
-play.kotlinlang.org

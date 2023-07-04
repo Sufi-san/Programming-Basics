@@ -16,7 +16,8 @@ public class Primitives {  // Primitives are data types which cannot be further 
         float decimal = 67.8f;  // Primitive, 'f' after number is required for float declaration (4 bytes)
         double lrg_decimal = 56779834589.78945;  // Primitive (8 bytes)
         long lrg_num = 56798738579903L;  //Primitive 'L' after number is required for long declaration (8 bytes)
-        boolean truth_value = true; // Primitive, can also be 'false'
+        boolean truth_value = true; // Primitive, can also be 'false' (1 bit)
         String name = "Sufiyan Chougule";  // Strings are not primitive, can be broken down to characters
+        // However, string-name[index] to read or modify characters of the string is not supported in Java.
     }
 }
