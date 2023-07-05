@@ -18,16 +18,8 @@ public class DynamicArrays {
         ArrayList<Integer> list = new ArrayList<>(10);  // Initial Capacity is the default capacity of array.
         // This means Initial Arraylist in memory will have a capacity for 10 elements.
         // <Integer> is a 'generic', a wrapper class which declares what type of elements will the array contain.
-        list.add(88);
-        list.add(89);
-        list.add(87);
-        list.add(86);
-        list.add(85);
-        list.add(56);
-        list.add(77);
-        list.add(83);
-        list.add(45);
-        list.add(25);
+        list.add(88);list.add(89);list.add(87);list.add(86);list.add(85);list.add(56);list.add(77);list.add(83);
+        list.add(45);list.add(25); // 10 elements added to ArrayList (initial size)
         list.add(57);  // initial capacity does not matter.
         // Other methods in ArrayList Class can also be accessed using the 'list' object.
         /* list.add(element) -> adds element to the end of arraylist

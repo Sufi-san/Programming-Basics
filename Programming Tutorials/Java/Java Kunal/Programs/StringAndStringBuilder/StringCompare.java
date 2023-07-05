@@ -1,8 +1,8 @@
 package StringAndStringBuilder;
 
 public class StringCompare {
-    public static void main(String[] args) {  // Command-line arguments are stored in 'args' which is a String type.
-        // These command line arguments consist of 'java', 'javac' etc.
+    public static void main(String[] args) {  // Command-line arguments are stored in 'args' which is a String type array.
+        // These command line arguments consist of 'java', 'javac' etc. (Not clearly understood by me yet...)
         String a = "Sufiyan";
         String b = "Sufiyan";  // We know both variables are pointing to same object.
 
@@ -15,7 +15,8 @@ public class StringCompare {
             false.
             Here '==' checks both values and whether variables point to same object.
         2) .equals method: when we do not want to check whether variables are pointing to same object
-            and only the value needs to be checked, '.equals' method should be used.
+            and only their value needs to be checked, '.equals' method should be used.
+            All pre-defined java objects have a .equals() method.
          */
 
         // Creating different objects of same values:

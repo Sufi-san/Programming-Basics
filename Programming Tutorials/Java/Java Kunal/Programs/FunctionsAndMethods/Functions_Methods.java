@@ -39,7 +39,5 @@ public class Functions_Methods {
         return sum;  // Function ends here
     }
 
-    public static void sum3(int a, int b){
-        System.out.println("Parameter Sum = "+(a+b));
-    }
+    public static void sum3(int a, int b){System.out.println("Parameter Sum = "+(a+b));}
 }

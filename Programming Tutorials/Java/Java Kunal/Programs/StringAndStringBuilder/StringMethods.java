@@ -16,5 +16,16 @@ public class StringMethods {
         System.out.println(Arrays.toString(tryout.strip().split(" ")));
         // .split(<regex>) creates a String array where 'regex' is the character at which elements are divided in
         // the array. (identified as different elements in the array)
+
+        /* There are many other methods which are used as per requirement, the ones seen here are:
+           ('*' stands for also a method for StringBuilder)
+            .toCharArray()
+            .toUpperCase()
+            .toLowerCase()
+            .indexOf() *
+            .lastIndexOf() *
+            .strip()
+            .split()
+         */
     }
 }

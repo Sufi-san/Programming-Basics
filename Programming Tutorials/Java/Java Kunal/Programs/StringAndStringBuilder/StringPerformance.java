@@ -20,7 +20,7 @@ public class StringPerformance {
 
         Though there exists 'Garbage Collector' to remove these unused objects, it is better if such
         useless objects are not at all formed from the get go.
-        To do this we need such a datatype that allows us to edit the same object at which the reference
+        To do this we need such a datatype/class that allows us to edit the same object at which the reference
         variable is pointing instead of creating a new object.
 
         This can be achieved using the 'StringBuilder' Class. (Mutable Strings)

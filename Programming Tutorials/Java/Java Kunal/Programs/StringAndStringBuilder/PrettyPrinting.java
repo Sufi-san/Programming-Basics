@@ -5,8 +5,8 @@ public class PrettyPrinting {
     public static void main(String[] args) {
         int a = 46;
         float b = 35.682532f;
-        System.out.printf("a = %d, b = %.2f, Pie = %.3f", a, b, Math.PI); // Float values are also rounded off
-        System.out.printf("\nMy name is %s and I am learning %s", "Sufiyan", "Java");
+        System.out.printf("a = %d, a(octal) = %o, a(hex) = %x , b = %.2e, Pie = %.3f",a, a, a, b, Math.PI); // Float values are also rounded off
+        System.out.printf("%nMy name is %s and I am learning %s 100%%", "Sufiyan", "Java");
     }
 
     /*
@@ -15,7 +15,6 @@ public class PrettyPrinting {
     %d - Decimal number (base 10)
     %e - Exponential floating-point number
     %f - Floating-point number
-    %i - Integer (base 10) [depends upon value entered, base is 16 for hex, 8 for oct, and 10 for dec]
     %o - Octal number (base 8)
     %s - String
     %u - Unsigned decimal (integer) number

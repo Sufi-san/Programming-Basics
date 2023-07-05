@@ -1,6 +1,6 @@
-package Assignments;
-/* rows player
-columns seasons
+package Assignments.Others;
+/* rows seasons
+columns players
 matrix of score
 find star player
 frequency of repetition of max scores */

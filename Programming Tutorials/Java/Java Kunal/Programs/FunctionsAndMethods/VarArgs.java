@@ -8,6 +8,7 @@ public class VarArgs {  // when we do not know the number of inputs, Variable Ar
 
     static void unknownArgs(double ...v){   // Internally, input is accepted into an array.
         System.out.println(Arrays.toString(v));
+        System.out.println(v[0]); // Accessing single element, similar to arrays.
     }
 
     static void unknownLast(int a, int b, int ...v) { // Variable arguments must always be at the end

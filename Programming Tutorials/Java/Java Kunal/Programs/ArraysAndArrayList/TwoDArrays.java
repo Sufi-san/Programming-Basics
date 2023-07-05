@@ -37,6 +37,7 @@ public class TwoDArrays {
         for (int row = 0; row < arr4.length; row++) {  // for loop for row
               for(int col = 0; col < arr4[row].length; col++){  // for loop for columns,
                   // here arr[row].length gives length of each array stored in initialized 2D array
+                  // in this case, as size of columns if fixed i.e. 3, we can replace arr4[row].length with 3.
                   System.out.print("arr4["+row+"]["+col+"] = ");
                   arr4[row][col] = in.nextInt();
               }

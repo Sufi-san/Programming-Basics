@@ -8,8 +8,6 @@ public class ArrayOfObjects {
         /* Here, an array object is created and stored in heap memory.
            This object itself contains reference variables as elements,
            these reference variables point to other objects in the heap.
-           This concept is similar to 2D arrays, as Strings themselves
-           are in a way, character arrays.
          */
         String[] str_arr = new String[8];
         for (int i = 0; i < str_arr.length; i++) {

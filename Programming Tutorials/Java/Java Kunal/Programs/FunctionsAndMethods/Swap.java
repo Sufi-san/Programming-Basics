@@ -7,8 +7,8 @@ public class Swap {
         System.out.println("Before Swap: m = "+m+", n = "+n);
         swap(m,n);  // Will not swap in main function as only value is passed.
         // In above case i.e. for primitive data types, always a copy of the value is passed.
-        // In this case, the copy is used to create another object, which the variables in function point to.
-        // However, for complex or non-primitive data types, we pass by value OF the reference variable.
+        // In this case, the copy is used to create another object/literal, which the variables in function point to.
+        // However, for complex or non-primitive data types, we pass by value OF the reference variable(actual reference).
         System.out.println("In main function, After Swap: m = "+m+", n = "+n);
     }
 

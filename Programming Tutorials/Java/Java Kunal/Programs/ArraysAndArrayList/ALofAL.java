@@ -26,10 +26,10 @@ public class ALofAL {
             for (int j = 0; j < 3; j++) {  // Here we cannot mention the size of internal arraylists as they are dynamic,
                 // Thus, to make the for loop stop at a certain point and accept another arraylist input we define limit.
                 // In this case, we have set it up such that we can enter 3 elements inside each arraylist.
-                list.get(i).add(s1.nextInt()); // Here list.get(i) obtains index of sub ArrayList
+                list.get(i).add(s1.nextInt()); // Here list.get(i) obtains sub ArrayList using for loop's 'i' as index
                 // and .add(s1.nextInt()) adds user input to the subArrayList.
                 // In this case, each arraylist will contain three elements.
-                // Since ArrayList at index 4 already has 3 elements, more 3 elements will be added after the old ones.
+                // Since ArrayList at index 3 already has 3 elements, more 3 elements will be added after the old ones.
             }
         }
 

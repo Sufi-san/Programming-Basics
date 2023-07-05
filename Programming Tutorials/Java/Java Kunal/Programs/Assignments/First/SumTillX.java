@@ -1,4 +1,4 @@
-package Assignments;
+package Assignments.First;
 import java.util.Scanner;
 
 public class SumTillX {

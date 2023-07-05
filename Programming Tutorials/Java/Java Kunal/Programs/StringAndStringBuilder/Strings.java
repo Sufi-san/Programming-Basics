@@ -15,7 +15,7 @@ public class Strings {
         // About String Immutability:
         /* Concepts:
             1) String Pool: It is a separate memory structure inside the heap containing the objects
-                            at which the reference variable points.
+                            whose reference is stored in reference variables.
                             All Similar values of String are not recreated in the pool, Saving memory.
                             This makes program more optimised.
             2) String Immutability:  Even though reference variables point to the same object in String pool,
@@ -24,7 +24,7 @@ public class Strings {
                                      In case we change an old reference variable, a new object will be created
                                      in the pool, and it will point to that new object instead of changing the
                                      old one. The old object will then be erased by the garbage collector if it
-                                     is not used by any other reference variable.
+                                     is not used by any other reference variable to free memory space.
          */
         String name1 = "Shubham";
         String name2 = "Shubham";  // Pointing to same 'Shubham' in String Pool
