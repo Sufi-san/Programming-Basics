@@ -1,0 +1,24 @@
+- Learnt about DevTools in Browsers
+- In Chrome can be opened using shortcut: Ctrl + Shift + J
+- Consists of information about HTML, CSS files, and contains JavaScript Console, Network & Performance and other important details.
+- Console can be used to run Java Script snippets. (However Code Editors are preferred for actual development work)
+- We can add JavaScript to an HTML document:
+  1) Inline -> Inside element tags
+  2) Internal -> All the code inside a 'script' tag
+  3) External -> Mentioning the 'src' inside a 'script' tag
+  4) Multiple External -> Mentioning multiple script tags with source.
+
+- Primitive Data types in js: 
+String(Depends on use-case), Number, Boolean, Undefined, Null.
+
+- 'typeof' operator can be used to check the datatypes
+
+- Variables in JS are containers to hold values of different data types.
+- They can be declared using: 'var', 'let' or 'const' (var is not recommended as it is error prone)
+- JS variable naming rules:
+    1) Cannot contain spaces
+    2) Cannot contain special characters except '$' and '_' (underscore)
+    3) Cannot start with numbers but can start with allowed special characters or alphabets.
+    4) Should follow camelCase convention (Good Practice)
+
+- 'const' variables need to be assigned a value on declaration, which is not the case for 'let'. Also, 'const' variables cannot be reassigned.
