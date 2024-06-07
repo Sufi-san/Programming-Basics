@@ -1,0 +1,40 @@
+Non-primitive Data Types: Objects, Arrays
+
+Primitive Data Types are immutable and Non-primitive Data Types are mutable.
+
+Mutable data types can be directly compared.
+Immutable data types use references of actual object. 
+They are also called reference types and are generally not compared directly.
+
+The built-in 'Math' object in JS provides useful mathematical functions to operate on Numbers.
+(.abs, .sqrt, .pow, .floor, .ceil, .round, .random ...)
+
+Strings can be concatenated using '+' operator or the '.concat()' method (preferred).
+
+We can use '\' while writing long string literals to indicate it will be continued in the next line
+There are many other backslash escape sequences for various tasks. (\n, \t, \\, \', \b, ...)
+
+Template literals can be used to directly use variable inside String: 
+`This is a variable value: ${variableName}`
+(We can also insert expressions inside of the ${})
+
+Though we cannot change characters, we can access them in an arraylike fashion in Strings. (str[0])
+Useful String methods: 
+
+.length, .toUpperCase, .toLowerCase,
+.substr(index, number of characters to slice)
+.substring(start index, end index) -> excludes end index
+.split(character to split at) -> return an array of Strings split as defined by arguments
+.trim() -> removes space from beginning and end of string
+.includes(substring) -> returns true if exists, false otherwise
+.replace(oldSubstring, newSubstring), 
+.charAt(index), charCodeAt(index) -> returns ASCII of character,
+.indexOf() & .lastIndexOf() -> takes substring and returns first or last index of substring if it exists and -1 otherwise, 
+.concat(multiple strings), .startsWith(substring), .endsWith(substring),
+.search(substring or Regex) -> returns first index of match, search value can be regular expression too.
+.match(substring or Regex) -> returns match arrays based on input.
+.repeat(number of times) -> return repeated sequence of string
+
+Useful methods for typecasting: 
+parseInt(), parseFloat(), Number(), 
+using '+' sign -> (let num = "5", then (+num) will become integer 5, works for float as well)
