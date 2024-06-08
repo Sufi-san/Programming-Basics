@@ -1,0 +1,63 @@
+Truthy values: (boolean is true)
+- positive and negative numbers except zero
+- all strings except empty strings
+- the literal boolean value 'true'
+
+False values: (boolean is false)
+- the literal boolean value 'false'
+- 0
+- 0n
+- Nan
+- undefined
+- null
+- '', "", `` empty strings.
+
+Assignment Operators: =, +=, -=, *=, /=, %=, **=, ...
+
+Comparison Operators: ==, ==, <, >, <=, >=, !=
+== -> Equal in value only. Eg: '1' == 1 will be true
+=== -> Equal in value and datatype. Eg: '1' === 1 will be false.
+
+Logical Operators: &&, ||, !
+
+Increment Operator: ++
+++count -> Increment by 1 on the spot
+count++ -> Increment in the next line
+
+Decrement Operator: --
+
+Ternary Operator: (short-hand if-else)
+(condition)? <Run if true>: <Run if false>
+-> Can also be used for Assignment
+
+Operator precedence and associativity: (important points)
+- operators are first grouped by precedence and then associativity
+- parentheses has highest precedence
+- ** operator has higher precedence than *, /, %
+- ** operator has right associativity. Eg: a ** b ** c = a ** (b ** c)
+- Bitwise operators (>>, <<, &, |, ^, ~) have same prority as binary operators (*, /, )
+
+Generally, assignment operators have lower priority, bitwise and binary have medium priority, parenthesis, access calls (like function calls), exponentiation and prefix operators (increment, decrement, unary) have higher priority. 
+
+Short circuiting: jargon for conditional evaluation
+- Evaluation depends upon first value and the connection between
+Eg: a && (b + c) -> If 'a' is false, there is no need to evaluate 'b + c'
+Eg: a || (b + c) -> Similar conclusion if 'a' is true.
+
+Window Methods:
+alert -> popup on window to display something
+prompt -> requires input from user and returns it inside the code in string from
+confirm -> takes a Yes or No answer and return boolean
+
+Date Object:
+
+- has methods like get ->
+FullYear, Month, Date, Hours, Minute, Second, Milliseconds, Time(milliseconds since Jan 1, 1970)(also called 'Unix' Time), Day (Weekday as a number)
+
+- If object printed as it is it shows current time in format:
+Day Month Date Year Time(HH:MM:SS) TimeType
+
+
+
+
+
