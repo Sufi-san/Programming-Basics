@@ -1,0 +1,8 @@
+The default order of execution of statements and instruction in JS is from top to bottom.
+
+This can be altered using:
+i) Conditional Execution (if, else-if, else, switch)
+ii) Repetitive Execution
+
+Using conditional statements and boolean values, we can run spedific parts of code based on conditions.
+

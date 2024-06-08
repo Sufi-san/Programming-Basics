@@ -56,8 +56,3 @@ FullYear, Month, Date, Hours, Minute, Second, Milliseconds, Time(milliseconds si
 
 - If object printed as it is it shows current time in format:
 Day Month Date Year Time(HH:MM:SS) TimeType
-
-
-
-
-
