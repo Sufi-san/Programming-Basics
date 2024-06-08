@@ -4,5 +4,5 @@ This can be altered using:
 i) Conditional Execution (if, else-if, else, switch)
 ii) Repetitive Execution
 
-Using conditional statements and boolean values, we can run spedific parts of code based on conditions.
+Using conditional statements and boolean values, we can run specific parts of code based on conditions.
 

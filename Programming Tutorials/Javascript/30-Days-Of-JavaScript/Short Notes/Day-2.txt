@@ -32,7 +32,7 @@ Useful String methods:
 .indexOf() & .lastIndexOf() -> takes substring and returns first or last index of substring if it exists and -1 otherwise, 
 .concat(multiple strings), .startsWith(substring), .endsWith(substring),
 .search(substring or Regex) -> returns first index of match, search value can be regular expression too.
-.match(substring or Regex) -> returns match arrays based on input.
+.match(substring or Regex) -> returns match arrays based on input, return null if not found.
 .repeat(number of times) -> return repeated sequence of string
 
 Useful methods for typecasting: 

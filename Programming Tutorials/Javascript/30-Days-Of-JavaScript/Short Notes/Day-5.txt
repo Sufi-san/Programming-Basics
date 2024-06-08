@@ -1,0 +1,31 @@
+Arrays can store multiple values and provides indices to access those values.
+An empty array can be created using the 'Array()' constructor or by '[]'
+
+In JavaScript, Arrays(can be referred to as lists) can have different data types, both of primitive or non-primitve type. We can even have Arrays containing other arrays or objects.
+
+Arrays themselves are non-primitive, and we can modify values at their indices due to their mutable nature.
+
+Some important Array methods and properties:
+
+Array(number of items) -> creates an empty array of given size
+fill(item) -> fill 'item' at every index
+concat(other array) -> similar to string concat
+length -> size of array
+indexOf(element to look for) -> similar working to string indexOf
+lastIndexOf(), includes()
+Array.isArray(item) -> checks if item is an array, if it is returns true else false
+.toString() -> string of comma separated elements from the array.
+.join(middle parameter) -> returns a string with selected middle parameter separating the elements
+.slice(s, e) -> taking start (inclusive) and end (exlusive) parameters, returns a new array with items of selected range. (like substring). Copies full array if no parameter is passed, takes end index by default if no end parameter is passed.
+.splice(start, number of items, replace/add new items...) -> Takes a start index, and according to selected number of items and provided new sequence of elements, removes/replaces old items and adds new items to the array.
+The Original Array object is affected.
+It also 'Returns' another array of old items now replaced from the original array.
+.push(item) -> Add item at the end of the array.
+.pop() -> Remove item at the end of the array.
+.shift() -> Remove item from beginning
+.unshift(item) -> Add item from beginning
+.reverse() -> Reverse the order of array.
+.sort() -> sorts the array elements, 'lexicographically' if strings. (can be used with 'callback' functions to define the sorting criteria)
+'reverse' and 'sort' affect the original array object itself.
+
+
