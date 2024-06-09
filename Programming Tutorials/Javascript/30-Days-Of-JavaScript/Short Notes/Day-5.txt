@@ -24,8 +24,6 @@ It also 'Returns' another array of old items now replaced from the original arra
 .pop() -> Remove item at the end of the array.
 .shift() -> Remove item from beginning
 .unshift(item) -> Add item from beginning
-.reverse() -> Reverse the order of array.
+.reverse() -> Reverse the order of elements in original array object.
 .sort() -> sorts the array elements, 'lexicographically' if strings. (can be used with 'callback' functions to define the sorting criteria)
-'reverse' and 'sort' affect the original array object itself.
-
 

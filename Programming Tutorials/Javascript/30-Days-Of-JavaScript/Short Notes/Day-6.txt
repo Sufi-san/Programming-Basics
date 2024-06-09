@@ -1,0 +1,13 @@
+We can use loops to perform tasks that require repetition.
+- Additive operations
+- Traversing arrays or other data structures
+
+Types of loops in JS:
+- for
+- while
+- do while
+- for of -> handy for arrays when we are not interested in indices
+
+Control loop flows:
+- break statement, stops and breaks out of the loop
+- continue statement, stops current loop and goes to the next

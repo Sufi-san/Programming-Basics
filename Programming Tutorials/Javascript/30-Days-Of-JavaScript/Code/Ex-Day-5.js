@@ -106,15 +106,16 @@ console.log(`Average Age: ${avgAge}`);
 console.log(`Age range: ${ages[ages.length - 1] - ages[0]}`);
 console.log(Math.abs(ages[0] - avgAge) == Math.abs(ages[ages.length - 1] - avgAge));
 
-console.log(countries.slice(0, 10));
+const countries2 = require('./Additional Files/countries2');
+console.log(countries2.slice(0, 10));
 
-let countrMid = Math.floor(countries.length / 2);
-let midCountries = (countries.length % 2 == 0)? countries.slice(mid, mid + 2): countries[mid];
+let countrMid2 = Math.floor(countries2.length / 2);
+let midCountries = (countries2.length % 2 == 0)? countries2.slice(countrMid2, countrMid2 + 2): countries2[countrMid2];
 console.log(midCountries);
 
-
+let countrMid = Math.floor(countries.length / 2);
 let midPoint = (countries.length & 1)? countrMid: countrMid + 1;
-let countries1 = countries.slice(0, midPoint + 1);
-let countries2 = countries.slice(midPoint + 1);
-console.log(`Countries1: ${countries1}`);
-console.log(`Countries2: ${countries2}`);
+let countriesA = countries.slice(0, midPoint + 1);
+let countriesB = countries.slice(midPoint + 1);
+console.log(`CountriesA: ${countriesA}`);
+console.log(`CountriesB: ${countriesB}`);
