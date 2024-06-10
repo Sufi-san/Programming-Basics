@@ -1,0 +1,56 @@
+Using functions to write code ensures:
+- reusability
+- easy to test
+- readability
+
+Functions can be declared as:
+
+- Declaration function:
+function name(params) {code}
+
+- Anonymous function: (functions with no name)
+function(params) {code}
+
+- Expression function: (storing any function in variable)
+let myFunc = function(params) {code}
+let myFunc = function name(params) {code}
+let myFunc = () => {code}
+
+- Arrow function: (no names, shorter syntax)
+(params) => {code}
+when using brackets, a return statement is necessary
+
+- Self Invoking Functions: (no names, invokes automatically)
+(function(params) {code}());
+OR
+(function(params) {code})();
+
+Functions can have an unlimited number of parameters. In the case, we do not know the exact number we can,
+
+1) In normal functions: 
+
+- use 'arguments' keyword.
+'arguments' will be a default JS object of arguments passed to the function that exhibits array-like behavior but it isn't a true array (has no common built-in methods like true arrays and is sometimes not iterable using for-of loop).
+
+- use 'rest parameters' (recommended way)
+Eg: function myFunc(default_var1, default_var2, ...restParams) {code} 
+Rest parameter array is a true array. It can be given any name and is identified by the '...' syntax before its name. The parameters can also be changed or modified using this array (possible with arguments array too but not recommended).
+It should appear last in the parameter sequence and only one can exist per function.
+
+Technically, it's possible to declare both a rest parameter and use the arguments object within the same function.
+However, this is generally discouraged for the following reasons -
+Unnecessary Complexity: It can make the code harder to read and maintain.
+Potential Issues: The arguments object has limitations and might behave differently than a true array, leading to potential bugs.
+
+
+2) In arrow functions: we can only use 'rest parameters' method as mentioned above
+
+Default values:
+    When no arguments are passed for a parameter, then any default values assigned are used.
+    Eg:
+    function (name = "sufi") {
+        console.log(`Hello, ${name}`);
+    }
+
+In JS, there is no method overloading.
+Functions are hoisted above their scopes, the one with the same name that is written in the end wins.
