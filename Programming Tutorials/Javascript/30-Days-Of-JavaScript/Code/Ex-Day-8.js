@@ -114,7 +114,10 @@ console.log(copyOfUsers);
 console.log('Keys in users object:',userNames);
 console.log('Values of users object:',Object.values(users));
   
-// Cannot find countries Object !!
+const countries_data = require('./Additional Files/countries_data');
+for(country of countries_data) {
+    console.log(`Country Name: ${country.name}, Capital: ${country.capital}, Population: ${country.population}, Languages: ${country.languages}`);
+}
 
 const personAccount = {
     firstName: "Sufi",

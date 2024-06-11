@@ -1,0 +1,46 @@
+Higher Order Functions:
+- Functions that take other functions as parameters or return a function as a value.
+- Functions passed as a parameter are called callbacks.
+
+Setting time:
+
+- setInterval(callback, duration): Takes callback function as parameter and a duration paramter. The callback is always called in set duration.
+Eg: function sayHello() {console.log('Hello')}
+setInterval(sayHello, 1000) // call sayHello() every second
+'setInterval()', when called, returns a numeric ID, which can be stored.
+When we want to stop the interval we pass that ID in another function called 'clearInterval(setIntervalID)'.
+
+- setTimeout():
+Delays the call for the callback function by set amount of time.
+Eg: setTimeout(sayHello, 4000) // sayHello will be called 4 seconds after the call is made.
+
+Built-in methods that use callback function:
+
+- forEach((element, index, array) => {code}): used only with arrays, the index and array parameters are optional.
+
+- map(callback): modifies array elements, by the return value of callback. 
+
+- filter(callback): removes items from the array as per condition in callback.
+
+- reduce((acc, cur) => {code}, initialValue): takes an accumulator(answer till now or result till now), curr(current element of array we iterate over) and optional initialValue,. If no initialValue is passed, accumulator starts from the first value of the array. (This might result in error when array is empty).
+
+- every((item) => {code}): check if all elements are similar in one aspect(match criteria). Return boolean.
+
+- some((item) => {code}): checks if at least 1 element matches the criteria.
+
+- find((item) => {code}): return the first element that matches set criteria
+
+- findIndex((item) => {code}): same as find but returns index instead of item itself.
+
+- sort(): arranges elements in ascending or descending order, affects the original array object. By default it performs lexicographical string sorting for any object/element that is inside the array.
+To avoid the string sorting behavior we can pass a callback function that sets the criteria for sorting.
+Eg: for numbers ->
+.sort((a, b) => a - b); // Ascending sorting. Negative value: a < b, Zero: a == b, Positive value: a > b
+Eg: for objects ->
+.sort((a, b) => {
+    if(a.key < b.key) return -1;
+    if(a.key > b.key) return 1;
+    return 0;
+}); // Comparing required keys
+
+Note: filter, map and reduce are immutable functions, they do not modify the original array and return a copy of result.
