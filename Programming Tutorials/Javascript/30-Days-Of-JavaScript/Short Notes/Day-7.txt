@@ -18,7 +18,6 @@ let myFunc = () => {code}
 
 - Arrow function: (no names, shorter syntax)
 (params) => {code}
-when using brackets, a return statement is necessary
 
 - Self Invoking Functions: (no names, invokes automatically)
 (function(params) {code}());
@@ -48,9 +47,10 @@ Potential Issues: The arguments object has limitations and might behave differen
 Default values:
     When no arguments are passed for a parameter, then any default values assigned are used.
     Eg:
-    function (name = "sufi") {
+    function sayName(name = "sufi") {
         console.log(`Hello, ${name}`);
     }
+    sayName() // Hello, sufi
 
 In JS, there is no method overloading.
 Functions are hoisted above their scopes, the one with the same name that is written in the end wins.
