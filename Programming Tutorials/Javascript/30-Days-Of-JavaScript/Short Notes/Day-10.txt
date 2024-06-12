@@ -1,0 +1,39 @@
+Sets:
+Contains unique elements, allows constant time checking.
+Sets are initialized using:
+const set = new Set();
+We can create sets from arrays by passing it in the constructor 'Set(Array)'
+Set is iterable, and we can iterate through the set using for-of loop.
+Elements can be added to set using 'set.add()'
+And can be deleted using 'set.delete()'.
+We can check if an element is in the set using 'set.has()'.
+The set can be cleared using 'set.clear()'
+The number of elements in the set can be known by using 'set.size'
+
+Union of sets:
+- Can be obtained using the spread operator - set([...set1, ...set2]).
+OR
+union = new Set(set1), and iterate over 'set2' while adding its elements to the union.
+- Basically merging anything into 1 array and then making a set out of that array.
+
+Intersection of sets:
+- Using the 'filter()' method
+c = a.filter(num => B.has(num))
+intersection = new Set(c)
+where, 'a' is an array and 'B' is a set and 'c' is combination array of 'a' and 'B' with uncommon elments of removed. This is then turned into a set to remove repeated elements.
+
+Difference of sets:
+- Again using the 'filter()' method
+c = a.filter(num => !B.has(num))
+difference = new Set(c)
+
+Map:
+Provides key-value pair relationships for constant retrieval of values
+map = new Map()
+An array of arrays can be converted to a map where the keys will be the first element of the internal array and values will be the second element. If there is no second element then you value will be undefined. If there are more than two elements in the internal array the behavior stays the same and extra elements are ignored.
+map = new Map([[1, 2], [2, "Helsinki"]])
+We can use map.set(Key, Value) method to enter values into the map and map.get(Key) to retreive values of corresponding keys. We can know the number of keys using map.size.
+To check whether a key exists in map we can use map.has(key).
+Map is also iterable with for-of.
+- for(const entry of map) to iterate over the entries where entry is a two element array with entry[0] as key and entry[1] as value.
+- for(const [key, value] of map) can also be used.
