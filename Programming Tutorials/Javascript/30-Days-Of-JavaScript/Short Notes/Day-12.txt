@@ -1,0 +1,101 @@
+RegExp:
+They are a specialized notation for defining patterns that can be used by many programming languages and text processing tools.
+
+Can used by the RegExp constructor or by declaring RegExp pattern using two forward slashes followed by a flag.
+The flag could be g, i, m, s, u or y.
+Flags are optional parameters.
+Some useful flags:
+g: global flag, indicates necessity to search for pattern in the whole text.
+i: case insensitive flag(search for both upper and lower case)
+m: multiline
+- ^ (Caret): In multiline mode (m flag), ^ matches the beginning of the string and any newline character (\n) within the string. This allows you to search for patterns that start at the beginning of a line or after a newline character.
+- $ (Dollar Sign): Similarly, in multiline mode, $ matches the end of the string and any newline character (\n) within the string. This enables you to search for patterns that occur at the end of a line or before a newline character.
+
+Creating pattern using RegExp() constructor:
+let regEx = new RegExp('love');
+let regEx = new RegExp('love', 'gi'); // 2 parameters, first text or pattern and then flags
+
+Creating pattern without using RegExp() Constructor:
+let regEx = /love/gi;
+
+RegExp methods:
+- test(String): tests for match in the string for the regexp object and return true if match is found and false otherwise
+- match(RegExp): if global flag is used, it return an array of all matches for the regExp present inside the string, if not then it return an array where, first index of the array is the first found match, second is its index, third is a copy of the string that was passed, fourth index is the group it was in.
+If no match is found, it returns 'null'.
+- search(RegExp OR String): return index of first match or -1 if no match found.
+- replace(RegExp, replacement string): creates a new string with all matches replaced by the provided replacement string.
+
+RegExp Symbols:
+
+- [] means set of characters
+Eg: [a-c], [a-z], [A-Z], [a-zA-Z0-9]
+
+- \ to escape special characters:
+Eg: \d means match where string contains digits, \D means match where string does not contain digits.
+
+- . means any character except newline(\n)
+Eg: 
+const pattern = /[a]./g  // this square bracket means a and . means any character except new line
+const txt = 'Apple and banana are fruits'
+const matches = txt.match(pattern)
+console.log(matches)  // ["an", "an", "an", "a ", "ar"]
+
+- ^ means startsWith or NOT
+Eg (used as startsWith): ^love, detect string which starts with the word love.
+Eg (used as NOT): [^abc] means NOT a, NOT b, NOT c.
+
+- $ means endsWith
+
+- * zero times or more
+const pattern = /[a].*/g  //. any character, + any character one or more times 
+const txt = 'Apple and banana are fruits'
+const matches = txt.match(pattern)
+console.log(matches)  // ['and banana are fruits']
+// Here the '.' or New Line(\n) does not occur in the sentence after 'a'
+
+
+- + one or more times
+Eg:
+const pattern = /\d+/g  // d is a special character which means digits
+const txt = 'This regular expression example was made in January 12,  2020.
+const matches = txt. match(pattern)
+console.log(matches)  // ["12", "2020"], this is not what we want
+
+- ? zero or one times
+const txt = 'I am not sure if there is a convention how to write the word e-mail.\
+Some people write it email others may write it as Email or E-mail.'
+const pattern = /[Ee]-?mail/g  // ? means optional
+matches = txt.match(pattern)
+console.log(matches)  // ["e-mail", "email", "Email", "E-mail"]
+// Here '-' occurs once or does not occur at all.
+
+
+- \b matches with beginning or ending of a word. (word-boundary)
+Eg: string.test(/ow\b/) 
+is false for "I go through ups and downs"
+is true for "Bow before thy lord"
+/\bow/ will mean word ends with 'ow'
+/\bow\b/ will mean word either starts or ends with 'ow'
+(Not to confuse this with ^ and $ that check the whole string instead of words)
+
+- \B opposite of '\b'. (non-word boundary)
+
+- \w checks for alphabets and/or numbers, when used for matching, it selects alphanumeric characters (word characters)
+Eg: string.test(/\w/)
+is false for "!@#, @#%"
+is true for "f!@#, @#%"
+\w is a shorthand character class that simplifies matching common word characters.
+It's not the same as a literal word, but it captures the building blocks of most words.
+
+- {n} exactly 'n' characters
+- {n,} at least 'n' characters
+- {n, m} between n to m characters
+where 'n' and 'm' are whole numbers.
+These are mostly used in regExp to specify the minimum and maximum length to match.
+
+- | Either or
+Eg: /apple|banana/.test("apple") // true
+/apple|banana/.test("banana") // true
+/apple|banana/.test("pumpkin") // false
+
+- () Capture and group
