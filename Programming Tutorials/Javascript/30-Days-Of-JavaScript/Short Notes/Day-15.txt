@@ -1,0 +1,127 @@
+Everything in JS is an object, except primitive values.
+
+Class: serves as the blueprint for object creation.
+We use PascalCase to define class names. Eg: MyClass
+
+Constructors inside classes:
+- They serve the purpose of defining the initial properties and their values for any instantiation of the class.
+- Eg:
+class Person {
+  constructor(firstName, lastName) {
+    console.log(this) // Check the output from here
+    this.firstName = firstName
+    this.lastName = lastName
+  }
+}
+If no arguments for properties are passed then they stay undefined: 
+const person1 = new Person();
+Here, person1.firstName and lastName are both undefined.
+- Similar to function parameters, we can also assign default values for object properties in constructors.
+Eg:
+class Person {
+  constructor(
+    firstName = 'Asabeneh',
+    lastName = 'Yetayeh',
+    age = 250,
+    country = 'Finland',
+    city = 'Helsinki'
+  ) {
+    this.firstName = firstName
+    this.lastName = lastName
+    this.age = age
+    this.country = country
+    this.city = city
+  }
+}
+
+Class Methods:
+- Methods inside a class.
+- These can be used by all the objects that are instantiated using the particular class.
+
+Getter: get object properties indirectly through a method. We can use the 'get' key word to define getter methods
+Getters can perform operations on the retrieved value before returning it. This allows you to format data or ensure it's in a specific format.
+
+Setter: set/modify object properties indirectly through a method. We can use the set key word to define setter methods
+You can restrict direct modification of properties by only providing a setter and not a public property. This enforces data integrity by controlling how values are changed.
+
+Eg: 
+class Person {
+  constructor(firstName, lastName, age, country, city) {
+    this.firstName = firstName
+    this.lastName = lastName
+    this.age = age
+    this.country = country
+    this.city = city
+    this.score = 0
+    this.skills = []
+  }
+  getFullName() {
+    const fullName = this.firstName + ' ' + this.lastName
+    return fullName
+  }
+  get getScore() {
+    return this.score
+  }
+  get getSkills() {
+    return this.skills
+  }
+  set setScore(score) {
+    this.score += score
+  }
+  set setSkill(skill) {
+    this.skills.push(skill)
+  }
+}
+
+- For getter and setter methods we do not follow the traditional way of using methods, these are treated similar to variables.
+
+Eg: person1.setScore = 100;
+    console.log(person1.getScore);
+
+Static methods:
+- These are methods inside the classes that can be accessed by the class itself instead of an instantiation or object.
+- The static methods are methods which can be used as utility functions.
+Eg: 
+class Person {
+    static showDateTime() {
+    let now = new Date()
+    let year = now.getFullYear()
+    let month = now.getMonth() + 1
+    let date = now.getDate()
+    let hours = now.getHours()
+    let minutes = now.getMinutes()
+    if (hours < 10) {
+      hours = '0' + hours
+    }
+    if (minutes < 10) {
+      minutes = '0' + minutes
+    }
+
+    let dateMonthYear = date + '.' + month + '.' + year
+    let time = hours + ':' + minutes
+    let fullTime = dateMonthYear + ' ' + time
+    return fullTime
+  }
+}
+console.log(Person.showDateTime());
+
+Inheritance:
+Using inheritance we can access all the properties and the methods of the parent class, inside the child class that inherits from it. This reduces repetition of code.
+Eg:
+class Student extends Person {
+  saySomething() {
+    console.log('I am a child of the person class')
+  }
+}
+
+const s1 = new Student('Asabeneh', 'Yetayeh', 'Finland', 250, 'Helsinki')
+console.log(s1)
+console.log(s1.saySomething())
+console.log(s1.getFullName())
+console.log(s1.getPersonInfo())
+
+- super keyword:
+We use the super keyword inside the child class to access the methods and properties of the parent class.
+
+- Overriding methods:
+We can redefine the same methods from parent in a different way inside the child class. The objects instantiated using the child class will use the overrided method of its own class.
