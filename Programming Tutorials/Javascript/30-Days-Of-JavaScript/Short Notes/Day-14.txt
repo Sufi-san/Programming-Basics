@@ -1,0 +1,33 @@
+JS is loosely-typed and is more prone to runtime errors.
+It provides error-handling mechanisms to catch runtime errors using try-catch-finally block.
+Syntax:
+try {
+  // code that may throw an error
+} catch (err) {
+  // code to be executed if an error occurs
+} finally {
+  // code to be executed regardless of an error occurs or not
+}
+
+The 'e' or 'err' or any other name of the error parameter, has access to the name and message for the error that occurs. Can be displayed using e.name or e.message
+
+Throw:
+Allows us to create a custom error.
+Use the throw statement to throw an exception. When you throw an exception, expression specifies the value of the exception.
+Eg:
+throw 'Error2' // generates an exception with a string value
+throw 42 // generates an exception with the value 42
+throw true // generates an exception with the value true
+throw new Error('Required') // generates an error object with the message of Required
+
+Error Types:
+- ReferenceError: An illegal reference has occurred. A ReferenceError is thrown if we use a variable that has not been declared.
+- SyntaxError:
+Eg:
+let square = 2 x 2 // Invalid syntax for multiplication
+console.log(square)
+console.log('Hello, world")
+- TypeError:
+Eg:
+let num = 10
+console.log(num.toLowerCase()) // number type object will have no 'toLowerCase()' method
