@@ -1,0 +1,93 @@
+JSON stands for JavaScript Object Notation. The JSON syntax is derived from JavaScript object notation syntax, but the JSON format is text or string only. JSON is a light weight data format for storing and transporting. JSON is mostly used when data is sent from a server to a client. 
+JSON is not much different from JS Objects, but the difference is that JSON keys need to be 'strings' only. 
+
+Sample JSON File:
+{
+"users":[
+  {
+    "firstName":"Asabeneh",
+    "lastName":"Yetayeh",
+    "age":250,
+    "email":"asab@asb.com"
+  },
+  {
+    "firstName":"Alex",
+    "lastName":"James",
+    "age":25,
+    "email":"alex@alex.com"
+  },
+  {
+  "firstName":"Lidiya",
+  "lastName":"Tekle",
+  "age":28,
+  "email":"lidiya@lidiya.com"
+  }
+]
+}
+
+- Also, unlike JS Objects, JSON doesn't allow functions or code to be embedded within, it is purely a data interchange format. JSON doesn't support comments too.
+
+- We store JSON obtained from a file or HTTP response as a string.
+
+- This can be converted to a JS Object using 'JSON.parse()' method.
+
+- On the other hand, we can convert JS Objectts to JSON strings using, 'JSON.stringify()'
+
+- JSON objects can be directly inserted as literal values for variables into the code without any errors. We can then use stringify and parse on it to get a JavaScript Object.
+
+JSON.parse():
+It takes the stringified JSON object as first argument and can optionally also take a 'reviver' function as a second argument.
+We can use the 'reviver' callback function as a formatter while converting the stringified JSON.
+Eg:
+const usersText = `{
+"users":[
+  {
+    "firstName":"Asabeneh",
+    "lastName":"Yetayeh",
+    "age":250,
+    "email":"asab@asb.com"
+  },
+  {
+    "firstName":"Alex",
+    "lastName":"James",
+    "age":25,
+    "email":"alex@alex.com"
+  },
+  {
+  "firstName":"Lidiya",
+  "lastName":"Tekle",
+  "age":28,
+  "email":"lidiya@lidiya.com"
+  }
+]
+}`
+const usersObj = JSON.parse(usersText, (key, value) => {
+  let newValue =
+    typeof value == 'string' && key != 'email' ? value.toUpperCase() : value
+  return newValue
+})
+console.log(usersObj) // Will have names capitalized
+It is not mandatory to pass a reviver function as an argument.
+
+JSON.stringify():
+Takes the JS Object as first argument and can take two optional arguments 'replacer' and 'space'
+'space' determines the indentation while displaying the resulting JSON string. It is a numeric value.
+'replacer' is an array that acts as a filter while creating the JSON string.
+The elements of this array are the names of object properties or keys that we want to include in the JSON string.
+Eg:
+const user = {
+  firstName: 'Asabeneh',
+  lastName: 'Yetayeh',
+  country: 'Finland',
+  city: 'Helsinki',
+  email: 'alex@alex.com',
+  skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Python'],
+  age: 250,
+  isLoggedIn: false,
+  points: 30
+}
+const txt = JSON.stringify(user,['firstName', 'lastName', 'country', 'city', 'age'],4)
+console.log(txt)
+
+Note: 
+Aside from standard JS Objects, we can use JSON.stringify on Arrays, Strings, Numbers, Booleans, Null, to convert them to valid JSON strings as well.
