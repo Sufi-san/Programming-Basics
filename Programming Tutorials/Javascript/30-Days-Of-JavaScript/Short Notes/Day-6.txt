@@ -7,7 +7,7 @@ Types of loops in JS:
 - while
 - do while
 - for of <variable-name> -> handy for arrays when we are not interested in indices
-- for in <variable-name> -> provides the indices from 0 to n - 1. Where 'n' is length of the data collection.
+- for in <variable-name> -> provides the indices from 0 to n - 1. Where 'n' is length of the data collection. Can also be used to iterate over the keys of 'Object'.
 
 Control loop flows:
 - break statement, stops and breaks out of the loop

@@ -1,0 +1,22 @@
+What is an API?
+- APIs (Application Programming Interfaces) are like messengers between different apps and websites.
+Imagine you're building a cool new app, but you want to include features like weather updates or live sports scores without building everything from scratch. That's where APIs come in.
+
+- Here's the breakdown:
+    Your App: This is you, the app builder, wanting specific data (like weather).
+    API: The middleman, delivering your request (data needed) and bringing back the response (weather data).
+    External Service: The weather service that holds the actual data you need.
+    
+- Thus, APIs provide an accepted protocol to transfer data between different services in a particular format.
+- APIs come with documentation, like instructions for the messenger. It tells you exactly what format to use for your request, what data you can access, and how the response will be formatted. This lets you build your app to understand the information it receives.
+- APIs help connect different components (written using different programming languages or frameworks) of the same or different systems by providing means of data transfer.
+
+Above explanation helps us better understand the role of Web API that helps JS outsource various tasks, and provide asynchronicity by working with the JS Engine.
+
+API Formats:
+JSON (JavaScript Object Notation) is the dominant format for data exchange in most modern APIs
+While JSON is the most common, there are a few other formats used in some APIs, such as:
+
+    XML (Extensible Markup Language):  An older format that's more complex than JSON but offers more flexibility for defining data structures.
+
+    Protocol Buffers:  A more efficient format specifically designed for data serialization and used by some larger companies like Google.

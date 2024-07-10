@@ -1,0 +1,45 @@
+Execution Context:
+Explains how the code file is executed. 
+
+Working: JS engine divides programs into 2 phases -
+
+1. Memory Creation phase 
+- Space is allocated in memory for storing variables/functions.
+- First Cycle: (This will always happen, mandatory step) 
+    - First, all the variables are loaded with initial values 'undefined'
+    - For function declarations, the name of the function is assigned the provided 'definition'
+
+2. Execution phase
+- Second Cycle:
+    - Actual values 'literals' are assigned to respective variables.
+    - Function calls are handled: 
+    i) New Variable Environment (Sandbox) with a fresh Execution Thread is created.
+    ii) These new environments are created whenever functions are called and need to be executed.
+    iii) Now we can see a 'nested' or 'recursive' behavior as both the 'Memory Creation Phase' and the
+         'Execution Phase' itself, need to be repeated for this new environment.
+    iv) The result or return value of these Execution Phases are ultimately returned back to the Global
+        Execution Phase after completion.
+    v) When execution is completed, these new execution contexts are deleted.
+
+Different Execution Context in JS are: 
+- Global Execution Context (GEC): This is the first context created when a JavaScript program starts running.It has access to all globally declared variables and functions.
+    
+- Function Execution Context (FEC): A new FEC is created whenever a function is called. It has its own scope chain for resolving variable references and a specific value for the this keyword.
+    
+- eval Execution Context (Not As Common): The eval function, when used, creates a unique execution context with its own scope chain. This context can be risky as it can potentially introduce security vulnerabilities.
+
+Clarification on this Keyword:
+
+    The this keyword within the Global Execution Context doesn't directly refer to the window object in all environments. While it's true in browsers, it can have different meanings depending on the runtime environment (e.g., this might refer to the global object in Node.js).
+    The GEC provides access to built-in objects and features like document (in browsers) because these are declared globally and accessible within that context.
+
+
+Call Stack:
+Describes how particular memory is used to store variables & functions, execute them and remove those when task is complete.
+It uses the LIFO concept and the Global Execution context is inserted inside it at the start.
+Based on the function calls made, new Function Execution contexts are added into the stack.
+The last execution context inside the stack will be the first one to be removed after its execution
+is complete.
+In this manner all function calls are handled for the program inside the call stack.
+The last execution context to be removed will be the global execution context which served as the starting
+point of the program.

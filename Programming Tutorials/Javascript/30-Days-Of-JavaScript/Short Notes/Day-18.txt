@@ -1,0 +1,13 @@
+In programming, asynchronous programming refers to a way of handling tasks without blocking the main thread of execution.
+It allows your program to continue running other parts of the code while waiting for a potentially long-running operation to complete. This is in contrast to synchronous programming, where the program execution pauses until a long-running operation finishes.
+
+Promises:
+A Promise is a way to handle asynchronous operations in JavaScript.
+This lets asynchronous methods return values like synchronous method.
+Instead of immediately returning the final value, the asynchronous method returns a promise to supply the value at some point in the future.
+
+A Promise can be in one of these states:
+
+    pending: initial state, neither fulfilled nor rejected.
+    fulfilled: meaning that the operation completed successfully.
+    rejected: meaning that the operation failed.

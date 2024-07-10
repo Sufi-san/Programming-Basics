@@ -1,0 +1,30 @@
+JavaScript is single-threaded (has no multiple threads) and synchronous (has blocking code).
+This is true for 'default' JavaScript.
+Even though we can think it is slower as compared to other multi-threaded languages, we never experience the slow behavior as in any runtime environment, JS Engine is not used in seclusion. Thus, JS engine can delegate certain tasks and can provide the feel of multi-tasking in any environment.
+
+There can be two types of codes with respect to synchronicity in JS:
+1) Blocking Code: Stops control flow of the program until the task at hand is fully completed.
+2) Non-blocking Code: Shows asynchronous behavior by not waiting for a time-intensive task to complete first
+                      before moving on to the next task.
+
+Asynchronous nature of JS and Event Loop:
+The 'Web API' can be used to achieve asynchronicity in JS.
+The 'Event Loop' is a core mechanism that manages the asynchronous nature of JavaScript. It constantly monitors the call stack and task queue.
+The 'Even Loop' in JS consists of:
+1) JS Engine -> has Memory Heap and Call Stack (with various Execution Contexts)
+2) Web API -> when asynchronous functions, promises or setTimeout or setInterval methods are used, the callback
+              function and its set time is accurately registered and these callbacks are pushed into the
+              'Task Queue'
+3) Task Queue -> Stores the registered callbacks and when the 'Call Stack' is completely empty (no execution 
+                 contexts except the GEC), then while following the FIFO (First In First Out) behavior of the queue, the callbacks are removed from queue and placed into the empty stack. The task queue waits for the recently pushed callback to finish its execution and get popped out of the stack, before pushing another callback from the task queue into the stack. (This is done to maintain synchronicity)
+4) Promise Queue -> 
+In JavaScript, there isn't a separate "promise queue" in the traditional sense. 
+(Has higher priority callbacks, will be discussed in detail when understanding Promises)
+
+About some WebAPI methods:
+1) setTimeout(callback, time in milliseconds, optional args) -> returns an id, executes callback after set time.
+2) setInterval(callback, time in milliseconds, optional args) -> returns an id, executes callback continuously after set time.
+3) clearTimeout(timeout ID) -> cancels timeout event
+4) clearInterval(interval ID) -> stops interval event
+Note: Both 'setTimeout' and 'setInterval' also take additional arguments after the time in milliseconds. These arguments are passed to their respective callbacks if those callbacks have parameters.
+

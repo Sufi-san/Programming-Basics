@@ -2,15 +2,16 @@ Truthy values: (boolean is true)
 - positive and negative numbers except zero
 - all strings except empty strings
 - the literal boolean value 'true'
+- Empty objects or arrays are also truthy
 
 False values: (boolean is false)
 - the literal boolean value 'false'
 - 0
-- 0n
+- 0n (Big Integers)
 - Nan
 - undefined
 - null
-- '', "", `` empty strings.
+- '', "", `` (empty strings).
 
 Assignment Operators: =, +=, -=, *=, /=, %=, **=, ...
 
@@ -54,5 +55,14 @@ Date Object:
 - has methods like get ->
 FullYear, Month, Date, Hours, Minute, Second, Milliseconds, Time(milliseconds since Jan 1, 1970)(also called 'Unix' Time), Day (Weekday as a number)
 
-- If object printed as it is it shows current time in format:
+- If object is printed as it is, it shows current time in format:
 Day Month Date Year Time(HH:MM:SS) TimeType
+
+Nullish Coalescing Operator: (??)
+Assigns a value if the previously assigned values is null or undefined.
+Eg:
+let var1 = 5, var2 = null, var3;
+var1 = var1?? 10;
+var2 = var2?? 10;
+var3 = var3?? 10;
+console.log(var1, var2, var3); // 5 10 10

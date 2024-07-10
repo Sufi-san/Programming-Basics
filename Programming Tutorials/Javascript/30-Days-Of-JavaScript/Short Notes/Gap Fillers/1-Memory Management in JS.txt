@@ -1,0 +1,17 @@
+Two types of Memories:
+
+1. Stack
+2. Heap
+
+- Stack memory is used mostly for storing the primitive data type values.
+- When dealing with non-primitive data, Heap memory is used.
+
+- Whenever data is stored in the stack memory, we get a copy of the stored data when the memory location is accessed. (Maintains immutability of primitive types).
+There are also some more optimizations using a memory-pool for data types like strings. (In some languages, data types like Strings aren't even considered primitve. Eg: Java);
+
+- Whenever we want to access properties of objects stored in the heap memory, we obtain the copy of reference to that specific heap memory location. This reference is obtained from Stack Memory, as stack memory stores direct values for primitive data as well as references to heap memory locations for non-primitive data.
+Note: We do not have control over the memory allocation & deallocation itself (no pointers) in JavaScript. We can just access objects stored at particular heap memory location by using the references.
+
+
+Garbage Collection:
+JavaScript employs automatic garbage collection to manage memory in the heap. When objects are no longer referenced, the garbage collector reclaims the memory space they occupied.
