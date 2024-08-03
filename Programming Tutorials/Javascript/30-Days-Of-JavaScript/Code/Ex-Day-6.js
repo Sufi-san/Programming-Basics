@@ -126,7 +126,7 @@ console.log(upCountries);
 
 console.log(lenCountries);
 
-countries.splice(countries.indexOf('Japan'), 0, 'Iceland');
+countries.splice(countries.indexOf('Japan'), 1, 'Iceland');
 const arrOfArr = [];
 for(country of countries) {
     const arr = [];

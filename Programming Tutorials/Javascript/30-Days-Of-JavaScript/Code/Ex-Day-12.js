@@ -16,7 +16,7 @@ let distance = sortedPoints[sortedPoints.length - 1] - sortedPoints[0];
 console.log(Math.abs(distance));
 
 function is_valid_variable(str) {
-    let validVar = /^[_$a-zA-Z][a-zA-Z0-9_$]{0,}$/;
+    let validVar = /^[_$a-zA-Z]\w{0,}$/;
     console.log(validVar.test(str));
 }
 is_valid_variable('first_name') // True
@@ -30,7 +30,7 @@ paragraph = `I love teaching. If you do not love teaching what else can you love
 
 function tenMostFrequentWords(str, size = 10) {
     const freqWordArr = [];
-    const wordSet = new Set(str.match(/\b\w{1,}\b/g));
+    const wordSet = new Set(str.match(/\b\w+\b/g));
     for(const word of wordSet) {
         regWord = '\\b' + word + '\\b';
         let regex = new RegExp(regWord, 'g');

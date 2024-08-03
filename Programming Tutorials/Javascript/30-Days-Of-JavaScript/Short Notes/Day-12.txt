@@ -1,7 +1,13 @@
+Good Resource: https://dev.to/awwsmm/20-small-steps-to-become-a-regex-master-mpc 
+^
+|
+|
+(Completed till Step 16)
+
 RegExp:
 They are a specialized notation for defining patterns that can be used by many programming languages and text processing tools.
 
-Can used by the RegExp constructor or by declaring RegExp pattern using two forward slashes followed by a flag.
+Can be used by the RegExp constructor or by declaring RegExp pattern using two forward slashes followed by a flag.
 The flag could be g, i, m, s, u or y.
 Flags are optional parameters.
 Some useful flags:
@@ -19,8 +25,8 @@ Creating pattern without using RegExp() Constructor:
 let regEx = /love/gi;
 
 RegExp methods:
-- test(String): tests for match in the string for the regexp object and return true if match is found and false otherwise
-- match(RegExp): if global flag is used, it return an array of all matches for the regExp present inside the string, if not then it return an array where, first index of the array is the first found match, second is its index, third is a copy of the string that was passed, fourth index is the group it was in.
+- regExpObj.test(String): tests for match in the string for the regexp object and return true if match is found and false otherwise
+- match(RegExp): if global flag is used, it return an array of all matches for the regExp present inside the string, the length of the array represents the number of matches found.
 If no match is found, it returns 'null'.
 - search(RegExp OR String): return index of first match or -1 if no match found.
 - replace(RegExp, replacement string): creates a new string with all matches replaced by the provided replacement string.
@@ -33,9 +39,9 @@ Eg: [a-c], [a-z], [A-Z], [a-zA-Z0-9]
 - \ to escape special characters:
 Eg: \d means match where string contains digits, \D means match where string does not contain digits.
 
-- . means any character except newline(\n)
+- . means any character except new line (\n)
 Eg: 
-const pattern = /[a]./g  // this square bracket means a and . means any character except new line
+const pattern = /[a]./g  // this square bracket means string that starts with 'a' followed by any character except new line
 const txt = 'Apple and banana are fruits'
 const matches = txt.match(pattern)
 console.log(matches)  // ["an", "an", "an", "a ", "ar"]
@@ -45,6 +51,8 @@ Eg (used as startsWith): ^love, detect string which starts with the word love.
 Eg (used as NOT): [^abc] means NOT a, NOT b, NOT c.
 
 - $ means endsWith
+
+- both ^ and $ do not consider '\n' for new line withing the text if the 'm' multiline flag is not enabled
 
 - * zero times or more
 const pattern = /[a].*/g  //. any character, + any character one or more times 
@@ -59,7 +67,7 @@ Eg:
 const pattern = /\d+/g  // d is a special character which means digits
 const txt = 'This regular expression example was made in January 12,  2020.
 const matches = txt. match(pattern)
-console.log(matches)  // ["12", "2020"], this is not what we want
+console.log(matches)  // ["12", "2020"]
 
 - ? zero or one times
 const txt = 'I am not sure if there is a convention how to write the word e-mail.\
@@ -80,22 +88,33 @@ is true for "Bow before thy lord"
 
 - \B opposite of '\b'. (non-word boundary)
 
-- \w checks for alphabets and/or numbers, when used for matching, it selects alphanumeric characters (word characters)
+- \w checks for alphabets and/or numbers, when used for matching, it selects alphanumeric characters (word characters) -> [A-Za-z0-9_$]
 Eg: string.test(/\w/)
 is false for "!@#, @#%"
 is true for "f!@#, @#%"
 \w is a shorthand character class that simplifies matching common word characters.
 It's not the same as a literal word, but it captures the building blocks of most words.
 
-- {n} exactly 'n' characters
-- {n,} at least 'n' characters
-- {n, m} between n to m characters
+- Instead of selecting all characters or minimum one and all characters with * or +, we can define the range using {}.
+1. {n} exactly 'n' characters
+2. {n,} at least 'n' characters
+3. {n, m} between n to m characters
 where 'n' and 'm' are whole numbers.
 These are mostly used in regExp to specify the minimum and maximum length to match.
+The {} RegExp uses greedy technique, 
+Eg: 
+{18,} will check for at least 18 matches, if there are more than 18, say 44, it will count all 44.
+{18, 33} will check for more matches upto the count of 33, even if 18 are found already.
 
 - | Either or
 Eg: /apple|banana/.test("apple") // true
 /apple|banana/.test("banana") // true
 /apple|banana/.test("pumpkin") // false
 
-- () Capture and group
+- () Capture and group -> assigns different group identities to characters according to the definitions
+Eg: 
+Pattern: (\d+\.\d+)|(\d+)
+String: 1.99 23.9 44 25 88.1 99
+Match:  ^^^^ ^^^^ ^^ ^^ ^^^^ ^^
+Groups: 1111 1111 22 22 1111 22
+Tip: Define more specific or complex matches first when using OR '|'

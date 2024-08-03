@@ -61,9 +61,9 @@ let {width: w, height: h, area: a, perimeter: p} = rectangle;
 console.log(w, h, a, p);
 
 const keySet = new Set();
-users.forEach(obj => keySet.add(Object.keys(obj).join(', ')));
+Object.keys(users[0]).forEach(key => keySet.add(key));
 let [...keys] = keySet;
-console.log("All keys are:", keys);
+console.log("All keys are:", keys.join(', '));
 
 const userWithLessSkills = users.filter(obj => {
     const {skills} = obj;

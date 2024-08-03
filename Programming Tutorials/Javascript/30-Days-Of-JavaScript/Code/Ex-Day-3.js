@@ -126,7 +126,7 @@ let format3 = `${DD}/${MM}/${YY} ${HH}:${mm}`;
 console.log(format1,"\n",format2,"\n",format3);
 
 function numLen(num) {
-    return parseInt(Math.log(num)/Math.log(10)) + 1;
+    return parseInt(Math.log10(num)) + 1;
 }
 HH = '7', mm = '5';
 HH = (numLen(HH) < 2)? '0'.concat(HH): HH;

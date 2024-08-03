@@ -30,7 +30,7 @@ difference = new Set(c)
 Map:
 Provides key-value pair relationships for constant retrieval of values
 map = new Map()
-An array of arrays can be converted to a map where the keys will be the first element of the internal array and values will be the second element. If there is no second element then you value will be undefined. If there are more than two elements in the internal array the behavior stays the same and extra elements are ignored.
+An array of arrays can be converted to a map where the keys will be the first element of the internal array and values will be the second element. If there is no second element then the value will be undefined. If there are more than two elements in the internal array the behavior stays the same and extra elements are ignored.
 map = new Map([[1, 2], [2, "Helsinki"]])
 We can use map.set(Key, Value) method to enter values into the map and map.get(Key) to retreive values of corresponding keys. We can know the number of keys using map.size.
 To check whether a key exists in map we can use map.has(key).

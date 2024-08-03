@@ -4,7 +4,7 @@ It is a way to unpack arrays & objects and assigning elements to distinct variab
 Destructuring Arrays:
 arr = [1, 2, 3, 4, 5];
 - Assigning: let [a, b] = arr // a = 1, b = 2
-- Extra variables: let [a, b, c, d, e, f] = arr // a = - 1 ... e = 5, f = undefined
+- Extra variables: let [a, b, c, d, e, f] = arr // a = 1 ... e = 5, f = undefined
 - Skipping values: let [a, , b, c, , e] = arr // a = 1, b = 3, c = 4, e = undefined
 - Default values: let[a, b, c, d, e, f = 6] = arr // a = 1, ..., e = 5, f = 6;
 - Using spread operator to get an array of remaining variables: let [a, b, c, ...rest] = arr // a = 1, b = 2, c = 3, rest = [4, 5];
@@ -53,4 +53,4 @@ Scenarios to Consider:
 
     Nested Objects/Arrays:
 
-    If the original data structure contains nested objects or arrays, changes made through destructuring can affect the nested structures as well, since you're modifying the references.
+    If the original data structure contains nested objects or arrays, changes made through destructuring can affect the nested structures as well, since you're modifying using the references.

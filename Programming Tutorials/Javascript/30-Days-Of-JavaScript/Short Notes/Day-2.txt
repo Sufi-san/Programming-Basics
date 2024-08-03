@@ -2,8 +2,14 @@ Non-primitive Data Types: Objects, Arrays
 
 Primitive Data Types are immutable and Non-primitive Data Types are mutable.
 
-Mutable data types can be directly compared.
-Immutable data types use references of actual object. 
+When we say that something is mutable, we mean that it can be mutated: changed while still having the same identity. For example, when you grow out your hair, you are mutating yourself: you're still you, but one of your attributes is different.
+In the case of primitives, all of their attributes are fully determined by their identity; 1 always means 1, no matter what, and 1 + 1 is always 2. You can't change that.
+If a given int variable has the value 1, you can change it to have the value 2 instead, but that's a total change of identity: it no longer has the same value it had before. 
+
+Immutable data types can be directly compared.
+Mutable data types can NOT be directly compared.
+Mutable data types use references of actual object.
+Direct comparison (===) for objects and arrays checks for reference equality, not content equality
 They are also called reference types and are generally not compared directly.
 
 The built-in 'Math' object in JS provides useful mathematical functions to operate on Numbers.

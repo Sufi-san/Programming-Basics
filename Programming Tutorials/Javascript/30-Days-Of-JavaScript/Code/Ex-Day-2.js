@@ -107,7 +107,7 @@ map.forEach((value, key) => {
 console.log(`Word with max count: ${maxWord}\n`);
 
 const sent3 = 'He earns 5000 euro from salary per month, 10000 euro annual bonus, 15000 euro online courses per month.'
-const regex3 = /\d+/g; // '\d' in regex, means digits. '+' means one or more digits.
+const regex3 = /\d+/g; // '\d' in regex, means digits. '+' means one or more consecutive digits.
 figures = sent3.match(regex3);
 console.log(figures);
 console.log("Annual Income: ", (+figures[0] + +figures[2]) * 12 + +figures[1]);

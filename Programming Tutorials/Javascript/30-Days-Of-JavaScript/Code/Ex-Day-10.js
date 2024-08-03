@@ -27,11 +27,12 @@ let c = [...a, ...b];
 const unionAB = new Set(c);
 console.log(unionAB);
 
-c = a.filter(num => (new Set(b)).has(num));
+const setB = new Set(b);
+c = a.filter(num => setB.has(num));
 const intersectAB = new Set(c);
 console.log(intersectAB);
 
-c = a.filter(num => !(new Set(b).has(num)));
+c = a.filter(num => !setB.has(num));
 const diffAB = new Set(c);
 console.log(diffAB);
 

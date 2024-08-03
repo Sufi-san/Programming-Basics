@@ -36,7 +36,7 @@ Eg: function myFunc(default_var1, default_var2, ...restParams) {code}
 Rest parameter array is a true array. It can be given any name and is identified by the '...' syntax before its name. The parameters can also be changed or modified using this array (possible with arguments array too but not recommended).
 It should appear last in the parameter sequence and only one can exist per function.
 
-Technically, it's possible to declare both a rest parameter and use the arguments object within the same function.
+Technically, it's possible to declare a rest parameter and use the arguments object within the same function.
 However, this is generally discouraged for the following reasons -
 Unnecessary Complexity: It can make the code harder to read and maintain.
 Potential Issues: The arguments object has limitations and might behave differently than a true array, leading to potential bugs.

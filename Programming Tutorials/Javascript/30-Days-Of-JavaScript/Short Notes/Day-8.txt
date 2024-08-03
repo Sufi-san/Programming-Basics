@@ -1,11 +1,11 @@
 Variable Scopes:
-- Global (Anything declared without let, var or const is at Global level)
+- Global (Anything declared without let, var or const in the main function, is at Global level)
 - Local (Access only in certain parts of the code, can be 'Block Scope' or 'Function Scope')
 
 'var', 'let' & 'const':
 - 'let' and 'const' variables have 'Block Scope', they cannot be accessed out of the block they were declared in.
 - 'var' has a 'Function Scope'. This means that they can be accessed anywhere in the function they were declared in irrespective of the block they were declared in.
-- Note: 'var' variables can also be accessed before their declaration takes place in the function given that it actually does take place in the same function. The initial value of that variable at that point will be 'undefined' as no values were assigned. This is also called 'variable hoisting'. 
+- Note: 'var' variables can also be accessed before their declaration takes place in the function given that it actually does take place in the same function body. The initial value of that variable at that point will be 'undefined' as no values were assigned. This is also called 'variable hoisting'. 
 - The recommended way to declare variables however for ES6+ is 'let' and 'const' to avoid the sneakiness of 'var' variables.
 
 Objects:
@@ -13,12 +13,12 @@ Objects:
 - To create objects we use '{}' curly brackets.
 - Properties can by anything: string, number, boolean, another object, null, undefined, function.
 - Object values can be accessed and assigned to, either by using the 'object.key'(dot) operator or square brackets (["key-name"]). Square brackets are mostly used for those keys that have spaces in their names.
-- for referring to the object inside the object itself we use the 'this' keyword.
+- for referring to the object inside that object itself, we use the 'this' keyword.
 - When a property of the object is a 'function' and we need to use the 'this' keyword inside the function to refer to the object, we should NOT use an 'arrow' function.
-- Object, like Arrays, are non-primitive and mutable.
+- Objects, like Arrays, are non-primitive and mutable.
 
 Useful Object class methods:
-- Object.assign({}, original Object) -> makes and returns a new copy of an object.
+- Object.assign(target Object, source Object) -> copies all key-value pairs from source and adds them to target
 - Object.keys() -> Get the keys(properties) of an object in array form
 - Object.values() -> Get the values (literals) of an object in array form
 - Object.entries() -> An array of arrays where every internal array's first element indicates the key and the second one indicates the said key's value.

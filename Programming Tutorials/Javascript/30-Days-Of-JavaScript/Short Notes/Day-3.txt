@@ -4,7 +4,7 @@ Truthy values: (boolean is true)
 - the literal boolean value 'true'
 - Empty objects or arrays are also truthy
 
-False values: (boolean is false)
+Falsy values: (boolean is false)
 - the literal boolean value 'false'
 - 0
 - 0n (Big Integers)
@@ -38,7 +38,7 @@ Operator precedence and associativity: (important points)
 - ** operator has right associativity. Eg: a ** b ** c = a ** (b ** c)
 - Bitwise operators (>>, <<, &, |, ^, ~) have same prority as binary operators (*, /, )
 
-Generally, assignment operators have lower priority, bitwise and binary have medium priority, parenthesis, access calls (like function calls), exponentiation and prefix operators (increment, decrement, unary) have higher priority. 
+Generally, assignment operators have lower priority, bitwise and binary have medium priority, parentheses, access calls (like function calls), exponentiation and prefix operators (increment, decrement, unary) have higher priority. 
 
 Short circuiting: jargon for conditional evaluation
 - Evaluation depends upon first value and the connection between

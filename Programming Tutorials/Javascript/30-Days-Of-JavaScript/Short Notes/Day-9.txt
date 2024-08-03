@@ -4,7 +4,7 @@ Higher Order Functions:
 
 Setting time:
 
-- setInterval(callback, duration): Takes callback function as parameter and a duration paramter. The callback is always called in set duration.
+- setInterval(callback, duration): Takes callback function as parameter and a duration parameter. The callback is always called in set duration.
 Eg: function sayHello() {console.log('Hello')}
 setInterval(sayHello, 1000) // call sayHello() every second
 'setInterval()', when called, returns a numeric ID, which can be stored.
@@ -26,7 +26,7 @@ Built-in methods that use callback function:
 
 - every((item) => {code}): check if all elements are similar in one aspect(match criteria). Return boolean.
 
-- some((item) => {code}): checks if at least 1 element matches the criteria.
+- some((item) => {code}): checks if at least 1 element matches the criteria. Return boolean.
 
 - find((item) => {code}): return the first element that matches set criteria
 

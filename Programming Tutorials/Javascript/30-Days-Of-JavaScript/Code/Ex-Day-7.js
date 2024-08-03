@@ -394,9 +394,9 @@ function generateColors(type='hexa', count=1) {
 }
 
 console.log(generateColors('hexa', 3));
-console.log(generateColors('hexa', 1));
+console.log(generateColors('hexa'));
 console.log(generateColors('rgb', 3));
-console.log(generateColors('rgb', 1));
+console.log(generateColors('rgb'));
 
 function shuffleArray(arr) {
     console.log(`Original Array: ${arr}`);
@@ -512,7 +512,7 @@ console.log(allSameType([1, 2, 3, 4]));
 console.log(allSameType([true, false, false, true]));
 console.log(allSameType(['a', 'b', 'c']));
 
-function isValidVariable(varName='') {
+function isValidVariable(varName='') { // checks only for syntax, not reserved keywords
     varName = ''.concat(varName);
     if(isEmpty(varName)) return false;
     if(varName[0].match(/[^a-zA-Z$_]/)) return false;
