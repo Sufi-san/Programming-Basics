@@ -121,7 +121,9 @@ const filter = ['firstName', 'lastName', 'skills'];
 const stdJSON = JSON.stringify(student, filter, 4);
 console.log(stdJSON);
 
-const txtObj = JSON.parse(txt);
+const txtObj = JSON.parse(txt, (key, value) => {
+    return (key == 'skills')? value.map(skill => skill.toUpperCase()): value;
+});
 console.log(txtObj);
 
 const txtObjKeys = Object.keys(txtObj);
@@ -130,3 +132,27 @@ let maxSkillUser = txtObjKeys.reduce((acc, curr) => {
     return (accIsMax)? acc: curr;
 });
 console.log(maxSkillUser);
+
+// Experimentation:
+const jsonStr = `{
+    "Sufi":{"name": "Sufiyan", "age": 17, "isMarried": false},
+    "Raiho":{"name": "Raihan", "age": 10, "isMarried": false},
+    "Tahhu":{"name": "Tahir", "age":22, "isMarried": true}
+}`
+
+const jsonObj = JSON.parse(jsonStr, (key, value) => {
+    if(typeof value == 'object' && key.length > 0) { // *
+        const newObj = {};
+        for(objKey of Object.keys(value)) {newObj[objKey.toUpperCase()] = value[objKey];}
+        return newObj;
+    }
+   else if(key == 'name') {return value.toUpperCase();}
+   else return value;
+});
+
+console.log(jsonObj);
+// *: If the condition 'key.length > 0' is not added, the top-level keys 'Sufi, Raiho, Tahhu' will also be capitalized. 
+/* The parse function:
+    1. Makes the changes using a bottom-up approach. (Nested key-value pairs are modified first);
+    2. The last key-value pair will be the root JSON Object itself with: key = '', value = <root-object>
+*/

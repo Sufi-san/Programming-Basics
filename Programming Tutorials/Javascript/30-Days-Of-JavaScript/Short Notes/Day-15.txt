@@ -44,6 +44,10 @@ Getters can perform operations on the retrieved value before returning it. This 
 Setter: set/modify object properties indirectly through a method. We can use the set key word to define setter methods
 You can restrict direct modification of properties by only providing a setter and not a public property. This enforces data integrity by controlling how values are changed.
 
+-> We can declare private properties using an underscore '_' before the variable name.
+-> This makes the property unseen and inaccessible.
+-> To provide a controlled access to these we can make use of the 'getters' and 'setters'
+
 Eg: 
 class Person {
   constructor(firstName, lastName, age, country, city) {
@@ -52,24 +56,24 @@ class Person {
     this.age = age
     this.country = country
     this.city = city
-    this.score = 0
-    this.skills = []
+    this._score = 0
+    this._skills = []
   }
   getFullName() {
     const fullName = this.firstName + ' ' + this.lastName
     return fullName
   }
   get getScore() {
-    return this.score
+    return this._score
   }
   get getSkills() {
-    return this.skills
+    return this._skills
   }
   set setScore(score) {
-    this.score += score
+    this._score += score
   }
   set setSkill(skill) {
-    this.skills.push(skill)
+    this._skills.push(skill)
   }
 }
 
@@ -78,12 +82,14 @@ class Person {
 Eg: person1.setScore = 100;
     console.log(person1.getScore);
 
+- To be able to pass arguments when getting or setting a property, or when complex logic is involved during the process, we can make use of regular methods inside the class instead of getters and setters.
+
 Static methods:
 - These are methods inside the classes that can be accessed by the class itself instead of an instantiation or object.
 - The static methods are methods which can be used as utility functions.
 Eg: 
 class Person {
-    static showDateTime() {
+  static showDateTime() {
     let now = new Date()
     let year = now.getFullYear()
     let month = now.getMonth() + 1
@@ -122,6 +128,20 @@ console.log(s1.getPersonInfo())
 
 - super keyword:
 We use the super keyword inside the child class to access the methods and properties of the parent class.
+Eg:
+class Student extends Person {
+  constructor(firstName, lastName, age, country, city, rollNo, class) {
+      super(firstName, lastName, age, country, city);
+      this.rollNo = rollNo;
+      this.class = class 
+    }
+}
 
 - Overriding methods:
 We can redefine the same methods from parent in a different way inside the child class. The objects instantiated using the child class will use the overrided method of its own class.
+
+class Student extends Person {
+  getFullName() {
+    return 'Student: " + this.firstName + ' ' + this.lastName;
+  }
+}

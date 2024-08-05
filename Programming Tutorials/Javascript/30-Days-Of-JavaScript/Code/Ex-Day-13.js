@@ -40,6 +40,7 @@ console.error("Sample Error Message!!");
 
 let i = 0;
 let arr = [1, 4, 7, 10], sum;
+
 console.time('while');
 sum = 0;
 while(i < arr.length) {
@@ -48,16 +49,19 @@ while(i < arr.length) {
 }
 console.log("Sum:",sum);
 console.timeEnd('while');
+
 console.time('for');
 sum = 0;
 for(i = 0; i < arr.length; i++) sum += arr[i];
 console.log("Sum:",sum);
 console.timeEnd('for');
+
 console.time('for of');
 sum = 0;
 for(const num of arr) sum += num;
 console.log("Sum:",sum);
 console.timeEnd('for of');
+
 console.time('for Each');
 sum = 0;
 arr.forEach(num => sum += num);

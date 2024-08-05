@@ -31,7 +31,7 @@ Sample JSON File:
 
 - This can be converted to a JS Object using 'JSON.parse()' method.
 
-- On the other hand, we can convert JS Objectts to JSON strings using, 'JSON.stringify()'
+- On the other hand, we can convert JS Objects to JSON strings using, 'JSON.stringify()'
 
 - JSON objects can be directly inserted as literal values for variables into the code without any errors. We can then use stringify and parse on it to get a JavaScript Object.
 
@@ -62,8 +62,7 @@ const usersText = `{
 ]
 }`
 const usersObj = JSON.parse(usersText, (key, value) => {
-  let newValue =
-    typeof value == 'string' && key != 'email' ? value.toUpperCase() : value
+  let newValue = typeof value == 'string' && key != 'email' ? value.toUpperCase() : value
   return newValue
 })
 console.log(usersObj) // Will have names capitalized

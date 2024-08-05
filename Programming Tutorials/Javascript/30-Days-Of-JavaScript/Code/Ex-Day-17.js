@@ -72,5 +72,5 @@ const personAccount = {
 console.log("Object before stringify:");
 console.log(personAccount);
 localStorage.setItem('pa', JSON.stringify(personAccount));
-console.log("Object parsed from JSON string:");
+console.log("Object parsed from localStorage string:");
 console.log(JSON.parse(localStorage.getItem('pa')));

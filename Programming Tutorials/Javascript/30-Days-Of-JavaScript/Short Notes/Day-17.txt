@@ -6,10 +6,9 @@ Cookies are a good choice for storing data that should not be persisted for a lo
 
 Cookies, localStorage, and sessionStorage are all:
 
-    Storage mechanisms on the client side. This means the clients can read and modify the values.
+    Storage mechanisms on the client side. This means the clients can read and modify the values and storage.
     Key-value based storage.
-    They are only able to store values as strings. Objects will have to be serialized into a string (JSON.stringify()) in order to be stored.
-
+    Only able to store values as strings. Objects will have to be serialized into a string (JSON.stringify()) in order to be stored.
 
 HTML 5 Web Storage:
 Web Storage(sessionStorage and localStorage) is a new HTML5 API offering important benefits over traditional cookies. Before HTML5, application data had to be stored in cookies, included in every server request. Web storage is more secure, and large amounts of data can be stored locally, without affecting website performance.
@@ -20,11 +19,14 @@ It should be noted that data stored in either localStorage or sessionStorage is 
 
 Since sessionStorage and localStorage have similar methods, we will focus only on localStorage.
 
-
 localStorage:
-localStorage is kept even between browser sessions. This means data is still available when the browser is closed and reopened, and also instantly between tabs and windows.
+localStorage is kept even between browser sessions. This means data is still available when the browser is closed and reopened, and also instantly between different tabs and browser windows of the same website(domain, protocol, port).
+Eg: localStorage for youtube.com will differ from the localStorage for whatsapp.com even when they are open in the same browser.
 
-Web Storage data is, in both cases, not available between different browsers. For example, storage objects created in Firefox cannot be accessed in Internet Explorer, exactly like cookies. There are five methods to work on local storage: setItem(), getItem(), removeItem(), clear(), key()
+Web Storage data is, in both cases, not available between different browsers. 
+Eg: Storage objects created in Firefox cannot be accessed in Internet Explorer, exactly like cookies. 
+
+There are five methods to work on local storage: setItem(), getItem(), removeItem(), clear(), key()
 
 Some use cases of Web Storages are
 
@@ -37,7 +39,7 @@ Some use cases of Web Storages are
 
 For the examples mentioned above, it makes sense to use localStorage. You may be wondering, then, when we should use sessionStorage.
 
-In cases, we want to to get rid of the data as soon as the window is closed. Or, perhaps, if we do not want the application to interfere with the same application that’s open in another window. These scenarios are served best with sessionStorage.
+In cases, we want to to get rid of the data as soon as the window is closed. Or, perhaps, if we do not want the application to interfere with the same application that’s open in another window or tab. These scenarios are served best with sessionStorage.
 
 We can access local and session storage using 'window.localStorage' or 'window.sessionStorage' in the browser console. Since, window is a global built-in object, we can simply use 'localStorage' and 'sessionStorage' as well.
 
@@ -46,7 +48,9 @@ We can access local and session storage using 'window.localStorage' or 'window.s
     localStorage.setItem(key, value) - to store data in the localStorage. It takes a key and a value parameters.
     localStorage.getItem(key) - to display data stored in the localStorage. It takes a key as a parameter.
     localStorage.removeItem(key) - to remove stored item form a localStorage. It takes key as a parameter.
-    localStorage.key(index) - to display a data stored in a localStorage. It takes index as a parameter. 
+    localStorage.key(index) - to display data stored in the localStorage. It takes index as a parameter. 
 
 Important points:
 - when storing objects, we should 'stringify' them first if we want to preserve their format eg: Arrays & Custom Objects
+- Arrays and JS Objects can be turned into a JSON string using JSON.stringify() before storing them in the local storage, to preserve their properties.
+- To get them back from the localStorage, we simple use JSON.parse() to convert the stringified elements, back to their original form.

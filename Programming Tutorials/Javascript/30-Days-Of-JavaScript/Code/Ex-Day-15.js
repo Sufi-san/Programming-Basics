@@ -245,3 +245,4 @@ personAccount.addIncome = 321810;
 personAccount.addIncome = [500000, 'Lottery'];
 personAccount.addExpense = [300000, "Medical Expenses"];
 personAccount.accountInfo();
+console.log(personAccount);

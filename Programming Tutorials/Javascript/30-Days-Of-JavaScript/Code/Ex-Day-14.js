@@ -8,6 +8,7 @@ function capitalizeInitials(arr) {
         }
         catch(err) {
             console.error(`Name: ${err.name}, Message: ${err.message}`);
+            errorFound = true;
         }
         finally {
             let str = (errorFound)?"Error Found": "No Errors";
@@ -35,6 +36,7 @@ function divide(numsArr) {
 
 const words = ["Trying", 5, "out", true, "error", "handling."];
 console.log(capitalizeInitials(words));
+console.log(capitalizeInitials(words.filter(item => typeof item == 'string')));
 
 const numsArr = [[1, 2], [1, '2'], [1, 'string'], [1, 0]];
 divide(numsArr);
@@ -42,4 +44,4 @@ divide(numsArr);
 // Uncommenting below lines will result in:
 
 // let num = 2 x 3; // Syntax Error
-// let num = num1 * num2 // Reference Error
+// let num3 = num1 * num2 // Reference Error
