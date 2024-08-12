@@ -1,3 +1,5 @@
+Good Resource: https://deepu.tech/memory-management-in-programming/
+
 Two types of Memories:
 
 1. Stack
@@ -7,7 +9,7 @@ Two types of Memories:
 - When dealing with non-primitive data, Heap memory is used.
 
 - Whenever data is stored in the stack memory, we get a copy of the stored data when the memory location is accessed. (Maintains immutability of primitive types).
-There are also some more optimizations using a memory-pool for data types like strings. (In some languages, data types like Strings aren't even considered primitve. Eg: Java);
+There are also some more optimizations using a memory-pool for data types like strings. (In some languages, Strings aren't even considered primitve. Eg: Java);
 
 - Whenever we want to access properties of objects stored in the heap memory, we obtain the copy of reference to that specific heap memory location. This reference is obtained from Stack Memory, as stack memory stores direct values for primitive data as well as references to heap memory locations for non-primitive data.
 Note: We do not have control over the memory allocation & deallocation itself (no pointers) in JavaScript. We can just access objects stored at particular heap memory location by using the references.

@@ -14,8 +14,8 @@ Imagine you're building a cool new app, but you want to include features like we
 Above explanation helps us better understand the role of Web API that helps JS outsource various tasks, and provide asynchronicity by working with the JS Engine.
 
 API Formats:
-JSON (JavaScript Object Notation) is the dominant format for data exchange in most modern APIs
-While JSON is the most common, there are a few other formats used in some APIs, such as:
+    JSON (JavaScript Object Notation): It is the dominant format for data exchange in most modern APIs
+    While JSON is the most common, there are a few other formats used in some APIs, such as:
 
     XML (Extensible Markup Language):  An older format that's more complex than JSON but offers more flexibility for defining data structures.
 

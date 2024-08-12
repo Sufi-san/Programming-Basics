@@ -1,0 +1,99 @@
+Good Resource: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+
+-> Some basic information already available in 'Day-18.txt'
+
+- As per basic understanding, a promise object accepts a callback function that has parameters 'resolve' and 'reject'. These parameters themselves are functions. In case of fulfillment, 'resolve' returns the obtained 'response' from the source while in case of failure or error, 'reject' returns the details about the error.
+Eg:
+const promise = new Promise(function(resolve, reject) {
+    let error = false 
+    // If error = false, then 'resolve' will return response
+    // If error = true, then 'reject' will return error
+    setTimeout(() => {
+        if(!error) {
+            console.log("Task Completed after 1 second")
+            resolve('Promise Resolved');
+        }
+        else reject('ERROR: Something went wrong')
+    }, 1000)
+})
+
+- We can accept the 'response' returned by 'resolve', inside an async function or in some cases the global environment using the 'await' keyword.
+- However, an error can occur and it is not guaranteed that the promise is always resolved and a response is returned. To handle this we use the 'try-catch' block where the 'error' returned from 'reject' will be handled in the 'catch' block.
+Eg: 
+async function consumePromise() {
+    try {
+        const response = await promise;
+        const data = await response.json();
+        console.log(data);
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+- Another way to handle this would be to use the '.then()' method that accepts the 'response' from 'resolve' in form of a promise and returns a new promise which can be further handled using '.then()' again in succession. The error in this case will be handled the '.catch()' method, that can either be unique and separate for different promises in the chain or it can be a single method at the end of the chain that handles errors for all promises. 
+Eg: 
+1) promise.then().then().then() ... .then().catch()
+2) promise.then((response) => {promise2.then(...Nested promises...).catch()}).then() ... .then().catch()
+
+* Note: 
+- If 'promise.then()' is nested inside another '.then()' method, it will ALWAYS need a seperate 'catch()' for itself at its end.
+- The 'catch()' method at the end of the '.then()' chain, will only handle errors for the outer level 'then()'s and not the nested ones.
+
+- In both of the above methods of handling promises, there can be an optional 'finally block' or '.finally()' method respectively, that executes code irrespective of promise fulfillment or failure.
+
+
+* Promise Identity:
+
+The promise returned by then() is a new promise.
+When you chain then() methods, each subsequent then() returns a new promise. This allows for asynchronous chaining and error handling. The original promise is not modified.
+
+* Are All Promises Thenable?
+- Yes, all promises are thenable. The then() method is the fundamental way to handle the resolution or rejection of a promise. It's an essential part of the Promise API.
+
+* Chaining Multiple then() Methods:
+You can indeed chain multiple then() methods on a promise. Each then() method returns a new promise, allowing you to perform sequential asynchronous operations. However, excessive chaining can lead to "callback hell," which is why techniques like async/await are often preferred for more complex asynchronous flows.
+
+* Callback Hell:
+Callback hell refers to the nested structure of callbacks that can become difficult to read and maintain, especially when dealing with multiple asynchronous operations. It's often visualized as a "pyramid of doom"
+
+- Example of callback hell:
+
+fetch(url1)
+  .then(response => response.json())
+  .then(data1 => {
+    fetch(url2)
+      .then(response => response.json())
+      .then(data2 => {
+        // ... more nested callbacks
+      })
+      .catch(error => {
+        // Handle error
+      });
+  })
+  .catch(error => {
+    // Handle error
+  });
+
+Note: There can also be a case where 'fetch(url2)' gets rejected while 'fetch(url1)' stays pending. This can cause undesirable effects and proper error handling will be required (advanced).
+
+- Avoiding Callback Hell:
+
+    Promise chaining: Use then() methods to create a linear flow.
+    Async/await: Modern syntax that makes asynchronous code look more synchronous.
+    Error handling: Use catch() to handle errors gracefully.
+    Libraries: Consider using libraries like RxJS or Bluebird for more complex asynchronous operations.
+
+** Microtask Queue **
+Good Resource: https://www.geeksforgeeks.org/what-is-the-difference-between-microtask-queue-and-callback-queue-in-asynchronous-javascript/
+
+The main difference between microtask and macrotask queue is their priority. The event loop always gives higher priority to the microtask queue, and will process all the callbacks in the microtask queue before moving on to the macrotask queue.
+
+The microtask queue contains the callbacks of operations that are considered more urgent or important, such as promises and mutation observers APIs.
+
+The macrotask queue contains the callbacks of operations that are less urgent such as timers, I/O events, and user interface events.
+
+** (Important) Learn by Experiments **: (In Folder: Code/Gap Filler (Codes)/PromisePlay)
+
+Other Advanced Topics:
+- Advanced promise patterns (e.g., Promise.all, Promise.race)
+- Error handling best practices

@@ -11,3 +11,82 @@ A Promise can be in one of these states:
     pending: initial state, neither fulfilled nor rejected.
     fulfilled: meaning that the operation completed successfully.
     rejected: meaning that the operation failed.
+
+- Promises can be created using the Promise constructor.
+- The promise callback function has two parameters which are the resolve and reject functions.
+Eg: const promise = new Promise((resolve, reject) => {
+    resolve('success');
+    reject('failure');
+})
+
+- The Promise.prototype.then() and Promise.prototype.catch() methods return promises, they can be chained.
+('prototype' explained in 'Gap Fillers')
+Eg: 
+// Promise
+const doPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    const skills = ['HTML', 'CSS', 'JS']
+    if (skills.length > 0) {
+      resolve(skills)
+    } else {
+      reject('Something wrong has happened')
+    }
+  }, 2000)
+})
+
+doPromise
+  .then(result => {
+    console.log(result)
+  })
+  .catch(error => console.log(error))
+
+
+** Fetch API: **
+The Fetch API provides an interface for fetching resources (including across the network).
+It is similar to XHR (XMLHttpRequest), but the new API provides a more powerful and flexible feature set.
+
+- Can be uses by calling the 'fetch(AnyURL)' method 
+- Returns a promise.
+Eg:
+const url = 'https://restcountries.com/v2/all' // countries api
+fetch(url)
+  .then(response => response.json()) // accessing the API data as JSON
+  .then(data => {
+    // getting the data
+    console.log(data)
+  })
+  .catch(error => console.error(error)) // handling error if something wrong happens
+The '.json()' returns a promise that has a JavaScript Object as its value.
+Despite the method being named json(), the result is NOT 'JSON' but is instead the result of taking JSON as input and parsing it to produce a JavaScript object.
+
+** Async and Await: **
+Async and await is an elegant way to handle promises. It is easy to understand and clean to write.
+The word 'async' in front of a function means that function will return a promise.
+To access the value from the promise, we will use the keyword 'await'. It can only be used inside an 'async' function or at the top level of a module.
+Eg:
+const factorial1 = async (n) => (n > 1)? await factorial1(n - 1) * n: 1;
+
+async function displayVal() {
+    const value = await factorial1(4);
+    console.log(value);
+}
+
+displayVal();
+
+Note: 
+Currently, when using Node.js, for files with extension '.js', 'await' cannot be used in the global scope.
+
+Eg: Obtaining data using -
+
+const url = 'https://restcountries.com/v2/all'
+
+// Promise Method Chaining
+fetch(url).then(response => response.json()).then(data => console.log(data)).catch(error => console.error(error));
+
+// Async and Await
+async function displayData() {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+}
+displayData();

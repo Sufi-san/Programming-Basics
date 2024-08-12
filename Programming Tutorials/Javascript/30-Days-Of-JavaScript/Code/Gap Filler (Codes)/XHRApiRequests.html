@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XHR API Requests</title>
+    <style>
+        #profile-card {
+            height: 200px;
+            width: 150px;
+            color: red;
+        }
+        .prof-img {
+            height: 100px;
+            width: 100px;
+            border-radius: 50px;
+        }
+        h2, h5 {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body style="background-color: #212121; color: white">
+    <div>
+        We can find various APIs via URLs Eg: api.github.com/users/(user's name)
+        We will find certain data structures and these will be the actual APIs.
+        We can go to 'jsonformatter.org', paste the API text and format the API to better understand it.
+    </div>
+    <button id="view-btn">View Card</button>
+    <div id="profile-card"></div>
+</body>
+<script>
+    let btnClicked = false;
+    const URL = "https://api.github.com/users/Sufi-san";
+    // Understanding basic XML<eXtensible Markup Language> API and XMLHttpRequest (XHR) object
+    /* Docs: 
+    https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+    https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+    */
+    const reqURL = "https://api.github.com/users/Sufi-san";
+    const xhr = new XMLHttpRequest(reqURL); 
+    xhr.onreadystatechange = () => {
+        let state = xhr.readyState;
+        console.log("Status code: ", state);
+        if(state == 1) console.log("State: Opened");
+        if(state == 2) console.log("State: Headers Received");
+        if(state == 3) console.log("State: Loading");
+        if(state == 4) {
+            console.log("State: Done");
+            const obj = JSON.parse(xhr.responseText);
+            const vwBtn = document.getElementById('view-btn');
+            vwBtn.addEventListener('click', () => createCard(obj));
+        }
+    }
+    xhr.open("GET", reqURL); 
+    // The states keep changing after the 'open()' call is made
+    xhr.send();
+    function createCard(data) {
+        const card = document.getElementById('profile-card');
+        if(btnClicked) {
+            card.innerHTML = '';
+            card.style.backgroundColor = '#212121';
+            btnClicked = !btnClicked;
+            return;
+        }
+        card.innerHTML = `
+            <img src=${data.avatar_url} class="prof-img">
+            <h2>Username: ${data.login}</h2>
+            <h5>Followers: ${data.followers}</h5>
+            <h5>Following: ${data.following}</h5>
+        `;
+        card.style.backgroundColor = 'aqua';
+        btnClicked = !btnClicked;
+    }
+
+</script>
+</html>

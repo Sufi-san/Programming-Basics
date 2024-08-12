@@ -15,11 +15,11 @@ The 'Even Loop' in JS consists of:
 2) Web API -> when asynchronous functions, promises or setTimeout or setInterval methods are used, the callback
               function and its set time is accurately registered and these callbacks are pushed into the
               'Task Queue'
-3) Task Queue -> Stores the registered callbacks and when the 'Call Stack' is completely empty (no execution 
+3) Task Queue / Callback Queue / Macrotask Queue -> Stores the registered callbacks and when the 'Call Stack' is completely empty (no execution 
                  contexts except the GEC), then while following the FIFO (First In First Out) behavior of the queue, the callbacks are removed from queue and placed into the empty stack. The task queue waits for the recently pushed callback to finish its execution and get popped out of the stack, before pushing another callback from the task queue into the stack. (This is done to maintain synchronicity)
-4) Promise Queue -> 
+4) Promise Queue / Microtask Queue -> 
 In JavaScript, there isn't a separate "promise queue" in the traditional sense. 
-(Has higher priority callbacks, will be discussed in detail when understanding Promises)
+(Has higher priority callbacks, will be discussed in detail when understanding Promises & 'fetch()')
 
 About some WebAPI methods:
 1) setTimeout(callback, time in milliseconds, optional args) -> returns an id, executes callback after set time.

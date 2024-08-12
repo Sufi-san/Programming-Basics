@@ -1,0 +1,20 @@
+Good Resources: 
+https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+https://blog.logrocket.com/fetch-api-node-js/
+https://fetch.spec.whatwg.org/#fetch-method
+
+Fetch API, which is a powerful and flexible replacement for XMLHttpRequest, was added to Node.js on 1st February, 2022.
+
+'fetch()' is a global method that starts the process of fetching a resouce from the network, returning a promise which is fulfilled once the response is availble.
+
+-> (IMP) A 'fetch()' promise only rejects when a network error is encountered (usually permission issues or similar). Promise does NOT reject on HTTP errors (like 404). Instead a 'then()' handler must check the Response.ok and/or Response.status properties.
+
+-> The 'fetch()' process is divided into 2 parts. 
+
+First a memory space is prepared to store the result of the request made by fetch().
+It consists of two arrays/fields called 'onFulfilled' and 'onRejected'.
+All of these are private fields and cannot be accessed directly.
+
+The Node Engine or Web Browser sends a request to the network which is either fulfilled or rejected. The result is stored in either an onFulfilled or onRejection array based on the state of the promise. 'onFulfilled' stores the 'response' (including HTTP errors like 404) while 'onRejection' stores 'error' (network errors or request rejections).
+
+Both the 'onFulfilled' and 'onRejection' arrays are equipped with functions that return the stored 'data' which is then returned to our Global Memory variable (response).
