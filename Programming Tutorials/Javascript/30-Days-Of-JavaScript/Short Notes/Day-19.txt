@@ -1,0 +1,72 @@
+Docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+
+** Closure **:
+A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment). In other words, a closure gives you access to an outer function's scope from an inner function. In JavaScript, closures are created every time a function is created, at function creation time.
+
+** Lexical Scoping **:
+The word lexical refers to the fact that lexical scoping uses the location where a variable is declared within the source code to determine where that variable is available. Nested functions have access to variables declared in their outer scope.
+Eg:
+function init() {
+  var name = "Mozilla"; // name is a local variable created by init
+  function displayName() {
+    // displayName() is the inner function, that forms the closure
+    console.log(name); // use variable declared in the parent function
+  }
+  displayName();
+}
+init();
+
+* More about Closures:
+- A closure is the combination of a function and the lexical environment within which that function was declared. This environment consists of any local variables that were in-scope at the time the closure was created.
+Eg1:
+    function makeFunc() {
+        const name = "Mozilla";
+        function displayName() {
+            console.log(name);
+        }
+        return displayName;
+    }
+
+    const myFunc = makeFunc();
+    myFunc();
+- In above case, myFunc is a reference to the instance of the function displayName that is created when makeFunc is run. The instance of displayName maintains a reference to its lexical environment, within which the variable name exists. For this reason, when myFunc is invoked, the variable name remains available for use, and "Mozilla" is passed to console.log.
+Eg2:
+    function makeAdder(x) {
+        return function (y) {
+            return x + y;
+        };
+    }
+
+    const add5 = makeAdder(5);
+    const add10 = makeAdder(10);
+
+    console.log(add5(2)); // 7
+    console.log(add10(2)); // 12
+
+
+- We can obtain the data-hiding (private properties) and encapsulation benefits which are usually provided in Object-Oriented Programming languages with the help of closures in JavaScript. (Example in 'Code/Ex-Day-19.js')
+
+- Closure has three scopes ->
+1) Local (Own Scope)
+2) Enclosing scope(can be block, function or module scope)
+3) Global scope
+- When the outer function is itself a nested function, access to the outer function's scope includes the enclosing scope of the outer function—effectively creating a chain of function scopes. 
+Eg: 
+    // global scope
+    const e = 10;
+    function sum(a) {
+        return function (b) {
+            return function (c) {
+                // outer functions scope
+                return function (d) {
+                    // local scope
+                    return a + b + c + d + e;
+                };
+            };
+        };
+    }
+    console.log(sum(1)(2)(3)(4)); // 20
+- This also enables 'Function Currying'. Function currying is a concept in functional programming where a function with multiple arguments is transformed into a sequence of functions, each taking a single argument. The result of each function is a new function that expects the next argument in the sequence until all arguments have been provided, and finally, the original function is invoked with all the arguments.
+
+- Each function instance manages its own scope and closure. Therefore, it is unwise to unnecessarily create functions within other functions if closures are not needed for a particular task, as it will negatively affect script performance both in terms of processing speed and memory consumption.
+- For instance, when creating a new object/class, methods should normally be associated to the object's prototype rather than defined into the object constructor. The reason is that whenever the constructor is called, the methods would get reassigned (that is, for every object creation). (3 great examples at the end of MDN Closures Docs)

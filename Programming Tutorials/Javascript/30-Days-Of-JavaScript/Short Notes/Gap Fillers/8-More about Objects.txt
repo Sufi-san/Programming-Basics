@@ -1,0 +1,24 @@
+Some object properties might have characteristics that differ from the regular or common behavior
+They can be constant(cannot be modified), non-iterable(cannot be selected inside a traversal loop) and unconfigurable.
+Eg: Constant hard-coded values in the 'Math' object such as 'E' and 'PI' cannot be updated/changed.
+
+To know about the characteristics of any object property we can use the method:
+    1) 'Object.getOwnPropertyDescriptor(Object-name, "Name of the Property in String form")'
+    2) 'Object.getOwnPropertyDescriptors(Object-name) // shows descriptors for all properties
+It returns another object with the hard-coded 'value' and boolean properties like 'writable', 'enumerable', 'configurable'.
+
+The characteristics of object properties can be set/updated using methods like:
+    1) 'Object.defineProperty(Object-name, "Name of the Property in String form", descriptor)'
+    2) 'Object.defineProperties(Object-name, descriptors)'
+where, 
+    - 'descriptor' is an object that contains name of characteristic and their values as key-value pairs
+    Eg: const descriptor = {value: "myObjValue", writable: true, enumberable: false, configurable: true}
+
+    - 'descriptors' is a collection of property names and their descriptor objects as key-value pairs
+    Eg: const descriptors = {property1: descriptor1, property2: descriptor2, ...} 
+
+About the characteristics:
+1) value -> The current value of the object property. Can be string, number, boolean, function ...
+2) writable -> 'true' means the property value can be updated, 'false' restricts any reassignment.
+3) enumberable -> when traversing over key-value pairs, 'true' means property needs to be included in the loop as a key, 'false' means exclusion of the property as a key inside the loop.
+4) configurable -> determines whether the characteristics of an object property can be altered. 'true' means we can use methods like 'defineProperty()' to alter the characteristics. 'false' means alteration cannot be done. Once set to 'false', the property characteristics can never be altered afterwards.

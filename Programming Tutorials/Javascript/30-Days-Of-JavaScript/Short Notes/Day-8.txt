@@ -13,8 +13,40 @@ Objects:
 - To create objects we use '{}' curly brackets.
 - Properties can by anything: string, number, boolean, another object, null, undefined, function.
 - Object values can be accessed and assigned to, either by using the 'object.key'(dot) operator or square brackets (["key-name"]). Square brackets are mostly used for those keys that have spaces in their names.
+
 - for referring to the object inside that object itself, we use the 'this' keyword.
 - When a property of the object is a 'function' and we need to use the 'this' keyword inside the function to refer to the object, we should NOT use an 'arrow' function.
+Q. Why to use regular functions and NOT the 'arrow' function?
+A: 
+    In regular functions, the value of 'this' is determined at runtime based on how the function is called. It can refer to the global object (in strict mode, it's undefined), the object it's a method of, or the object passed as the first argument to call, apply, or bind.
+    Arrow functions, on the other hand, capture the 'this' value from the enclosing scope at the time of their definition. This behavior is often referred to as lexical 'this'
+Eg1: 
+    const obj1 = {
+        name: "User",
+        displayName: function() {
+            console.log(this.name); // (this == obj1)
+        },
+        displayNameArr: () => {
+            console.log(this.name); // (this == window OR the 'this' from the enclosing scope)
+        }
+    }
+    obj1.displayName(); // User
+    obj1.displayNameArr(); // ""
+-- In above example, 'this' in the arrow function is NOT 'obj1' reference but rather the reference for 'this' that 'obj1' itself has. Here, 'obj1' is the enclosing scope for the arrow function.
+
+Eg2:
+    const obj2 = {
+        name: "User",
+        displayName: function() {
+            console.log(this.name);
+            (() => {console.log(this.name)})(); (this == obj1)
+        }
+    }
+    obj2.displayName();
+    // User
+    // User 
+-- In above example, 'this' in the arrow function is 'obj2' reference because the 'displayName()' function is the enclosing scope and the 'this' reference for the enclosing scope is 'obj2'.
+
 - Objects, like Arrays, are non-primitive and mutable.
 
 Useful Object class methods:

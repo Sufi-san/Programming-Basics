@@ -43,3 +43,12 @@ is complete.
 In this manner all function calls are handled for the program inside the call stack.
 The last execution context to be removed will be the global execution context which served as the starting
 point of the program.
+
+
+.call(), .apply() and .bind():
+    - call: The call method invokes a function with a specified this value and individual arguments passed as separate arguments. It allows you to borrow functions from one object and invoke them in the context of another.
+
+    - apply: Similar to call, the apply method invokes a function with a specified this value, but it takes an array or an array-like object as its second argument, allowing you to pass a variable number of arguments to the function.
+
+    - bind: The bind method creates a new function that, when called, has its this value set to a specific value and prepends any provided arguments to the original function's arguments list. It is often used to create functions with preset contexts or partially applied arguments.
+(Code implementaion in 'Code/Gap Filler (Codes)')

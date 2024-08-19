@@ -44,3 +44,12 @@ Useful String methods:
 Useful methods for typecasting: 
 parseInt(), parseFloat(), Number(), 
 using '+' sign -> (let num = "5", then (+num) will become integer 5, works for float as well)
+
+
+Some Questions:
+If 'string' is a primitive, how can we use 'object-like' properties on it?
+Is string an object or a primitive?
+If string is both object and primitive, can other primitives also become objects?
+Ans: 
+Type Coercion.
+https://javascriptweblog.wordpress.com/2010/09/27/the-secret-life-of-javascript-primitives/

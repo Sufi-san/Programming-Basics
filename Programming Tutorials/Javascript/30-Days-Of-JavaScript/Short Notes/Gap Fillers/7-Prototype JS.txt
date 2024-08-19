@@ -1,0 +1,17 @@
+Prototypes are the mechanism by which JavaScript objects inherit features from one another. (Prototype details can be seen in the browser console, when an object is directly printed in it)
+
+Everything except for true primitives in JavaScript is an object.
+
+Every object in JavaScript has a built-in property, which is called its prototype. The prototype is itself an object, so the prototype will have its own prototype, making what's called a prototype chain. The chain ends when we reach a prototype that has null for its own prototype.
+
+Note: The property of an object that points to its prototype is not called prototype. Its name is not standard, but in practice all browsers use __proto__. The standard way to access an object's prototype is the Object.getPrototypeOf() method.
+
+Here's what happens behind the scenes when the new keyword is used:
+
+1) A new object is created: The new keyword initiates the creation of a new JavaScript object.
+
+2) A prototype is linked: The newly created object gets linked to the prototype property of the constructor function. This means that it has access to properties and methods defined on the constructor's prototype.
+
+3) The constructor is called: The constructor function is called with the specified arguments and this is bound to the newly created object. If no explicit return value is specified from the constructor, JavaScript assumes this, the newly created object, to be the intended return value.
+
+4) The new object is returned: After the constructor function has been called, if it doesn't return a non-primitive value (object, array, function, etc.), the newly created object is returned.

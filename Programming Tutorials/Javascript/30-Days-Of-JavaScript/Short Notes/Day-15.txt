@@ -38,15 +38,12 @@ Class Methods:
 - Methods inside a class.
 - These can be used by all the objects that are instantiated using the particular class.
 
+
 Getter: get object properties indirectly through a method. We can use the 'get' key word to define getter methods
 Getters can perform operations on the retrieved value before returning it. This allows you to format data or ensure it's in a specific format.
 
 Setter: set/modify object properties indirectly through a method. We can use the set key word to define setter methods
 You can restrict direct modification of properties by only providing a setter and not a public property. This enforces data integrity by controlling how values are changed.
-
--> We can declare private properties using an underscore '_' before the variable name.
--> This makes the property unseen and inaccessible.
--> To provide a controlled access to these we can make use of the 'getters' and 'setters'
 
 Eg: 
 class Person {
@@ -56,37 +53,51 @@ class Person {
     this.age = age
     this.country = country
     this.city = city
-    this._score = 0
+
+    // getters and setters referring to the properties with a preceeding underscore will work,
+    // even if the below property names don't actually have a preceeding underscore inside the constructor !!
+    this._score = 0 
     this._skills = []
   }
-  getFullName() {
+  getFullName() { // normal method
     const fullName = this.firstName + ' ' + this.lastName
     return fullName
   }
-  get getScore() {
+  get score() { 
     return this._score
   }
-  get getSkills() {
+  get skills() {
     return this._skills
   }
-  set setScore(score) {
+  set score(score) {
     this._score += score
   }
-  set setSkill(skill) {
+  set skills(skill) {
     this._skills.push(skill)
   }
 }
 
+- We can declare private properties using an underscore '_' before the variable name. However, they are just considered private (convention) and aren't strictly private and can be accessed normally.
+- To provide a controlled access to these we can make use of the 'getters' and 'setters'
+- Generally getters and setters have the intended name of the property while the original property name is preceeded by an underscore (_property). This is done to make the property private while also avoiding the problem of Stack Overflow and Race Conditions.
+Case for Stack Overflow: getter called inside itself, setter called inside itself.
+Case for Race Condition: the constructor as well as the setter try to set the value of the property.
+
 - For getter and setter methods we do not follow the traditional way of using methods, these are treated similar to variables.
+Eg: person1 = new Person("UserFirstName", "UserLastName", 99, "Nowhere Land", "Unseen City");
+    person1.score = 100; // 'score' will be accessed through the 'getter' score() and it will return the value of private property '_score'
+    console.log(person1.score); // private property '_score' will be modified via the 'setter' score()
 
-Eg: person1.setScore = 100;
-    console.log(person1.getScore);
+- To be able to arguments when getting a property, or when complex logic is involved during the process of getting or setting, we can make use of regular methods inside the class instead of getters and setters.
+Eg: person1.getFullName()
 
-- To be able to pass arguments when getting or setting a property, or when complex logic is involved during the process, we can make use of regular methods inside the class instead of getters and setters.
+In other languages like Java, even though the concept of getters and setters exists, there are no special getters & setters and regular methods are used as getters and setters for private properties.
+
 
 Static methods:
 - These are methods inside the classes that can be accessed by the class itself instead of an instantiation or object.
 - The static methods are methods which can be used as utility functions.
+Note: In JS, objects can NOT access static properties or methods. This behavior is different from Java where both the class and the object can access static content.
 Eg: 
 class Person {
   static showDateTime() {
@@ -112,13 +123,14 @@ class Person {
 console.log(Person.showDateTime());
 
 Inheritance:
-Using inheritance we can access all the properties and the methods of the parent class, inside the child class that inherits from it. This reduces repetition of code.
+Using inheritance we can access all the properties and the methods of the parent class (including static content), inside the child class that inherits from it. This reduces repetition of code.
 Eg:
 class Student extends Person {
   saySomething() {
     console.log('I am a child of the person class')
   }
 }
+Note: If the inherited 'static' content of a child class is changed, it does not affect the 'static' content of the parent class.
 
 const s1 = new Student('Asabeneh', 'Yetayeh', 'Finland', 250, 'Helsinki')
 console.log(s1)

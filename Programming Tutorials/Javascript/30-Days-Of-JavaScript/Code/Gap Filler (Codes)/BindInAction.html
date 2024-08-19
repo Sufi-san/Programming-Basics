@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bind In Action</title>
+</head>
+<body>
+    <button>Click Me!</button>
+</body>
+<script>
+    class Page {
+        constructor() {
+            this.name = 'react-app';
+            this.library = 'React';
+            this.server = 'https://localhost:3000';
+
+            // We want to pass the constructor's or the 'Page' object's context (this) to another method
+            // Though it can be done by '.call()', what we exactly need to do is preserve a copy of the resultant method with its context set to the required context we passed.
+            // This preserved function will then be used later when required. 
+            /* Eg: 
+                We want a preserved copy of a function with its context set to the object's context.
+                We select a button and attach an event listener to it.
+                The callback function for the event listener will be this exact preserved function copy.
+
+                If we try to do this without .bind(), the 'this' inside the callback function will refer to the button object onto which the event listener is attached.
+            */
+            document
+            .querySelector('button')
+            .addEventListener('click', this.clickEffect.bind(this));
+        }
+
+        clickEffect() {
+            console.log("Button Clicked!");
+            console.log('Object Details:', this);
+        }
+    }
+    const app = new Page();
+</script>
+</html>
