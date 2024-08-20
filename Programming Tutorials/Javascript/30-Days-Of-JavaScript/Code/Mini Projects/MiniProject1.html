@@ -1,0 +1,160 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>JavaScript for Everyone:DOM</title>
+  </head>
+  <body>
+    <div class="wrapper">
+        <h1>Asabeneh Yetayeh challenges in 2020</h1>
+        <h2>30DaysOfJavaScript Challenge</h2>
+        <ul>
+            <li>30DaysOfPython Challenge Done</li>
+            <li>30DaysOfJavaScript Challenge Ongoing</li>
+            <li>30DaysOfReact Challenge Coming</li>
+            <li>30DaysOfFullStack Challenge Coming</li>
+            <li>30DaysOfDataAnalysis Challenge Coming</li>
+            <li>30DaysOfReactNative Challenge Coming</li>
+            <li>30DaysOfMachineLearning Challenge Coming</li>
+        </ul>
+    </div>
+  </body>
+  <script>
+
+    const bodyStyle = document.body.style;
+    bodyStyle.display = 'flex';
+    bodyStyle.justifyContent = 'center';
+
+    const container = document.querySelector('.wrapper');
+
+    const dateTimeHTML = getDateTimeHTML();
+    insertDateTime();
+    const colorPalette = ['yellow', 'red', 'green', 'blue', 'magenta', 'violet', '#8578ff', 'grey', 'purple', 'orange'];
+
+    const h1 = container.querySelector('h1');
+    const h2 = container.querySelector('h2');
+    const challengeList = container.querySelector('ul').querySelectorAll('li');
+
+    styleMainHeading();
+    styleSubHeading();
+    styleListItems();
+    styleDateTime();
+
+    setInterval(() => pageUpdate(), 1000);
+
+    function getDateTimeHTML() {
+        const dateTimeHTML = `
+            <div id='date-time-wrapper'>
+                <div id='date-time'>
+                    ${getDateTimeText()}
+                 </div>
+            </div>
+        `;
+        return dateTimeHTML;
+    }
+
+    function getDateTimeText() {
+        const dateObj = new Date();
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const month = months[dateObj.getMonth()];
+        const date = dateObj.getDate();
+        const year = dateObj.getFullYear();
+        let timeString = dateObj.toTimeString();
+        const time = timeString.substring(0, timeString.indexOf(' '));
+
+        return `${month} ${date}, ${year} ${time}`;
+    }
+
+    function insertDateTime() {
+        const containerHTML = container.innerHTML;
+        const h2EndInd = containerHTML.indexOf('</h2>') + 5;
+        const afterh2HTML = containerHTML.substring(h2EndInd);
+        container.innerHTML = `
+            ${containerHTML.substring(0, h2EndInd)}
+            ${dateTimeHTML}
+            ${afterh2HTML}
+        `;
+    }
+
+    function styleMainHeading() {
+        h1.style.fontFamily = 'Arial';
+        let yearInd = h1.textContent.indexOf('2020');
+        const textContent = h1.textContent.substring(0, yearInd);
+        const htmlContent = `
+        <span id='year-span' style='font-size: 88px; font-family: sans-serif; color: #8578ff'>
+            ${2020}
+        </span>`;
+        h1.innerHTML = textContent + htmlContent;
+    }
+
+    function styleSubHeading() {
+        h2.style.fontFamily = 'Arial';
+        h2.style.textDecoration = 'underline';
+        h2.style.textAlign = 'center';
+        h2.style.fontSize = '22px';
+        h2.style.fontWeight = '500';
+        h2.style.color = '#212121'
+        h2.style.marginBottom = '0px';
+    }
+
+    function styleListItems() {
+        challengeList.forEach(challenge => styleItem(challenge));
+    }
+
+    function styleItem(challenge) {
+        const text = challenge.textContent;
+        const type = text.substring(text.lastIndexOf(' ') + 1).toLowerCase();
+        
+        let bgColor = 'tomato';
+        if(type == 'done') bgColor = '#07da63';
+        else if(type == 'ongoing') bgColor = 'yellow';
+    
+        challenge.style.padding = '20px';
+        challenge.style.fontSize = '15px';
+        challenge.style.fontFamily = 'Arial';
+        challenge.style.backgroundColor = bgColor;
+        challenge.style.listStyle = 'none';
+        challenge.style.marginBottom = '4px';
+    }
+
+    function styleDateTime() {
+        const dateTime = container.querySelector('#date-time');
+        dateTime.style.textAlign = 'center';
+        dateTime.style.backgroundColor = 'green';
+        dateTime.style.paddingTop = '10px';
+        dateTime.style.paddingBottom = '10px';
+        dateTime.style.paddingLeft = '20px';
+        dateTime.style.paddingRight = '20px';
+        dateTime.style.display = 'block';
+        dateTime.style.marginTop = '18px';
+        dateTime.style.display = 'inline';
+
+        const dateTimeWrapper = container.querySelector('#date-time-wrapper');
+        dateTimeWrapper.style.display = 'flex';
+        dateTimeWrapper.style.flexDirection = 'column';
+        dateTimeWrapper.style.alignItems = 'center';
+    }
+
+    function pageUpdate() {
+        updateYearColor();
+        updateDateTime();
+    }
+
+    function updateYearColor() {
+        const year = container.querySelector('#year-span');
+        year.style.color = getRandomColor();
+    }
+
+    function updateDateTime() {
+        const dateTime = container.querySelector('#date-time');
+        dateTime.style.backgroundColor = getRandomColor();
+        dateTime.textContent = getDateTimeText();
+    }
+
+    function getRandomColor() {
+        const num = Math.floor(Math.random() * colorPalette.length);
+        return colorPalette[num];
+    }
+    
+  </script>
+</html>

@@ -55,4 +55,6 @@ Useful Object class methods:
 - Object.values() -> Get the values (literals) of an object in array form
 - Object.entries() -> An array of arrays where every internal array's first element indicates the key and the second one indicates the said key's value.
 
-The .hasOwnProperty(key name) for every individual object: to check whether the object has a certain property.
+The .hasOwnProperty(key name) for every 'individual object': to check whether the object has a certain property
+We can also use the class Method Object.hasOwn(object-name, key) for the same.
+Both return a boolean value, 'true' if object has the property and 'false' otherwise.

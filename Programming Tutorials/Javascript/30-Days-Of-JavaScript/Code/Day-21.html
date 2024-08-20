@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 Days Of JavaScript: Day 21</title>
+</head>
+<body>
+    <p id="para-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempore possimus esse animi sint dignissimos harum eius? Velit ab ut ea quos eligendi eaque earum, voluptates quibusdam, porro doloribus enim!</p>
+    <p id="para-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae magnam pariatur accusamus ut totam cumque fuga rem ab, tempora delectus reiciendis natus asperiores ex non aspernatur quasi quas perspiciatis quam!</p>
+    <p id="para-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis deleniti officiis porro repellat veniam aperiam aliquid neque voluptate, similique reprehenderit nulla voluptates tenetur quae animi alias ex facere eos architecto?</p>
+    <p id="para-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro repellat ipsum, quaerat eligendi facere illo excepturi, totam eius nihil sint ratione sequi, cupiditate asperiores tempore itaque officia voluptatum ad saepe!</p>
+</body>
+<script>
+    const firstPara = document.querySelector('p');
+
+    console.log(firstPara.textContent);
+    for(let i = 0; i < 4; i++) {
+        console.log(`\n%c${document.querySelector(`#para-${i + 1}`).textContent}`, 'color: green');
+    
+    }
+    const paragraphs = document.querySelectorAll('p');
+
+    paragraphs.forEach(para => console.log(`\n%c${para.
+    textContent}`, 'color: yellow'));
+    paragraphs[3].textContent = 'Fourth Paragraph';
+
+    for(let i = 0; i < 2; i++) {
+        paragraphs[i].className = 'para-class';
+        paragraphs[i].id = 'newPara-ID-' + (i + 1);
+    }
+    paragraphs[2].setAttribute('class', 'para-class');
+    paragraphs[2].setAttribute('id', 'newPara-ID-3');
+    paragraphs[3].setAttribute('id', 'newPara-ID-4');
+    paragraphs[3].classList.add('para-class');
+
+    for(const index in paragraphs) {
+        if(!(parseInt(index) >= 0)) break;
+        const paraStyle = paragraphs[index].style;
+        paraStyle.color = 'white';
+        paraStyle.backgroundColor = '#212121';
+        paraStyle.border = '2px solid yellow';
+        paraStyle.fontSize = '14px';
+        paraStyle.fontFamily = 'Impact';
+    }
+
+    let num = 0;
+    paragraphs.forEach(para => {
+        const color = (num % 2)? 'green': 'red';
+        para.style.color = color;
+        num++;
+    });
+</script>
+</html>

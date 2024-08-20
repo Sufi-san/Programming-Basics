@@ -8,12 +8,14 @@ Arrays themselves are non-primitive, and we can modify values at their indices d
 Some important Array methods and properties:
 
 Array(number of items) -> creates an empty array of given size
+Array.isArray(item) -> checks if item is an array, if it is returns true else false
+Array.from(any other object) -> creates a new, shallow-copied Array instance from an iterable or array-like object. For Objects with key-value pairs, it returns empty array
+Array.of(obj1, obj2, ...) -> creates a new array from a given set of elements.
 fill(item) -> fill 'item' at every index
 concat(other array) -> similar to string concat
 length -> size of array
 indexOf(element to look for) -> similar working to string indexOf
 lastIndexOf(), includes()
-Array.isArray(item) -> checks if item is an array, if it is returns true else false
 .toString() -> string of comma separated elements from the array.
 .join(middle parameter) -> returns a string with selected middle parameter separating the elements
 .slice(s, e) -> taking start (inclusive) and end (exlusive) parameters, returns a new array with items of selected range. (like substring). Copies full array if no parameter is passed, takes end index by default if no end parameter is passed.
@@ -26,4 +28,8 @@ It also 'Returns' another array of old items now replaced from the original arra
 .unshift(item) -> Add item from beginning
 .reverse() -> Reverse the order of elements in original array object.
 .sort() -> sorts the array elements, 'lexicographically' if strings. (can be used with 'callback' functions to define the sorting criteria)
-
+.flat(depth) -> returns a copy of the original array that has all items sub-array elements concatenated directly into it according to the give depth.
+Eg: 
+const myArr = [1,2,3,[4,5,6],7,[6,7,[4,5]]];
+myArr.flat(1); // [1, 2, 3, 4, 5, 6, 7, 6, 7, [4, 5]]
+myArr.flat(2); // [1, 2, 3, 4, 5, 6, 7, 6, 7, 4, 5]

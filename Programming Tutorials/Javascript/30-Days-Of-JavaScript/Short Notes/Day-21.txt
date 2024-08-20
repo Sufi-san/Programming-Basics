@@ -1,0 +1,89 @@
+HTML document is structured as a JavaScript Object. Every HTML element has different properties which can help to manipulate it. It is possible to get, create, append or remove HTML elements using JavaScript.
+Selecting HTML element using JavaScript is similar to selecting using CSS. To select an HTML element, we use tag name, id, class name or other attributes.
+
+To access or get elements we use different methods on the 'document' object provided by the global environment:
+
+document
+.getElementsByTagName('name of HTML tag'), 
+.getElementsByClassName('name of assigned class') 
+-> Both return an 'HTMLCollection' object for all matching HTML elements.
+
+.getElementById('id of HTML element')
+-> Returns a single HTML element
+
+.querySelector('#Id OR tag name OR .class name')
+-> Returns the first matching HTML element
+.querySelectorAll('#Id OR tag name OR .class name')
+-> Returns a 'NodeList' object of all matching HTML elements.
+
+Note: 
+- An HTMLCollection is an array-like object of HTML elements. An HTMLCollection does not support all array methods therefore we should use regular for loop instead of forEach for traversals.
+- A NodeList is an array-like object which supports array methods. We can use for-loop or forEach to loop through each nodeList elements.
+- If required, both HTMLCollection and NodeList object can be converted to regular arrays using 'Arrays.from(object)'
+
+* Adding attribute:
+- An attribute is added in the opening tag of HTML which gives additional information about the element. Common HTML attributes: 
+id, className (class), src, style, href, disabled, title, alt.
+Eg:
+    const headings = document.querySelectorAll('h1');
+    headings[0].className = 'main-heading';
+    headings[0].id = 'heading';
+
+- The 'setAttribute(attribute, value)' method can also be used to set values for HTML element attributes. It will always replace/override the complete attribute value.
+Eg:
+headings[0].setAttribute('class', 'main-heading second-class');
+headings[0].setAttribute('id', 'heading');
+
+- The 'getAttribute(attribute)' method can display existing values for the selected attribute.
+Eg:
+console.log(headings[0].getAttribute('class'))
+
+- Methods to add/remove class: (These 'append' to the class names and don't override them.)
+1) headings[0].classList.add('main-heading', 'header-main-heading');
+2) headings[0].classList.remove('main-heading', 'header-main-heading');
+
+* Adding Text to HTML element:
+- An HTML building block consists of an opening tag, a closing tag and text content.
+- We can override(replace) text content for HTML elements using the property .textConent, .innerText or .innerHTML.
+Eg:
+HTML Element:
+<div id="#element-id">This is the inner text <span display:"none">this is some more text</span>.</div>
+
+Selecting it:
+const element = document.getElementById('element-id');
+
+- textContent -> Selects all of the text content inside the HTML Element irrespective of embedded HTML and its effect while excluding HTML tags.
+Eg: 
+element.textContent
+// This is the inner text this is some more text.
+
+- innerText -> Selects text that is actually visible on the webpage.
+Eg:
+element.innerText
+// This is the inner text.
+
+- innerHTML -> Selects all the content inside the HTML Element with proper HTML Syntax.
+Eg:
+element.innerHTML
+This is the inner text <span display:"none">this is some more text</span>.
+
+* Handling style for HTML Elements:
+- The .style and its sub-properties can be used to control different CSS properties for an HTML Element:
+Eg:
+// Setting custom style to odd and even headings:
+const headings = document.querySelectorAll('h1');
+counter = 1;
+for(heading of headings) {
+    if(counter % 2) {
+        heading.style.color = 'red';
+        heading.style.backgroundColor = 'green';
+        heading.fontSize = '30px';
+    }
+    else {
+        heading.style.backgroundColor = 'red';
+        heading.style.color = 'green';
+        heading.fontSize = '20px';
+    }
+    counter++;
+}
+- The properties of CSS when referred to, in JavaScript are going to be in camelCase.
