@@ -1,0 +1,58 @@
+The Browser Environments consist of a global object called 'window' that refers to the Browser's Window itself.
+Inside it there are various other objects that can be accessed directly without specifiying 'window. '.
+
+An important object provided by the 'window' object is the 'document' object.
+The 'document' object refers to the complete HTML structure that constructs the webpage displayed inside the window.
+
+We can view the complete HTML inside console using:
+'console.log(document)'
+Other than HTML, the 'document' object also has other properties which can also be looked up in the console using:
+'console.dir(document)'
+
+The document's direct child (HTML) is again divided into two parts 'head' and 'body' which defines the basic structure of an HTML document.
+
+The 'window' object, 'document' object and each of the 'HTML Elements' or 'HTML markup Tags' can be viewed as 'Nodes' while the resulting structure starting from 'window' as the root node forms a tree.
+This tree can be referred to as, the Document Object Model (DOM).
+
+Being aware of this structure enables us to accurately use the 'document' object and its selector methods to select and manipulate various HTML elements on the webpage using JavaScript. 
+It also helps us understand the incurred cost for searching through the whole document for various HTML elements.
+Different selector methods provided by the 'document' object:
+getElementById, 
+getElementsByClassName,
+getElementsByTagName,
+querySelector,
+querySelectorAll
+...
+
+Eg:
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Learning DOM</title>
+    </head>
+    <body>
+        <div class='my-div'>
+            <h1 id='first-heading'>First Heading</h1>
+            <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+    </body>
+</html>
+
+Tree Diagram for above Document: (also available as an Image in this folder)
+
+                                  |---> title ---> text Node
+                          |---> head
+                          |       |---> meta ---> attribute
+                          |
+window --> document --> html
+                          |
+                          |
+                          |                |---> attribute
+                          |---> body ---> div
+                                           |
+                                           |      |---> text Node
+                                           |---> h1 
+                                           |      |---> attribute
+                                           |
+                                           |---> p ---> text Node

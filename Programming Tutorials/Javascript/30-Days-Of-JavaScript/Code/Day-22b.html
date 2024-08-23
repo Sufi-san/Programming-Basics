@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 Days Of JavaScript: Day 22-B</title>
+</head>
+<body>
+</body>
+<script>
+    const bodyStyle = document.body.style;
+    bodyStyle.display = 'flex';
+    bodyStyle.flexDirection = 'column';
+    bodyStyle.alignItems = 'center';
+    bodyStyle.padding = '0';
+
+    const header = document.createElement('div');
+    const content = document.createElement('div');
+    document.body.append(header);
+    document.body.append(content);
+
+    fetch('https://restcountries.com/v2/all')
+    .then(response => response.json())
+    .then(data => afterFetch(data))
+    .catch(error => {
+        console.log(error)
+        countries = [
+            'Afghanistan',
+            'Albania',
+            'Algeria',
+            'Andorra',
+            'Angola',
+            'Antigua and Barbuda',
+            'Argentina',
+            'Armenia',
+            'Australia',
+            'Austria',
+            'Azerbaijan',
+            'Bahamas',
+            'Bahrain',
+            'Bangladesh',
+            'Barbados',
+            'Belarus',
+            'Belgium',
+            'Belize',
+            'Benin',
+            'Bhutan',
+            'Bolivia',
+            'Bosnia and Herzegovina',
+            'Botswana',
+            'Brazil',
+            'Brunei',
+            'Bulgaria',
+            'Burkina Faso',
+            'Burundi',
+            'Cambodia',
+            'Cameroon',
+            'Canada',
+            'Cape Verde',
+            'Central African Republic',
+            'Chad',
+            'Chile',
+            'China',
+            'Colombi',
+            'Comoros',
+            'Congo (Brazzaville)',
+            'Congo',
+            'Costa Rica',
+            "Cote d'Ivoire",
+            'Croatia',
+            'Cuba',
+            'Cyprus',
+            'Czech Republic',
+            'Denmark',
+            'Djibouti',
+            'Dominica',
+            'Dominican Republic',
+            'East Timor (Timor Timur)',
+            'Ecuador',
+            'Egypt',
+            'El Salvador',
+            'Equatorial Guinea',
+            'Eritrea',
+            'Estonia',
+            'Ethiopia',
+            'Fiji',
+            'Finland',
+            'France',
+            'Gabon',
+            'Gambia, The',
+            'Georgia',
+            'Germany',
+            'Ghana',
+            'Greece',
+            'Grenada',
+            'Guatemala',
+            'Guinea',
+            'Guinea-Bissau',
+            'Guyana',
+            'Haiti',
+            'Honduras',
+            'Hungary',
+            'Iceland',
+            'India',
+            'Indonesia',
+            'Iran',
+            'Iraq',
+            'Ireland',
+            'Israel',
+            'Italy',
+            'Jamaica',
+            'Japan',
+            'Jordan',
+            'Kazakhstan',
+            'Kenya',
+            'Kiribati',
+            'Korea, North',
+            'Korea, South',
+            'Kuwait',
+            'Kyrgyzstan',
+            'Laos',
+            'Latvia',
+            'Lebanon',
+            'Lesotho',
+            'Liberia',
+            'Libya',
+            'Liechtenstein',
+            'Lithuania',
+            'Luxembourg',
+            'Macedonia',
+            'Madagascar',
+            'Malawi',
+            'Malaysia',
+            'Maldives',
+            'Mali',
+            'Malta',
+            'Marshall Islands',
+            'Mauritania',
+            'Mauritius',
+            'Mexico',
+            'Micronesia',
+            'Moldova',
+            'Monaco',
+            'Mongolia',
+            'Morocco',
+            'Mozambique',
+            'Myanmar',
+            'Namibia',
+            'Nauru',
+            'Nepal',
+            'Netherlands',
+            'New Zealand',
+            'Nicaragua',
+            'Niger',
+            'Nigeria',
+            'Norway',
+            'Oman',
+            'Pakistan',
+            'Palau',
+            'Panama',
+            'Papua New Guinea',
+            'Paraguay',
+            'Peru',
+            'Philippines',
+            'Poland',
+            'Portugal',
+            'Qatar',
+            'Romania',
+            'Russia',
+            'Rwanda',
+            'Saint Kitts and Nevis',
+            'Saint Lucia',
+            'Saint Vincent',
+            'Samoa',
+            'San Marino',
+            'Sao Tome and Principe',
+            'Saudi Arabia',
+            'Senegal',
+            'Serbia and Montenegro',
+            'Seychelles',
+            'Sierra Leone',
+            'Singapore',
+            'Slovakia',
+            'Slovenia',
+            'Solomon Islands',
+            'Somalia',
+            'South Africa',
+            'Spain',
+            'Sri Lanka',
+            'Sudan',
+            'Suriname',
+            'Swaziland',
+            'Sweden',
+            'Switzerland',
+            'Syria',
+            'Taiwan',
+            'Tajikistan',
+            'Tanzania',
+            'Thailand',
+            'Togo',
+            'Tonga',
+            'Trinidad and Tobago',
+            'Tunisia',
+            'Turkey',
+            'Turkmenistan',
+            'Tuvalu',
+            'Uganda',
+            'Ukraine',
+            'United Arab Emirates',
+            'United Kingdom',
+            'United States',
+            'Uruguay',
+            'Uzbekistan',
+            'Vanuatu',
+            'Vatican City',
+            'Venezuela',
+            'Vietnam',
+            'Yemen',
+            'Zambia',
+            'Zimbabwe'
+        ]
+        afterFetch(countries);
+    });
+
+    function afterFetch(data) {
+        const countryNames = [];
+        data.forEach(country => 
+            countryNames.push(Object.hasOwn(country, 'name')? country.name: country) 
+        );
+
+        prepareHeader(countryNames);
+        prepareContent(countryNames);
+    }
+
+    function prepareHeader(data) {
+        header.style.display = 'flex';
+        header.style.flexDirection = 'column';
+        header.style.alignItems = 'center';
+
+        const h1 = document.createElement('h1');
+        const divs = [];
+        for(let i = 0; i < 3; i++) divs.push(document.createElement('div'));
+        
+        h1.innerHTML = `
+            <span style="margin-right: 15px">W O R L D</span>
+            <span style="margin-right: 15px">C O U N T R I E S</span>
+            L I S T
+        `;
+        h1.style.fontSize = '38px';
+        h1.style.margin = '0px';
+
+        divs[0].textContent = `Total Number of countries: ${data.length}`; 
+        divs[0].style.textAlign = 'center';
+        divs[0].style.fontWeight = 'bold';
+        divs[0].style.fontFamily = 'Arial';
+
+        divs[1].textContent = '30DaysOfJavaScript:DOM Day 2';
+        divs[1].style.fontFamily = 'sans-serif';
+        divs[1].style.fontWeight = '500'
+        divs[1].style.fontSize = '13px';
+        divs[1].style.color = '#212121';
+        divs[1].style.marginTop = '4px';
+        divs[1].style.marginBottom = '0px';
+
+        divs[2].textContent = 'Author: Asabeneh Yetayeh';
+        divs[2].style.fontFamily = 'sans-serif';
+        divs[2].style.fontWeight = '500'
+        divs[2].style.fontSize = '13px';
+        divs[2].style.color = '#313131';
+        divs[2].style.marginTop = '2px';
+
+        header.appendChild(h1);
+        for(let i = 0; i < divs.length; i++) header.appendChild(divs[i]);
+    }
+
+    function prepareContent(countries) {
+        content.style.display = 'grid';
+        content.style.marginTop = '90px';
+        content.style.gridTemplateColumns = '17% '.repeat(6);
+        content.style.rowGap = '4px'
+        content.style.columnGap = '4px';
+        content.style.width = '900px';
+        content.style.justifyContent = 'center';
+
+        countries.forEach(country => content.appendChild(getCountryBox(country)));
+    }
+
+    function getCountryBox(country) {
+        const countryBox = document.createElement('div');
+        countryBox.textContent = country.toUpperCase();
+        countryBox.style.textAlign = 'center'
+        countryBox.style.display = 'flex';
+        countryBox.style.justifyContent = 'center';
+        countryBox.style.alignItems = 'center';
+        countryBox.style.border = '1px solid #e2e2e2';
+        countryBox.style.fontSize = '12px';
+        countryBox.style.paddingTop = '7em';
+        countryBox.style.paddingBottom = '7em';
+        countryBox.style.paddingRight = '1em';
+        countryBox.style.paddingLeft = '1em';
+        countryBox.style.borderRadius = '3px';
+        return countryBox;
+    }
+</script>
+</html>

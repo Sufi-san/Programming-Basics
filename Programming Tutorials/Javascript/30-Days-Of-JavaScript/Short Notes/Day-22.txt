@@ -1,0 +1,119 @@
+* Creating an HTML Element using JavaScript:
+To create an HTML Element with JavaScript we use the 'createElement' method with the 'tagname' of the element we want to create as argument -
+    document.createElement('tagname')
+Multiple identical elements can be created using loops and stored in arrays.
+
+* Getting a list of all children HTML elements:
+For a specific parent HTML element we can obtain all of its children elements as an 'HTML Collection' using '.children' property
+    parentElement.children;
+
+* Getting a 'NodeList' of children elements for an HTML element:
+- 'parent.childNodes' returns a 'NodeList' of children HTML elements.
+- It contains more than just the HTML elements identified by their tags. This is because it acknowledges comments, line breaks, text nodes inside the tags and more.
+
+* Selecting first and last HTML element child:
+    parent.firstElementChild
+    parent.lastElementChild
+
+* Accessing the parent element from child element:
+    child.parentElement
+
+* Accessing the previous & next sibling element:
+    sibling.previousElementSibling
+    sibling.nextElementSibling
+
+
+* Appending child to a parent element:
+To see a created element on the HTML document we should append it to the parent as a child element. We can access the HTML document body using document.body. The document.body support the 'appendChild()' method. 
+Eg:
+    const h1 = document.createElement('h1');
+    h1.textContent = 'This is a heading';
+    document.body.appendChild(h1);
+Note:
+    - We can replace 'h1.textContent = 'This is a heading';' with
+        const textNode = document.createTextNode('This is a heading');
+        h1.appendChild(textNode);
+    There are various advantages of creating a 'text node' object and appending it instead of directly inserting the text inside the element.
+    However, both ways are valid.
+    - We can also use 'append()' instead of 'appendChild()'. 'append()' also accepts 'DOMStrings' or simple text content whereas 'appendChild()' only accepts 'Node Objects'.
+    Eg:
+        // Appending Node Objects
+        parent.append(child) // Works fine
+        parent.appendChild(child) // Works fine
+        // Appending DOMStrings
+        parent.append('Hello world') // Works fine
+        parent.appendChild('Hello world') // Throws error
+    
+
+* Editing elements:
+- Replacing inner content:
+    After selecting the required element, we can insert new HTML or text content while overriding the old one.
+        document.body.querySelector('h1').innerHTML = 'This is a new heading';
+
+- Replacing the actual element:
+    After selecting the required element, we override it with a newly constructed element using the 'replaceWith()' method
+        const newHeading = document.createElement('h1');
+        newHeading.appendChild(document.createTextNode('This is another new heading.'));
+        document.body.querySelector('h1').replaceWith(newHeading);
+
+    Another way to do the same using the 'replaceChild(newChildReference, oldChildReference)' method
+        const heading = document.body.querySelector('h1);
+        const newHeadingText = document.createTextNode('This is one more new heading');
+        heading.replaceChild(newHeadingText, heading.childNodes[0]);
+
+    Another way to do the same with property 'outerHTML'
+        document.body.querySelector('h1').outerHTML = `<h1>This is one more heading</h1>`;
+
+* Inserting Elements:
+- Inserting an element after another element:
+    After selecting the required element, we use the 'after(element to insert)' method
+        const h2 = document.body.querySelector('h2');
+        const h3 = document.createElement('h3');
+        h2.after(h3) // appends 'h3' after 'h2'
+    Similaryly we use the 'before(element to insert)' method
+        h3.before(h2) // appends 'h2' before 'h3' 
+
+
+* Removing elements:
+- Removing a child element from a parent node:
+To remove child elements from a selected parent element, we can use the 'removeChild()' method.
+Eg:
+    HTML ->
+    <body>
+        <h1>Removing child Node</h1>
+        <h2>Asabeneh Yetayeh challenges in 2020</h1>
+        <ul>
+            <li>30DaysOfPython Challenge Done</li>
+            <li>30DaysOfJavaScript Challenge Done</li>
+            <li>30DaysOfReact Challenge Coming</li>
+            <li>30DaysOfFullStack Challenge Coming</li>
+            <li>30DaysOfDataAnalysis Challenge Coming</li>
+            <li>30DaysOfReactNative Challenge Coming</li>
+            <li>30DaysOfMachineLearning Challenge Coming</li>
+        </ul>
+    </body>
+    
+    JS ->
+    <script>
+        const ul = document.querySelector('ul');
+        const lists = ul.querySelectorAll('li'); 
+        lists.forEach(li => {
+            if(li.textContent.match('Coming')) ul.removeChild(li)
+        }); 
+    </script>
+
+- Removing the element using itself using 'remove()' method:
+    JS ->
+    <script>
+        const ul = document.querySelector('ul');
+        const lists = ul.querySelectorAll('li'); 
+        lists.forEach(li => {
+            if(li.textContent.match('Coming')) li.remove();
+        }); 
+    </script>
+
+
+Note: 
+When removing child elements, the 'removeChild()' method should be used from the direct parent of the child element we want to remove.
+When all HTML inside a specific parent element needs to be remove, we can also use:
+    parentElement.innerHTML = '';

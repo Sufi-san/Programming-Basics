@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 Days Of JavaScrpt: Day 22-A</title>
+</head>
+<body>
+
+</body>
+<script>
+    const container = document.createElement('div');
+    
+    const body = document.body;
+    body.style.display = 'flex';
+    body.style.justifyContent = 'center';
+    body.appendChild(container);
+
+    adjustContainer();
+
+    function adjustContainer() {
+        container.style.display = 'flex';
+        container.style.flexDirection = 'column';
+        container.style.alignItems = 'center';
+
+        const h1 = document.createElement('h1');
+        const h2 = document.createElement('h2');
+        const h3 = document.createElement('h3');
+        const numDiv = document.createElement('div');
+
+        prepareHeading(h1);
+        prepareSubHeading1(h2);
+        prepareSubHeading2(h3);
+        prepareNumberDiv(numDiv);
+
+        container.appendChild(h1);
+        container.appendChild(h2);
+        container.appendChild(h3);
+        container.appendChild(numDiv);
+    }
+
+    function prepareHeading(h1) {
+        h1.textContent = 'Number Generator';
+        h1.style.fontFamily = 'Arial';
+        h1.style.marginBottom = '0px';
+    }
+
+    function prepareSubHeading1(h2) {
+        h2.textContent = '30DaysOfJavaScript:DOM Day 2';
+        h2.style.textDecoration = 'underline';
+        h2.style.fontFamily = 'sans-serif';
+        h2.style.fontWeight = '500'
+        h2.style.fontSize = '18px';
+        h2.style.color = '#212121';
+        h2.style.marginTop = '4px';
+        h2.style.marginBottom = '0px';
+    }
+
+    function prepareSubHeading2(h3) {
+        h3.textContent = 'Author: Asabeneh Yetayeh';
+        h3.style.textDecoration = 'underline';
+        h3.style.fontFamily = 'sans-serif';
+        h3.style.fontWeight = '500'
+        h3.style.fontSize = '14px';
+        h3.style.color = '#313131';
+        h3.style.marginTop = '2px';
+    }
+
+    function prepareNumberDiv(grid) {
+        grid.style.display = 'grid';
+        grid.style.columnGap = '3px';
+        grid.style.rowGap = '3px';
+        const boxSize = '100px', boxSizes = [];
+        for(let i = 0; i < 6; i++) boxSizes.push(boxSize);
+        grid.style.gridTemplateColumns = boxSizes.join(' ');
+        grid.style.width = '100%'
+
+        const sieve = getPrimeSieve();
+        for(let i = 0; i < sieve.length; i++) {
+            grid.appendChild(prepareNumberBox(i, sieve[i]));
+        }
+    }
+
+    function getPrimeSieve() {
+        const sieve = [];
+        for(let i = 0; i <= 101; i++) sieve.push(true);
+        sieve[0] = sieve[1] = false;
+        let i = 2;
+        while(i * i < sieve.length) {
+            if(sieve[i]) {
+                const start = i * i;
+                const incr = i;
+                for(let j = start; j < sieve.length; j += incr) sieve[j] = false;
+            }
+            i++;
+        }
+        return sieve;
+    }
+
+    function prepareNumberBox(number, isPrime) {
+        let color = '';
+        if(isPrime) color = 'tomato';
+        else color = (number % 2)? 'yellow': '#07da63'
+
+        const numBox = document.createElement('div');
+        numBox.textContent = number;
+        numBox.style.color = 'white';
+        numBox.style.paddingLeft = numBox.style.paddingRight = '12px';
+        numBox.style.paddingTop = '12px';
+        numBox.style.paddingBottom = '5px';
+        numBox.style.fontFamily = 'Helvetica';
+        numBox.style.fontSize = '32px';
+        numBox.style.fontWeight = 'bold';
+        numBox.style.textAlign = 'center';
+        numBox.style.backgroundColor = color;
+        
+        return numBox;
+    }
+</script>
+</html>
