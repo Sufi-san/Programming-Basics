@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 Days Of JavaScrpt: Day 23-A</title>
+</head>
+<body>
+
+</body>
+<script>
+    const container = document.createElement('div');
+    
+    const body = document.body;
+    body.style.display = 'flex';
+    body.style.justifyContent = 'center';
+    body.appendChild(container);
+
+    adjustContainer();
+
+    function adjustContainer() {
+        container.style.display = 'flex';
+        container.style.flexDirection = 'column';
+        container.style.alignItems = 'center';
+
+        const h1 = document.createElement('h1');
+        const h2 = document.createElement('h2');
+        const h3 = document.createElement('h3');
+        const inpDiv = document.createElement('div');
+        const numDiv = document.createElement('div');
+
+        prepareHeading(h1);
+        prepareSubHeading1(h2);
+        prepareSubHeading2(h3);
+        prepareInputDiv(inpDiv, numDiv);
+        prepareNumberDiv(numDiv);
+
+        container.appendChild(h1);
+        container.appendChild(h2);
+        container.appendChild(h3);
+        container.appendChild(inpDiv);
+        container.appendChild(numDiv);
+    }
+
+    function prepareHeading(h1) {
+        h1.textContent = 'Number Generator';
+        h1.style.fontFamily = 'Arial';
+        h1.style.marginBottom = '0px';
+        h1.style.color = '#17b955'
+    }
+
+    function prepareSubHeading1(h2) {
+        h2.textContent = '30DaysOfJavaScript:DOM Day 3';
+        h2.style.fontFamily = 'sans-serif';
+        h2.style.fontWeight = '500'
+        h2.style.fontSize = '18px';
+        h2.style.color = '#212121';
+        h2.style.marginTop = '4px';
+        h2.style.marginBottom = '0px';
+    }
+
+    function prepareSubHeading2(h3) {
+        h3.textContent = 'Author: Asabeneh Yetayeh';
+        h3.style.fontFamily = 'sans-serif';
+        h3.style.fontWeight = '500'
+        h3.style.fontSize = '14px';
+        h3.style.color = '#313131';
+        h3.style.marginTop = '2px';
+    }
+
+    function prepareInputDiv(inpDiv, numDiv) {
+        const instruction = document.createElement('p');
+
+        instruction.style.color = 'red';
+        instruction.style.textAlign = 'left';
+        instruction.style.marginBottom = '4px';
+        instruction.style.fontSize = '14px';
+        instruction.style.fontFamily = 'sans-serif';
+
+        const inpSection = document.createElement('input');
+
+        inpSection.setAttribute('placeholder', 'Generate more numbers...');
+
+        inpSection.type = 'text';
+        inpSection.style.padding = '10px 40px 10px 10px';
+        inpSection.style.marginRight = '20px';
+        inpSection.style.outline = 'none';
+        inpSection.style.width = '62%';
+        inpSection.style.border = '1px solid lightgreen';
+
+        inpSection.addEventListener('focus', () => inpSection.style.outline = '1px solid green');
+        inpSection.addEventListener('blur', () => inpSection.style.outline = 'none');
+
+        const button = document.createElement('button');
+        button.appendChild(document.createTextNode('Generate numbers'));
+
+        button.style.backgroundColor = '#17b955';
+        button.style.color = 'white';
+        button.style.padding = '10px 8px 10px 8px';
+        button.style.border = 'none';
+        button.style.borderRadius = '2px';
+        button.style.fontFamily = 'Arial';
+        button.style.fontSize = '16px';
+        button.style.cursor = 'pointer';
+        
+        button.addEventListener('click', () => {
+            const val = inpSection.value;
+            if(val === '') {
+                instruction.textContent = 'Enter numeric value on the input field to generate numbers.';
+                return;
+            }
+            if(isNaN(+val)) {
+                instruction.textContent = 'Input value must be numeric';
+                return;
+            }
+            instruction.textContent = '';
+            prepareNumberDiv(numDiv, val);
+        })
+
+        inpDiv.style.width = '100%';
+        inpDiv.style.paddingLeft = '22%';
+        inpDiv.style.marginBottom = '30px';
+
+        inpDiv.appendChild(instruction);
+        inpDiv.appendChild(inpSection);
+        inpDiv.appendChild(button);
+    }
+
+    function prepareNumberDiv(grid, count = 0) {
+        grid.innerHTML = '';
+
+        grid.style.display = 'grid';
+        grid.style.columnGap = '5px';
+        grid.style.rowGap = '5px';
+        const boxSize = '90px', boxSizes = [];
+        for(let i = 0; i < 9; i++) boxSizes.push(boxSize);
+        grid.style.gridTemplateColumns = boxSizes.join(' ');
+        grid.style.width = '100%'
+
+        const sieve = getPrimeSieve(Math.round(count));
+        for(let i = 0; i < sieve.length; i++) {
+            grid.appendChild(prepareNumberBox(i, sieve[i]));
+        }
+    }
+
+    function getPrimeSieve(count) {
+        const sieve = [];
+        if(count > 0) sieve.push(false);
+        if(count > 1) sieve.push(false);
+        for(let i = 2; i < count; i++) sieve.push(true);
+        let i = 2;
+        while(i * i < sieve.length) {
+            if(sieve[i]) {
+                const start = i * i;
+                const incr = i;
+                for(let j = start; j < sieve.length; j += incr) sieve[j] = false;
+            }
+            i++;
+        }
+        return sieve;
+    }
+
+    function prepareNumberBox(number, isPrime) {
+        let color = '';
+        if(isPrime) color = 'tomato';
+        else color = (number % 2)? '#eedc5b': '#07da63'
+
+        const numBox = document.createElement('div');
+        numBox.textContent = number;
+        numBox.style.color = 'white';
+        numBox.style.paddingTop = '8px';
+        numBox.style.fontFamily = 'Helvetica';
+        numBox.style.fontSize = '34px';
+        numBox.style.fontWeight = 'bold';
+        numBox.style.textAlign = 'center';
+        numBox.style.lineHeight = '30px'
+        numBox.style.backgroundColor = color;
+        
+        return numBox;
+    }
+</script>
+</html>

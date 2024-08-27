@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Bubbling</title>
+    <style>
+        #outer {
+            padding: 100px;
+            background-color: blue;
+        }
+        #inner {
+            padding: 50px;
+            background-color: green;
+        }
+        #innermost {
+            padding: 25px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body style="background-color: #212121; color: aliceblue">
+    <div id="outer">
+        Outer
+        <div id="inner">
+            Inner
+            <div id="innermost">Innermost</div>
+        </div>
+    </div>
+    <div id="log"><h2>Event Log: </h2></div>
+</body>
+<script>
+    const outer = document.querySelector('#outer');
+    const inner = document.querySelector('#inner');
+    const innermost = document.querySelector('#innermost');
+    const log = document.querySelector('#log');
+
+    // Event Bubbling
+    /*
+        Handling events in the bubbling phase is the default behavior for elements.
+        The third parameter 'capturingMode' is false by default if not specified true.
+    */
+   let times = 1;
+
+   /*
+        'outer' has a delegated event listener which can get activated by clicking the 'inner' or 'innermost' divs as well
+   */
+   outer.addEventListener('click', (e) => {
+        const p = document.createElement('p');
+        p.innerText = `${e.currentTarget.id} was clicked (Click Count: ${times})`;
+        p.style.margin = '0px';
+        log.appendChild(p);
+        times++;
+   }, false); 
+
+   /*
+        'inner' too has a delegated event listener which can get activated when we click the 'innermost' div
+   */
+   inner.addEventListener('click', (e) => {
+        const p = document.createElement('p');
+        p.innerText = `${e.currentTarget.id} was clicked (Click Count: ${times})`;
+        p.style.margin = '0px';
+        log.appendChild(p);
+   }, false);
+
+   // Stopping even propagation in the bubbling phase
+   /*
+        However, we are using the e.stopPropagation() method inside the 'innermost' div.
+        This makes sure that it only activates its own event listener, while nullifying the event listener it delegated on 'outer' or 'inner'
+   */
+   innermost.addEventListener('click', (e) => {
+        const p = document.createElement('p');
+        p.innerText = `${e.currentTarget.id} was clicked (Click Count: ${times})`;
+        p.style.margin = '0px';
+        log.appendChild(p);
+
+        e.stopPropagation(); // makes sure delegated event listeners don't activate
+        times++; // Because "innermost" won't trigger "outer's" event listener now
+   }, false);
+
+   // Thus, when handling events in the bubbling phase, the order of execution is: (innermost -> inner -> outer)
+   // 1) Element's own event listener
+   // 2) Delegated event listeners, starting from the most direct parent in the DOM Tree. (if .stopPropagation() isn't used)
+</script>
+</html>

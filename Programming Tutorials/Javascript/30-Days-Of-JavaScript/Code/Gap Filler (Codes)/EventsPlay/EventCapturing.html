@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Capturing</title>
+    <style>
+        #outer {
+            padding: 100px;
+            background-color: blue;
+        }
+        #inner {
+            padding: 50px;
+            background-color: green;
+        }
+        #innermost {
+            padding: 25px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body style="background-color: #212121; color: aliceblue">
+    <div id="outer">
+        Outer
+        <div id="inner">
+            Inner
+            <div id="innermost">Innermost</div>
+        </div>
+    </div>
+    <div id="log"><h2>Event Log: </h2></div>
+</body>
+<script>
+    const outer = document.querySelector('#outer');
+    const inner = document.querySelector('#inner');
+    const innermost = document.querySelector('#innermost');
+    const log = document.querySelector('#log');
+
+    // Event Capturing
+    /*
+        Handling events in the capturing phase is not a default behavior for elements.
+        The third parameter 'capturingMode' must be specified as 'true' for handling events in the capturing phase
+    */
+   let times = 1;
+
+   /*
+        'outer' has a delegated event listener which can get activated by clicking the 'inner' or 'innermost' divs as well
+   */
+   outer.addEventListener('click', (e) => {
+        const p = document.createElement('p');
+        p.innerText = `${e.currentTarget.id} was clicked (Click Count: ${times})`;
+        p.style.margin = '0px';
+        log.appendChild(p);
+        if(e.target == e.currentTarget) times++;
+   }, true); // setting capturing mode on to handle 'outer' event in capturing phase
+   // as 'outer' is the most senior parent, its event listener will always activate first in the capturing phase
+
+   /*
+        'inner' too has a delegated event listener which can get activated when we click the 'innermost' div
+  
+        - Stopping event propagation in the capturing phase:
+        Unlike stopping propagation in the bubbling phase which makes sure that delegated events are not handled and only the currentTarget's own event listeners are activated, what stopping propagation in capturing phase means is the opposite.
+        In the capturing phase, the parent element stops the propagation for its children element such the children can only activate event listeners for the 'delegated' events and not their own exclusive event listeners. (excluding the default behavior like that of anchor tags)
+        
+   */
+   inner.addEventListener('click', (e) => {
+        const p = document.createElement('p');
+        p.innerText = `${e.currentTarget.id} was clicked (Click Count: ${times})`;
+        p.style.margin = '0px';
+        log.appendChild(p);
+
+        times++;
+        e.stopPropagation(); // this will prevent the activation of "innermost's" own event listener
+   }, true);
+
+   // the below event listener will never activate...
+   innermost.addEventListener('click', (e) => {
+        const p = document.createElement('p');
+        p.innerText = `${e.currentTarget.id} was clicked (Click Count: ${times})`;
+        p.style.margin = '0px';
+        log.appendChild(p);
+   }, false);
+
+   // Thus, when handling events in the capturing phase, the order of execution is: (outer -> inner -> innermost)
+   // 1) Delegated event listeners, starting from the topmost parent element in the DOM Tree. 
+   // 2) Element's own event listener (if .stopPropagation() isn't used in any delegated event listener)
+</script>
+</html>

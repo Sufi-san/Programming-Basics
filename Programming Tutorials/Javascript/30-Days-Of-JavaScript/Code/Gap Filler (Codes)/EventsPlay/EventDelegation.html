@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Delegation</title>
+</head>
+<body style="background-color: #212121; color: aliceblue">
+    <ul>
+        <h2>Clicking exactly on a list item will change its background-color to yellow</h2>
+    </ul>
+    <ul id='images'>
+    </ul>
+    <script>
+        const ul = document.querySelector('#images');
+        ul.style.listStyleType = 'none';
+        const colors = ['grey', '#313131'];
+        
+        for(let i = 0; i < 7; i++) {
+            const li = document.createElement('li');
+            const url = `https://picsum.photos/id/${400 + i}/300/200`;
+
+            li.innerHTML = `<img id=img${i + 1} src=${url}>`
+
+            const p = document.createElement('p');
+            const a = document.createElement('a');
+
+            a.setAttribute('href', url);
+            a.setAttribute('target', '_blank');
+            a.appendChild(document.createTextNode('Image Link'));
+
+            p.appendChild(document.createTextNode('Open in new tab: '));
+            p.appendChild(a);
+            p.setAttribute('id', 'para-' + (i + 1));
+            p.style.marginBottom = '40px';
+
+            li.style.backgroundColor = colors[i % 2];
+            li.style.padding = '30px';
+            li.style.marginBottom = '10px';
+
+            li.appendChild(p);
+            ul.appendChild(li);
+        }
+
+        // Event Delegation: (Cannot be stopped by stopping propagation in any phase)
+        /*
+            The event assigned to a parent element is passed on(ability to detect is passed on, not the listener itself) to each of its children elements. Thus, handling of the event is 'delegated' to parent instead of the required child element.
+
+            This allows us to attach a single event listener for children elements that exist now or in the future inside the parent element.
+
+            The event listener that gets triggered will always be of the parent element, unless a separate event listener is attached to the child element.
+            If event listener is activated by any child element,
+            The 'e.target' (where event occurred) will be the child element.
+            The 'e.currentTarget' (whose event listener was triggered) will always be the parent element.
+            
+            In the case when we need only a specific element to perform the required task, we can add a 'check' inside the callback
+        */
+        const lastSelection = [];
+        ul.addEventListener('click', function(e) {
+            console.log("Target:", e.target.tagName); // can be a child element
+            console.log("Current Target:", e.currentTarget.tagName); // always parent
+
+            // Though the 'target' element can be the image, paragraph or link, they will never pass the below check
+
+            if(e.target.tagName != 'LI') return; // the check
+
+            // As target is always a list item at this point, change the selected target's background color 
+            if(lastSelection.length > 0) { // undo the previous change
+                lastSelection[0].style.backgroundColor = lastSelection[1];
+                lastSelection[0].style.color = 'white';
+                for(let i = 0; i < 2; i++) lastSelection.pop();
+            }
+            // save old state
+            lastSelection.push(e.target);
+            lastSelection.push(e.target.style.backgroundColor);
+
+            // change state
+            e.target.style.color = 'black';
+            e.target.style.backgroundColor = 'yellow';
+        })
+
+    </script>
+</body>
+</html>

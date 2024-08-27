@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Object & its Properties</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #212121;
+            color: white;
+            height: 2048px;
+        }
+        #div-1{
+            padding: 100px;
+            margin-left: 20px;
+            margin-top: 0px;
+            background-color: darkcyan;
+        }
+        #arrow-buddy {
+            position: absolute;
+            padding-top: 20px;
+            padding-left: 20px;
+            border: 2px solid white;
+            border-radius: 20px;
+        }
+        a:visited {color: lightblue}
+    </style>
+</head>
+<body>
+    <div id="div-1"><p>Move mouse here and view console</p></div>
+    <a id="link" target='_blank' href="https://www.google.com">Visit Google</a>
+    <div id="coords-disp"></div>
+    <script>
+        const div = document.querySelector('#div-1');
+        const link = document.querySelector('#link');
+        const coordsDisp = document.querySelector('#coords-disp');
+        const cursorBuddy = document.createElement('div');
+
+        function showCommonProperties(e) {
+            console.log('Event Object:');
+            console.log(e);
+            console.log(`Event Type: ${e.type}`);
+            console.log(`Event TimeStamp: ${e.timeStamp}`);
+            console.log(`Event Target: ${e.target.tagName}`);
+            console.log(`Event Current Target: ${e.currentTarget.tagName}`);
+            console.log(`Event Default Prevented: ${e.defaultPrevented}`);
+        }
+
+        document.body.addEventListener('keydown', (e) => {
+            showCommonProperties(e);
+            console.log(`Shift Pressed: ${e.shiftKey}`); // Similaly we have altKey, ctrlKey...
+        });
+
+        document.body.addEventListener('click', (e) => {
+            showCommonProperties(e);
+        });
+
+        div.addEventListener('mouseenter', (e) => {
+            showCommonProperties(e);
+            if(e.relatedTarget) console.log(`Event relatedTarget: ${e.relatedTarget.tagName}`);
+        });
+
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            showCommonProperties(e);
+        })
+
+        document.body.addEventListener('mousemove', (e) => {
+            coordsDisp.innerHTML = `
+                <p>Client(X, Y): ${e.clientX}, ${e.clientY}</p>
+                <p>Screen(X, Y): ${e.screenX}, ${e.screenY}</p>
+                <p>Page(X, Y): ${e.pageX}, ${e.pageY}</p>
+                <p>Offset(X, Y): ${e.offsetX}, ${e.offsetY}</p>
+            `;
+            cursorBuddy.setAttribute('id', 'arrow-buddy');
+            cursorBuddy.style.top = `${e.clientY - 15}px`;
+            cursorBuddy.style.left = `${e.clientX - 15}px`;
+            document.body.appendChild(cursorBuddy);
+        })
+    </script>
+</body>
+</html>

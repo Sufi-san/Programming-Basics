@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 Days Of JavaScrpt: Day 23-B</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const styleTag = document.createElement('style');
+    styleTag.appendChild(document.createTextNode(`
+        .sp-green-font {
+            text-shadow: 1px 1px 1.2px black;
+            color: #17b955;
+            font-family: 'Arial';
+            font-weight: 'bold';
+        }
+    `));
+
+    document.head.appendChild(styleTag);
+
+    const bodyStyle = document.body.style; 
+
+    bodyStyle.display = 'flex';
+    bodyStyle.alignItems = 'center';
+    bodyStyle.justifyContent = 'center';
+    bodyStyle.position = 'absolute';
+    bodyStyle.left = '0px';
+    bodyStyle.right = '0px';
+    bodyStyle.top = '0px';
+    bodyStyle.bottom = '0px';
+
+    const container = document.createElement('div');
+    
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.alignItems = 'center';
+
+    const notifyDiv = document.createElement('div');
+    notifyDiv.appendChild(document.createTextNode('Press any keyboard key'));
+
+    notifyDiv.style.textAlign = 'center';
+    notifyDiv.style.fontSize = '34px';
+    notifyDiv.style.fontFamily = 'Arial';
+    notifyDiv.style.boxShadow = '2px 2px 3px 2px rgba(0, 0, 0, 0.3)';
+    notifyDiv.style.textShadow = '0px 2px 1px rgba(0, 0, 0, 0.3)';
+    notifyDiv.style.padding = '16px';
+    notifyDiv.style.color = '#323232';
+    notifyDiv.style.lineHeight = '30px';
+    notifyDiv.style.marginBottom = '20px';
+    notifyDiv.style.width = '450px';
+
+    const keycodeDiv = document.createElement('div');
+
+    keycodeDiv.classList.add('sp-green-font');
+    keycodeDiv.style.fontSize = '60px';
+    keycodeDiv.style.textAlign = 'center';
+    keycodeDiv.style.height = '80px';
+    keycodeDiv.style.padding = '16px 24px 20px 18px';
+    keycodeDiv.style.border = '2px solid #e9e9e9';
+    keycodeDiv.style.borderRadius = '8px';
+    
+
+    container.append(notifyDiv);
+    document.body.append(container);
+
+    document.body.addEventListener('keydown', (e) => {
+        console.log(e);
+        notifyDiv.innerHTML = '';
+
+        const span = document.createElement('span');
+        const keyname = (e.key === ' ')? e.code: e.key;
+        span.appendChild(document.createTextNode(keyname));
+        span.className = 'sp-green-font';
+
+        notifyDiv.appendChild(document.createTextNode('You pressed '));
+        notifyDiv.appendChild(span);
+
+        keycodeDiv.textContent = `${e.keyCode}`;
+        const width = Math.max(1, keycodeDiv.innerText.length - 1)
+        keycodeDiv.style.width = `${width}em`;
+
+        container.append(keycodeDiv);
+    })
+</script>
+</html>

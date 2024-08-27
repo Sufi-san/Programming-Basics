@@ -1,0 +1,218 @@
+Docs: https://developer.mozilla.org/en-US/docs/Web/API/Event
+
+In JavaScript, an event is an action or occurrence that happens in the browser, such as a user clicking a button, a page finishing loading, or an error occurring.
+
+Common HTML events: onclick, onchange, onmouseover, onmouseout, onkeydown, onkeyup, onload. 
+
+We can add event listener method to any DOM object. We use addEventListener() method to listen different event types on HTML elements. The addEventListener() method takes two arguments, an event listener and a callback function.
+Eg:
+
+    selectedElement.addEventListener('eventlistner', e => {
+    // the activity you want to occur after the event will be in here
+    })
+To attach an event listener to an element, first we select the element then we attach the addEventListener method. The event listener takes event type and callback functions as argument.
+
+List of common events:
+
+    click - when the element is clicked
+    dblclick - when the element is double clicked
+    mouseenter - when the mouse point enters the element
+    mouseleave - when the mouse pointer leaves the element
+    mousemove - when the mouse pointer moves on the element
+    mouseover - when the mouse pointer enters the element
+    mouseout -when the mouse pointer leaves the element
+    input -when value is entered to input field
+    change -when value is changed on input field
+    blur -when the element is not focused
+    keydown - when a key is down
+    keyup - when a key is up
+    keypress - when we press any key
+    onload - when the browser has finished loading a page
+
+- Difference between 'mousemove', 'mouseenter' & 'mouseover': 
+https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_event_mouseenter_mouseover
+
+- Difference between 'mouseout' and 'mouseleave':
+https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_event_mouseleave_mouseout
+
+
+* Getting values from input element:
+- We usually fill forms and forms accept data. Form fields are created using input HTML element. 
+- We can add an event listener to the input object, capture the event 'e' in the callback and obtain 'e.target.value' to get the entered input.
+- For any input element, we can also capture input in real-time by making the event listerner capture the 'input' event.
+Eg:
+    const input = document.querySelector('input')
+    const p = document.querySelector('p')
+
+    input.addEventListener('input', e => {
+        p.textContent = e.target.value
+    })
+
+Note: There are many other useful properties in the captured event parameter 'e' (can be named anything) inside the callback. This is the 'event' object.
+
+
+* Event Object (e) and its important properties:
+1) type -> name of the event captured
+
+2) timeStamp -> time in milliseconds from last window reload
+
+3) defaultPrevented -> describes  the default behaviour of an element is prevented. We can use the 'e.preventDefault()' method to prevent default behavior (different elements have different default behaviors that need to be understood when required)
+
+4) target -> returns the element 'where the event occured'. 
+
+5) currentTarget -> returns the element 'whose event listener triggered the event'.
+
+6) relatedTarget -> returns the secondary target for the mouse event, if there is one. For e.g if event listener captures the 'mouseenter' event and we have 2 divs on which event listener is attached, div1 and div2.
+Then,
+    When mouse pointer moves from div1 to div2: target -> div1, relatedTarget -> div2
+    When mouse pointer moves from div2 to div1: target -> div2, relatedTarget -> div1
+Tryout: https://developer.mozilla.org/en-US/play
+
+7) screenX - screenY, clientX - clientY, pageX - pageY, offsetX - offsetY -> these properties of a mouse event object provide information about the coordinates of the mouse pointer at the time the event occurred. These properties are used to track the mouse's position relative to different reference points.
+    screen -> monitor size
+    client -> viewport size (document, ignore scroll)
+    page -> full document size (acknowledge scroll)
+    offset -> HTML element size
+Difference Visualized: https://developer.mozilla.org/en-US/docs/Web/CSS/CSSOM_view/Coordinate_systems
+
+8) altkey, ctrlkey, shiftkey ... -> boolean values that indicate whether the event was triggered by a specific key
+
+9) key -> returns the value/name of the key that triggered the event.
+
+10) keyCode -> returns the assigned code for a specific keyboard key.
+
+11) tiltX - tiltY -> https://w3c.github.io/pointerevents/#dom-pointerevent-tiltx
+
+Note: 
+- Different event objects may or may not have certain properties. For e.g. 'click' events do not have properties like 'key' or 'keycode'.
+- List of interfaces which are based on the main Event interface can be looked up in the docs.
+
+
+* Another approach to add events & why event listener is generally better:
+- We can directly assign tasks by targetting specific events for an element.
+Eg:
+    const btn = document.querySelector('button');
+    
+    btn.onclick = function() {
+        console.log('You clicked on a button');
+    }
+- However, addEventListener is preferred because:
+    1. addEventListener offers more flexibility, control, and maintainability compared to direct assignment.
+    2. It enables event propagation, dynamic event handling, and access to event objects.
+    3. It avoids overwriting previous handlers, ensuring consistent behavior.
+
+
+* Event Propagation (Bubbling & Capturing) & The third parameter in addEventListener:
+- Article: https://dev.to/itzz_okure/how-event-propagation-and-delegation-work-in-javascript-5efe
+- Coded examples in Code/Gap Filler(Codes)/EventsPlay
+
+- In JavaScript, events travel to and fro the Document Object Model(DOM) tree. This is generally known as event propagation, which comes in two phases: capturing and bubbling. The fact that events pass through the parent element of the target element that triggered such events can then help you to decide where to handle these events.
+- Even Capturing:
+    When an event is triggered or fired, the window object gets notified of the event first and then followed by the document element as well as the subsequent parent elements of the target element. This process is known as event capturing.
+- Event Bubbling:
+    Once the target element has been notified of the event, the event once again travels up to the root of the DOM tree. Just like in the capturing phase, the event passes through all of its parent elements. This process is known as event bubbling. So as an event ‘bubbles’ through its parent elements, it is as if the event was triggered in that very element.
+
+- Generally, events are always handled either at the target or bubbling phase. However, event listeners can be set up in a way that they listen to events in the capturing phase instead. 
+- It is important to note that not all events have a capturing and bubbling phase. Some events, like the 'focus' event, are generated right at the target element and can only be handled there.
+
+- Event Delegation:
+Event delegation is essentially the use of the knowledge that events bubble to instead handle events at any of the parent elements of the target element where the event was triggered. Events are said to be ‘delegated’ to a parent element of the target element so they can be handled right at that element.
+
+- The third parameter in addEventListener() is a boolean parameter, 'capturingMode'. By default its value is 'false'. When 'false', the events are handled in the 'bubbling' phase of event propagation and when 'true' then they are handled in the 'capturing' phase.
+
+- Sample Code:
+<html>
+<head></head>
+<body>
+    <ul id='images'>
+        <li><img id='pic1' src='...'></li>
+        <li><img id='pic2' src='...'></li>
+    </ul>
+</body>
+</html>
+
+- Bubbling: (Bottom-up Event Listening)
+Eg:
+    const pic1 = document.querySelector('#pic1');
+    const list = document.querySelector('#images');
+
+    pic1.addEventListener('click', () => {
+        console.log('pic1 was clicked');
+    })
+
+    list.addEventListener('click', () => {
+        console.log('list was clicked');
+    })
+
+Console: (when 'pic1' is clicked)
+    pic1 was clicked
+    list was clicked
+
+Conclusion:
+    The events bubbled up from child element to parent element.
+
+- Capturing: (Top-down Event Listening)
+Eg:
+    const pic2 = document.querySelector('#pic2');
+    const list = document.querySelector('#images');
+
+    pic2.addEventListener('click', () => {
+        console.log('pic2 was clicked');
+    })
+
+    list.addEventListener('click', () => {
+        console.log('list was clicked');
+    }, true)
+
+Console: (when 'pic2' is clicked)
+    list was clicked
+    pic2 was clicked
+    
+Conclusion:
+    The events were captured down from parent element to child element.
+
+- Stopping the propagation:
+  We can use event.stopPropagation() to prevent an event from further propagation. (can be used in both bubbling and capturing phases but with different effects);
+Eg:
+    const pic1 = document.querySelector('#pic1');
+    const list = document.querySelector('#images');
+
+    pic1.addEventListener('click', (e) => {
+        console.log('pic1 was clicked');
+        e.stopPropagation();
+    })
+
+    list.addEventListener('click', () => {
+        console.log('list was clicked');
+    })
+
+Console: (when 'pic1' is clicked)
+    pic1 was clicked
+
+Conclusion:
+    The events did NOT bubble-up from child element.
+
+
+* Removing Event Listeners:
+- We can use the 'removeEventListener('event', identical-callback, identical-capturing-mode-choice)' to remove an attached event from a target element.
+Eg:
+    function sayHello() {
+        alert("Hello");
+    }
+
+    const btn = document.querySelector('button');
+
+    btn.addEventListener('click', sayHello, false); // event added
+    btn.removeEventListener('click', sayHello, false); // event removed
+- If we want to pass the captured event object as argument, we can store the function inside a variable so that we can remove it later when required.
+Eg:
+    const showEventTargetTag = (e) => {
+        alert(e.target.tagName)
+    }
+
+    const btn = document.querySelector('button');
+    
+    btn.addEventListener('click', showEventTargetTag);
+    btn.removeEventListener('click', showEventTargetTag);
+
+Note: To accurately remove a specific event listener, the third parameter (capturingMode) should also match.
