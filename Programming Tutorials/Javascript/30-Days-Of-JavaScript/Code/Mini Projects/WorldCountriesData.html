@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Project: World Countries Data</title>
+    <style>
+        :root {
+            --border-color: rgba(225, 225, 225, 0.7);
+            --bg-color: #fafafa;
+        }
+        body {
+            font-family: Arial;
+        }
+        header {
+            padding-top: 30px;
+            text-align: center;
+            border-bottom: 3px solid var(--border-color);
+            background-color: var(--bg-color);
+        }
+        h1 {
+            margin: 0px;
+            color: orange;
+            font-size: 46px;
+            font-weight: normal;
+            letter-spacing: 2px;
+        }
+        #country-desc {
+            margin: 10px;
+            margin-bottom: 15px;
+            color: #414141;
+            font-size: 20px;
+        }
+        main {
+            display: flex;   
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 30px;
+        }
+
+        #select-section {
+            display: flex;
+            justify-content: center;
+            column-gap: 12px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: orange;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        #info-display {
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-color);
+            border: 2px solid var(--border-color);
+            row-gap: 8px;
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        .data-row {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 160px 700px 200px;
+            column-gap: 10px;
+        }
+
+        .name-div, .count-div  {
+            text-align: left;
+        } 
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>World Countries Data</h1>
+        <p id="country-desc"></p>
+    </header>
+    <main>
+        <div id="select-section">
+            <button id="popul-btn">POPULATION</button>
+            <button id="lang-btn">LANGUAGES</button>
+        </div>
+        <p id="display-desc"></p>
+    </main>
+</body>
+<script>
+    fetch('https://restcountries.com/v2/all')
+    .then(response => response.json())
+    .then(data => afterFetch(data))
+    .catch(error => console.log(error));
+
+    const countryDesc = document.querySelector('#country-desc');
+    const populButton = document.querySelector('#popul-btn');
+    const langButton = document.querySelector('#lang-btn');
+    const displayDesc = document.querySelector('#display-desc');
+    const main = document.querySelector('main');
+
+    let firstClick = true;
+
+    function afterFetch(countriesData) {
+        countryDesc.appendChild(document.createTextNode(`Currently, we have ${countriesData.length} countries`));
+
+        const countryPopulations = new Map();
+        const countryNames = [];
+
+        const langSpokenCounts = new Map();
+        const allLanguages = [];
+
+        countriesData.forEach(countryObj => {
+            const countryName = countryObj.name;
+            const population = countryObj.population?? 0;
+            const languages = countryObj.languages?? [];
+
+            countryNames.push(countryName);
+            countryPopulations.set(countryName, population);
+
+            languages.forEach(languageObj => {
+                const language = languageObj.name;
+                const spokenCount = langSpokenCounts.get(language);
+                if(spokenCount) langSpokenCounts.set(language, spokenCount + 1);
+                else {
+                    langSpokenCounts.set(language, 1);
+                    allLanguages.push(language);
+                }
+            });
+        });
+
+        countryNames.sort((a, b) => countryPopulations.get(b) - countryPopulations.get(a));
+        allLanguages.sort((a, b) => langSpokenCounts.get(b) - langSpokenCounts.get(a));
+
+        populButton.addEventListener('click', () => {
+            displayTopTen(countryNames, countryPopulations, false);
+        });
+
+        langButton.addEventListener('click', () => {
+            displayTopTen(allLanguages, langSpokenCounts, true);
+        });
+    }
+
+    function displayTopTen(arr, map, displayLang) {
+        const infoDisplay = document.createElement('div');
+        infoDisplay.setAttribute('id', 'info-display');
+
+        let maxCount;
+        if(displayLang) {
+            displayDesc.innerText = '10 Most Spoken languages in the world'
+            maxCount = map.get(arr[0]);
+        }
+        else {
+            displayDesc.innerText = '10 Most populated countries in the world'
+            maxCount = getWorldPopul(arr, map);
+            const worldPopulDataRow = getDataRow('World', maxCount, maxCount);
+            infoDisplay.appendChild(worldPopulDataRow);
+        }
+
+        for(let i = 0; i < 10; i++){
+            const item = arr[i];
+            const count = map.get(item);
+
+            const dataRow = getDataRow(item, count, maxCount);
+            infoDisplay.appendChild(dataRow);
+        }
+
+        if(firstClick) {
+            main.appendChild(infoDisplay);
+            firstClick = false;
+        }
+        else main.lastElementChild.replaceWith(infoDisplay);
+    }
+
+    function getDataRow(item, count, maxCount) {
+        const dataRow = document.createElement('div');
+        dataRow.setAttribute('class', 'data-row');
+
+        const nameDiv = document.createElement('div');
+        const barDiv = document.createElement('div');
+        const countDiv = document.createElement('div');
+
+        nameDiv.innerText = item;
+        nameDiv.setAttribute('class', 'name-div');
+
+        countDiv.innerText = count;
+        countDiv.setAttribute('class', 'count-div');
+        countDiv.style.paddingLeft = `${getCustomPadding(countDiv.innerText.length)}px`;
+
+        const bar = document.createElement('div');
+        bar.style.backgroundColor = 'orange';
+        bar.style.width = `${getPercentage(count, maxCount)}%`;
+        bar.style.height = '100%';
+
+        barDiv.style.height = '40px';
+        barDiv.style.width = '700px';
+
+        barDiv.appendChild(bar);
+
+        dataRow.append(nameDiv);
+        dataRow.appendChild(barDiv);
+        dataRow.appendChild(countDiv);
+
+        return dataRow;
+    }
+
+    function getCustomPadding(count) {
+        return (count < 3)? 50: 5;
+    }
+
+    function getWorldPopul(countryNames, countryPopulations) {
+        return countryNames.reduce((sum, name) => sum += countryPopulations.get(name), 0);
+    }
+
+    function getPercentage(value, total) {
+        return (value / total * 100).toFixed(2);
+    }
+</script>
+</html>
