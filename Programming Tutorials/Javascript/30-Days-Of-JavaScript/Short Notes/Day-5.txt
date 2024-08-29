@@ -5,6 +5,8 @@ In JavaScript, Arrays(can be referred to as lists) can have different data types
 
 Arrays themselves are non-primitive, and we can modify values at their indices due to their mutable nature.
 
+Arrays in JavaScript are not contiguous data structures and the data stored in the array can be located in a non-contiguous location.
+
 Some important Array methods and properties:
 
 Array(number of items) -> creates an empty array of given size

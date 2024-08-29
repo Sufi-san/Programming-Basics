@@ -1,0 +1,70 @@
+There are two main types of arrays:
+
+1) Continuous OR Packed (Eg: [1, 2, 3, 4, 5])
+2) Holey (Eg: [1, 2, , 3, 4])
+
+All languages optimize arrays in some way.
+The ways for array optimization in JS depend on what elements the array contains:
+
+1) SMI (small integer)
+2) Double (float, string, function)
+3) Packed element
+
+Thus, based on the type and position of elements present in an array, JS performs a lot of optimizatitons on them internally.
+Many of the in-built methods for array objects are implemented differently for different types of arrays.
+
+In terms of optimization, going from more optimized to less optimized, the order of array types is as follows:
+
+1) PACKED_SMI_ELEMENTS: (Eg: [1, 2.0, 3])
+    - is continuous
+    - contains only small integers
+
+2) PACKED_DOUBLE_ELEMENTS: (Eg: [1, 2, 3.7])
+    - is continuous
+    - contains at least one floating point number, NaN or Infinity
+
+3) PACKED_ELEMENTS: (Eg: [1, '7', '8.8', 'abc'])
+    - is continuous
+    - contains at least one string literal
+
+4) HOLEY_SMI_ELEMENTS: (Eg: [1, , ,4])
+
+5) HOLEY_DOUBLE_ELEMENTS: (Eg: [1.23, , ,1])
+
+6) HOLEY_ELEMENTS: (Eg: ['1.23', 'abc', , ,1])
+
+
+Note: 
+- Once the type of an array changes, by adding a different type of element, that array cannot be changed back to the previous type even if the element that caused the type change is removed.
+Eg: 
+Adding 7.1 to a PACKED_SMI_ELEMENTS type, will change it to PACKED_DOUBLE_ELEMENTS.
+Even if we later remove the element 7.1 from it, the array type will NOT change back to PACKED_SMI_ELEMENTS !!!
+Instead, if we delete/remove the inserted element with no replacement, a hole will be created at that position which will turn the array into the a 'HOLEY' type which will further downgrade optimizations.
+
+
+What goes on behind the scenes when we search for a value inside the array using an index:
+
+1. bound check -> returns undefined if index is out of bound
+2. hasOwnProperty(arr, index) -> checks for value at array's index
+3. hasOwnProperty(arr.prototype, index) -> checks for value in array's prototype.
+4. hasOwnProperty(Object.prototype, index) -> checks for value in the Object's prototype
+
+Note: The 'hasOwnProperty()' is a very expensive check and thus, holes are very expensive in JS.
+
+
+Some more points:
+- Instead of creating arrays with empty spaces from initialization, create an empty array and then 'push' elements inside it later on. 
+Eg:
+    DO NOT:
+        const arr = new Array(2); // HOLEY_SMI
+        arr[0] = 1;
+        arr[1] = 2;
+
+    INSTEAD DO:
+        const arr = [] // PACKED_SMI
+        arr.push(1);
+        arr.push(2);
+
+- prefer internal method implementations provided by Java Script instead of creating your own methods to provide the exact same functionality
+
+- we can use jsvu's 'v8-debug' engine's runtime environment to use the method '%DebugPrint()'. We can find many crucial/additional details about objects by passing them as arguments to the method.

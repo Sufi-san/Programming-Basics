@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 24: Mini Project - Solar System</title>
+    <style>
+        body {
+            background-image: url(https://raw.githubusercontent.com/Sufi-san/30-Days-Of-JavaScript/master/24_Day_Project_solar_system/24_day_starter/images/galaxy.gif);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 15% 10% 15%;
+        }
+
+        h1 {
+            text-shadow: 2px 1px 1px grey;
+            font-family: Arial;
+            text-align: center;
+            margin-bottom: 65px;
+            font-size: 40px;
+        }
+
+        #inp-section {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        #mass-inp {
+            margin-right: 7px;
+            padding: 6px 5px;
+        }
+
+        #planet-select {
+            margin-right: 10px;
+            width: 150px;
+            background-color: white;
+            color:#616161;
+            padding-left: 10px;
+            border: none;
+        }
+
+        #calc-btn {
+            background-color: grey;
+            color: white;
+            padding: 6px 5px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        #disp-container {
+            background-color: rgba(250, 250, 250, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 45px;
+            width: 85%;
+        }
+
+        #instruct-div {
+            background-color: rgba(250, 250, 250, 0.12);
+            text-align: center;
+            padding: 15px 0px;
+            width: 50%;
+        }
+
+        #detail-div {
+            display: grid;
+            grid-template-columns: 0.8fr 1fr;
+            column-gap: 20px;
+        }
+
+        #weight-card-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: right;
+        }
+
+        #weight-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(250, 250, 250, 0.12);
+            text-align: center;
+            padding: 1% 12% 5% 12%;
+        }
+
+        #weight-value {
+            background-color: rgba(250, 250, 250, 0.12);
+            padding: 10% 2.5%;
+            font-weight: bold;
+            border-radius: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculate the weight of an object on a planet</h1>
+    <div id="inp-section">
+        <input type="text" id="mass-inp" placeholder="Mass in Kilogram"/>
+        <select id="planet-select">
+            <option>--select planet--</option>
+        </select>
+        <button id="calc-btn">Calculate weight</button>
+    </div>
+    <div id="disp-container"></div>
+</body>
+<script>
+    const imageURL = 'https://raw.githubusercontent.com/Sufi-san/30-Days-Of-JavaScript/master/24_Day_Project_solar_system/24_day_starter/images/'
+
+    const planetObjects = {
+        mercury: {
+            name: 'mercury',
+            gravityConstant: 3.7
+        }, 
+        venus: {
+            name: 'venus',
+            gravityConstant: 8.87
+        }, 
+        earth: {
+            name: 'earth',
+            gravityConstant: 9.807
+        }, 
+        moon: {
+            name: 'moon',
+            gravityConstant: 1.62
+        }, 
+        mars: {
+            name: 'mars',
+            gravityConstant: 3.71
+        }, 
+        jupiter: {
+            name: 'jupiter',
+            gravityConstant: 24.79
+        }, 
+        saturn: {
+            name: 'saturn',
+            gravityConstant: 10.44
+        }, 
+        uranus: {
+            name: 'uranus',
+            gravityConstant: 8.87
+        }, 
+        neptune: {
+            name: 'neptune',
+            gravityConstant: 11.15
+        }, 
+        pluto: {
+            name: 'pluto',
+            gravityConstant: 0.62
+        }
+    };
+
+    const massInp = document.querySelector('#mass-inp');
+    const planetNameInp = document.querySelector('#planet-select');
+    const calcBtn = document.querySelector('#calc-btn');
+
+    for(const key in planetObjects) {
+        const planetObj = planetObjects[key];
+        const planetName = planetObj.name;
+
+        const selectOption = document.createElement('option');
+        selectOption.appendChild(document.createTextNode(planetName.toUpperCase()));
+        planetNameInp.appendChild(selectOption);
+
+        planetObj.image = getImageElement(planetName);
+    }
+
+    const dispContainer = document.querySelector('#disp-container');
+    const earthIMG = planetObjects['earth'].image;
+    earthIMG.style.maxWidth = '45%';
+    dispContainer.appendChild(earthIMG);
+
+    calcBtn.addEventListener('click', displayWeightInfo);
+
+    function getImageElement(planetName) {
+        const planetImage = document.createElement('img');
+        planetImage.setAttribute('src', imageURL + `${planetName}.png`);
+        return planetImage;
+    }
+
+    function isValidInput() {
+        if(!isValidMass()) return displayInstruction(true);
+        else if(!isValidPlanet()) return displayInstruction(false);
+        return true;
+    }
+
+    function isValidMass() {
+        return !isNaN(parseFloat(massInp.value));
+    }
+
+    function isValidPlanet() {
+        return planetNameInp.value != '--select planet--';
+    }
+
+    function displayInstruction(massInvalid) {
+        dispContainer.style.padding = '20px';
+        const message = (massInvalid)? 'Mass is required': 'You did not choose a planet yet';
+        dispContainer.innerHTML = `<div id='instruct-div'>${message}</div>`;
+        return false;
+    }
+
+    function displayWeightInfo() {
+        if(!isValidInput()) return;
+        dispContainer.innerHTML = '';
+        dispContainer.style.padding = '65px 40px';
+        const planetNameLC = planetNameInp.value.toLowerCase();
+
+        const detailDiv = document.createElement('div');
+        detailDiv.setAttribute('id', 'detail-div');
+
+        const planetIMG = planetObjects[planetNameLC].image;
+        planetIMG.style.maxWidth = '100%';
+
+        const weightCard = document.createElement('div');
+        weightCard.setAttribute('id', 'weight-card');
+
+        const weightText = document.createElement('p');
+        const planetNameSpan = document.createElement('span');
+        planetNameSpan.innerText = planetNameInp.value;
+        planetNameSpan.style.fontWeight = 'bold';
+
+        weightText.appendChild(document.createTextNode('The weight of the object on '));
+        weightText.appendChild(planetNameSpan);
+
+        const weightValue = document.createElement('div');
+        weightValue.setAttribute('id', 'weight-value');
+
+        const objectMass = parseFloat(massInp.value);
+        const gravityConstant = planetObjects[planetNameLC].gravityConstant;
+        weightValue.innerText = `${(objectMass * gravityConstant).toFixed(2)}N`;
+
+        weightCard.appendChild(weightText);
+        weightCard.appendChild(weightValue);
+
+        const weightCardWrapper = document.createElement('div');
+        weightCardWrapper.setAttribute('id', 'weight-card-wrapper');
+        weightCardWrapper.appendChild(weightCard);
+
+        detailDiv.appendChild(planetIMG);
+        detailDiv.appendChild(weightCardWrapper);
+        
+        dispContainer.appendChild(detailDiv);
+    }
+</script>
+</html>
