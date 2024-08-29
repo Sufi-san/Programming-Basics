@@ -1,0 +1,117 @@
+:root {
+    --globe-bg-url: url(https://github.com/Sufi-san/30-Days-Of-JavaScript/blob/master/26_Day_World_countries_data_visualization_2/26_day_starter/images/globe-2.jpg?raw=true);
+    --map-bg-url: url(https://github.com/Sufi-san/30-Days-Of-JavaScript/blob/master/26_Day_World_countries_data_visualization_2/26_day_starter/images/map_image.jpg?raw=true);
+    --country-box-width: 150px;
+}
+
+body {
+    font-family: Arial;
+    color: white;
+    margin: 0;
+}
+
+nav {
+    background-image: 
+        linear-gradient(to bottom, rgba(45, 112, 199, 0.6), rgba(42, 85, 141, 0.247)),
+        var(--globe-bg-url);
+    background-size: cover;
+    background-position: center;
+    height: 460px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    margin-bottom: 0px;
+    font-size: 50px;
+    letter-spacing: 8px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#country-count {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+} 
+
+#selection-status {
+    margin-top: 0px;
+} 
+
+#selection-options {
+    margin-top: 3px;
+    margin-bottom: 25px;
+}
+
+button {
+    color: white;
+    background-color: rgb(150, 102, 199);
+    padding: 12px;
+    font-size: 12px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(86, 22, 146);
+}
+
+#start-wrd-btn {
+    background-color: rgb(86, 22, 146);
+}
+
+#search-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 8px;
+    width: 100%;
+}
+
+#country-searchbar {
+    padding: 10px;
+    border-radius: 30px;
+    border: none;
+    width: 32%;
+    text-align: center;
+    outline: none;
+}
+
+#country-searchbar:focus {
+    outline: 1.5px solid lightblue;
+}
+
+#search-btn {
+    cursor: pointer;
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(6, var(--country-box-width));
+    padding: 60px 70px;
+    justify-content: center;
+    column-gap: 50px;
+    row-gap: 10px;
+}
+
+.country-box-div {
+    background-image: 
+        linear-gradient(to bottom, rgba(126, 175, 240, 0.452), rgba(11, 28, 129, 0.671)), 
+        var(--map-bg-url);
+    background-size: cover;
+    background-position: center;
+    width: var(--country-box-width);
+    height: 150px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bolder;
+    text-shadow: .6px 1px 1px white;
+}
