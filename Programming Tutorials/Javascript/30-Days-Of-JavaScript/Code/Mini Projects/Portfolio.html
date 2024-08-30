@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Project: Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 185px 200px 185px;
+            justify-content: center;
+            font-family: Arial;
+        }
+
+        h1 {
+            color: #212121;
+            font-size: 55px;
+            font-weight: normal;
+            letter-spacing: 15px;
+        }
+
+        #titles {
+            background-color: #e4dacf;
+            padding: 24px 18px;
+            font-weight: 100;
+            font-size: 20px;
+        }
+
+        #icon {
+            margin-right: 30px;
+        }
+
+        #title {
+            display: inline-block;
+            animation: slideToRight 2.5s ease-out 1;
+        }
+
+        @keyframes slideToRight {
+            from {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        #description {
+            line-height: 30px;
+        }
+
+        #events-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            column-gap: 8%;
+            margin-bottom: 10px;
+            padding: 0px 20px;
+        }
+
+        #event {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fefefe;
+            border: 1px solid #f1f1f1;
+            padding: 25% 9%;
+            font-size: 1.2vw;
+            font-weight: 100;
+            text-align: center;
+        }
+
+        #event:hover {
+            background-color: #f1f1f1;
+            font-size: 1.5vw;
+            padding: 23.2% 2%;
+        }
+
+        #technology {
+            font-size: 1.5em;
+            font-weight: bold;
+            animation: fade-in 2.5s 1;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Asabeneh Yetayeh</h1>
+    <div id="titles"></div>
+    <p id="description">I am Asabeneh Yetayeh. I am instructor, developer, motivator and content creator. I love educating people and creating educational materials. In January 2019, I also created a teaching material <b>JavaScript For Everyone</b>. In December 2019, I created <b>30Days Of Python</b> challenge and in January 2020 <b>30 Days Of JavaScript challenge</b>.</p>
+    <div id="events-section"></div>
+    <p>The technologies I teach <span id="technology"></span></p>
+</body>
+<script>
+    const titles = [
+        {icon: '🌱', title: 'Educator'},
+        {icon:'📖' , title: 'Instructor'},
+        {icon: '🔥', title: 'Motivator'},
+        {icon: '🔥', title: 'Motivational Speaker'},
+        {icon: '📔', title: 'Content Creator'},
+        {icon: '💻', title: 'Programmer'}
+    ]
+
+    const events = ['JavaScript for Everyone', '30Days Of Python', '30Days Of JavaScript'];
+
+    const technologies = [
+        {name: 'Python', color: 'blue'},
+        {name: 'Pandas', color: 'blue'},
+        {name: 'Numpy', color: 'blue'},
+        {name: 'JavaScript', color: 'yellow'},
+        {name: 'React', color: 'aqua'},
+        {name: 'Redux', color: '#520c61'},
+        {name: 'Node', color: 'green'},
+        {name: 'MongoDB', color: 'green'}
+    ]
+
+    let [ind1, ind2] = [0, 0];
+
+    const titlesDiv = document.querySelector('#titles');
+    const eventsDiv = document.querySelector('#events-section');
+    const technoDiv = document.querySelector('#technology');
+
+    updateTitle();
+    updateTech();
+
+    events.forEach(event => {
+        const eventBox = document.createElement('div');
+        eventBox.setAttribute('id', 'event');
+
+        eventBox.appendChild(document.createTextNode(event.toUpperCase()));
+        eventsDiv.appendChild(eventBox);
+    })
+
+    setInterval(() => {
+        updateTitle();
+        updateTech();
+    }, 2500);
+
+    function updateTitle() {
+        const titleObj = titles[ind1];
+        titlesDiv.innerHTML = `<span id='icon'>${titleObj.icon}</span><span id='title'>${titleObj.title}</span>`;
+        ind1 = (ind1 + 1) % titles.length;
+    }
+
+    function updateTech() {
+        const technoObj = technologies[ind2];
+        technoDiv.innerHTML = `<span id='technology' style='color: ${technoObj.color}'>${technoObj.name.toUpperCase()}</span>`;
+        ind2 = (ind2 + 1) % technologies.length;
+    }
+</script>
+</html>
