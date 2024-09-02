@@ -1,0 +1,117 @@
+:root {
+    --theme-color: rgb(224, 175, 175);
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    padding-top: 12px;
+    font-family: Arial;
+}
+
+h1 {
+    font-weight: 100;
+    margin-bottom: 30px;
+}
+
+#add-player {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 12px;
+}
+
+input {
+    padding: 12px 10px;
+    border: 1px solid var(--theme-color);
+    font-size: 20px;
+    width: 13%;
+}
+
+input:focus {
+    outline: 1px solid white;
+    border-color: red;
+}
+
+input::placeholder {
+    color: #838383;
+}
+
+#add-btn {
+    color: white;
+    background-color: var(--theme-color);
+    padding: 12px 25px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#instruction {
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+    margin-top: 40px;
+    margin-bottom: 100px;
+    width: 68%;
+    min-width: 600px;
+}
+
+.player-info {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: var(--theme-color);
+    padding: 17px 10px 10px 10px;
+    border-radius: 1.5px;
+}
+
+.player-detail-txt {
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.date-time {
+    font-size: 14px;
+    color: grey;
+    letter-spacing: .5px;
+    margin-bottom: 0;
+}
+
+.buttons-div {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    padding-bottom: 5px;
+}
+
+.del-button, .score-up-button, .score-down-button {
+    background-color: white;
+    font-size: 13px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.del-button {
+    color: red;
+    padding: 20px 22px;
+}
+
+.score-up-button {
+    padding: 20px;
+}
+
+.score-down-button {
+    padding: 20px 22px;
+}
