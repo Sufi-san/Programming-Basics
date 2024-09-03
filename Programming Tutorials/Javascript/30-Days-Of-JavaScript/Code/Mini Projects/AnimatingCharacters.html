@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Project - Animating Characters</title>
+    <style>
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        body, p {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+<script>
+    const colorsList = getRandomColorsList(15);
+    const fontFamilies = ['Arial', 'Helvetica', 'Sans-serif', 'Calibri', 'Courier', 'Times New Roman'];
+
+    const defaultObjDOM = document.createElement('div');
+    defaultObjDOM.style.animation = 'fade-in 3s ease 1';
+    defaultObjDOM.style.fontSize = '100px';
+
+    const textPara = document.createElement('p')
+    const text = '30 DAYS OF JAVASCRIPT\n CHALLENGE 2020\n ASABENEH YETAYEH';
+    fillCharSpans(textPara, text);
+    textPara.style.lineHeight = '1.3em';
+
+    defaultObjDOM.appendChild(textPara);
+    defaultObjDOM.style.width = '90%';
+    defaultObjDOM.style.margin = '40px 50px 0px 50px';
+
+    setInterval(() => {
+        defaultObjDOM.remove();
+
+        const bgColor = getRandomColor();
+        const randomFontFamily = getRandomFontFamily();
+
+        document.body.style.backgroundColor = bgColor;
+        defaultObjDOM.style.backgroundColor = bgColor;
+        defaultObjDOM.style.fontFamily = randomFontFamily;
+
+        const characters = defaultObjDOM.firstElementChild.children;
+        for(let j = 0; j < characters.length; j++) {
+            const charSpan = characters[j];
+            charSpan.style.color = getRandomColor(bgColor);
+        }
+
+        document.body.appendChild(defaultObjDOM);
+    }, 3200);
+
+    function getRandomColorsList(count) {
+        const colorsList = [];
+        const hexCodeChars = '0123456789abcdef'
+        for(let i = 0; i < count; i++) {
+            color = ['#'];
+            for(let i = 0; i < 6; i++) color.push(hexCodeChars[parseInt(Math.random() * 16)]);
+            colorsList.push(color.join(''));
+        }
+        return colorsList;
+    }
+
+    function getRandomColor(skipColor) {
+        let index;
+        do index = parseInt(Math.random() * colorsList.length);
+        while(colorsList[index] == skipColor);
+        return colorsList[index];
+    }
+
+    function fillCharSpans(parent, text) {
+        for(let i = 0; i < text.length; i++) {
+            if(text[i] == '\n') {
+                parent.appendChild(document.createElement('br'));
+                continue;
+            }
+            const charSpan = document.createElement('span');
+            charSpan.innerText = text[i];
+            parent.appendChild(charSpan);
+        }
+    }
+
+    function getRandomFontFamily() {
+        return fontFamilies[parseInt(Math.random() * fontFamilies.length)];
+    }
+</script>
+</html>
