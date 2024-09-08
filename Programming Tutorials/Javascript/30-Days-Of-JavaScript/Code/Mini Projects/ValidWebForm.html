@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Project: Validating Web Forms</title>
+    <style>
+        :root {
+            font-family: Arial;
+            --dark-green: rgb(23, 179, 114)
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 300px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+            row-gap: 10px;
+            margin-top: 20px;
+        }
+
+        .instruction {
+            text-align: center;
+            color: orange;
+            font-weight: bold;
+        }
+
+        label {
+            text-align: left;
+            font-size: 20px;
+            text-shadow: .5px 0px;
+            letter-spacing: .3px;
+            color: #414141;
+        }
+
+        input {
+            border-radius: 4px;
+            border: 1px solid #d1d1d1;
+            font-size: 18px;
+            padding: 10px 18px;
+            outline: none;
+        }
+
+        #submit-btn {
+            color: white;
+            background-color: var(--dark-green);
+            width: 25%;
+            min-width: 100px;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        } 
+        
+    </style>
+</head>
+
+<body>
+    <h1>Validating Web Forms</h1>
+    <form action="submit">
+        <label for="first-name">First Name</label>
+        <input type="text" name="first-name" id="first-name">
+
+        <label for="last-name">Last Name</label>
+        <input type="text" name="last-name" id="last-name">
+
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+
+        <label for="telephone">Telephone</label>
+        <input type="tel" name="telephone" id="telephone">
+
+        <label for="bio">Your bio</label>
+        <input type="text" name="bio" id="bio">
+
+        <input type="button" id="submit-btn" value="Submit">
+    </form>
+</body>
+<script>
+    const form = document.querySelector('form');
+
+    form.childNodes.forEach(node => {
+        if(node.tagName != 'INPUT' || node.type == 'button') return;
+        node.value = '';
+    });
+
+    form.addEventListener('focusout', e => {
+        if(e.target.tagName != 'INPUT') return;
+        if(!isValidInput(e.target.value, e.target.id)) e.target.style.border = '1px solid #d1d1d1';
+    });
+
+    form.addEventListener('input', e => {
+        if(e.target.tagName != 'INPUT') return;
+        const sibling = e.target.nextElementSibling;
+        const hasInstructSibling = sibling.className == 'instruction';
+        if(!isValidInput(e.target.value, e.target.id)) {
+            e.target.style.border = '3px solid red';
+            e.target.style.backgroundColor = 'white';
+            if(!hasInstructSibling) attachInstruction(e.target);
+        }
+        else {
+            e.target.style.border = ' 3px solid var(--dark-green)';
+            if(e.target.id == 'email' || e.target.id == 'telephone') e.target.style.backgroundColor = '#e3f6f5';
+            if(hasInstructSibling) sibling.remove();
+        }
+    });
+
+    form.querySelector('#submit-btn').addEventListener('click', () => {
+        let allValid = true;
+        const inputs = form.querySelectorAll('input');
+        inputs.forEach(input => {
+            if(input.type == 'button' || !allValid) return;
+            allValid &= isValidInput(input.value, input.id);
+        })
+        if(allValid) {
+            alert('Details submitted succesfully');
+            window.location.reload();
+        }
+        else alert('All fields required!');
+    })
+
+    function isValidInput(inputStr, targetID) {
+        switch(targetID) {
+            case 'email': return isValidEmail(inputStr);
+            case 'password': return isValidPassword(inputStr);
+            case 'telephone': return isValidTel(inputStr)
+            case 'bio': return isValidBio(inputStr);
+            default: return isValidName(inputStr);
+        }
+    }
+
+    function isValidName(nameStr) {
+        const length = nameStr.trim().length;
+        const a = length > 2 && length < 17;
+        const b = !nameStr.match(/[^a-zA-Z0-9]/);
+
+        return a && b;
+    }
+
+    function isValidEmail(emailStr) {
+        return emailStr.match(/\w+@[a-zA-Z0-9]+\.[a-z]+$/m) != null;
+    }
+
+    function isValidPassword(password) {
+        const length = password.trim().length;
+        const a = length > 5 && length < 21;
+        const b = !password.match(/[^a-zA-Z0-9@_-]/);
+
+        return a && b;
+    }
+
+    function isValidTel(telStr) {
+        const a = telStr.length == 12;
+        const b = telStr.match(/\d{3}-\d{3}-\d{4}/);
+
+        return a && (b != null);
+    }
+
+    function isValidBio(bioStr) {
+        const length = bioStr.length;
+        const a = length > 7 && length < 80;
+        const b = !bioStr.match(/[^ a-z_-]/);
+
+        return a && b;
+    }
+
+    function attachInstruction(target) {
+        const id = target.id;
+        const nameInstruction = ' name must be alphanumeric and contain 3 - 16 characters';
+        let message = '';
+        switch(id) {
+            case 'first-name': {
+                message = 'First' + nameInstruction;
+                break;
+            }
+            case 'last-name': {
+                message = 'Last' + nameInstruction;
+                break;
+            }
+            case 'email': {
+                message = 'Email must be a valid address, e.g: example@example.com';
+                break;
+            }
+            case 'password': {
+                message = 'Password must be alphanumeric (@, _ and - are also allowed) and between 6 - 20 characters';
+                break;
+            }
+            case 'telephone': {
+                message = 'A valid Telephone number (10 digits and 333-333-3334)';
+                break;
+            }
+            case 'bio': {
+                message = 'Bio must contain only lowercase letters, underscores, hyphens and be 8 - 50 characters'
+            }
+        }
+
+        const instructPara = document.createElement('p');
+        instructPara.appendChild(document.createTextNode(message));
+        instructPara.setAttribute('class', 'instruction');
+
+        target.after(instructPara);
+    }
+
+</script>
+</html>

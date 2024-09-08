@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/8bf040821d.js" crossorigin="anonymous"></script>
+    <title>Mini Project: Final World Countries Data Visualization</title>
+    <link rel="stylesheet" href="WCDFinal.css">
+</head>
+<body>
+    <header>
+        <h2 id="header-title">World Countries Data</h2>
+        <p id="country-count-txt"></p>
+        <p id="matched-countries-txt"></p>
+    </header>
+    <div id="search-section">
+        <div id="search-bar-div">
+            <input id="search-bar" type="text" placeholder="Search countries by name, city and languages">
+        </div>
+        <div id="search-options">
+            <div id="sort-buttons-div">
+                <button id="name-btn">NAME <i class="fas fa-down-long arrow-icon" style="opacity: 1"></i></button>
+                <button id="capital-btn">CAPITAL <i class="fas fa-down-long arrow-icon"></i></button>
+                <button id="popul-btn">POPULATION <i class="fas fa-down-long arrow-icon"></i></button>
+            </div>
+            <a href="#data-visual-header-div"><i id="stats-icon" class="fas fa-chart-column"></i></a>
+        </div>
+    </div>
+    <main>
+        <div id="country-boxes-div">
+
+        </div>
+        <div id="data-visual-header-div">
+            <div id="choice-buttons-div">
+                <button id="vis-popul-btn">POPULATION</button>
+                <button id="vis-lang-btn">LANGUAGES</button>
+            </div>
+            <p id="visual-info">10 most populated countries in the world</p>
+        </div>
+        <div id="visualisation-div">
+            
+        </div>
+    </main>
+    <footer id="footer">
+        <p style="font-size: 15px">Developed By SC</p>
+        <a href="#header-title"><button id="jump-top-btn"><i class="fas fa-arrow-up"></i></button></a>
+    </footer>
+</body>
+<script src="WCDFinal.js"></script>
+</html>
