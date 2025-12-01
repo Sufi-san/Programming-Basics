@@ -1,0 +1,116 @@
+Summary: JVM Memory Management (Crucial for Revisions)
+
+This document demystifies memory management within the Java Virtual Machine (JVM), specifically focusing on JDK 11 onwards.
+
+I. JVM Memory Structure:
+The JVM allocates native memory from the OS, dividing it into several key areas:
+
+    Heap Memory:
+
+        Purpose: Stores objects and dynamic data. Largest memory block.
+
+        Management: Where Garbage Collection (GC) occurs.
+
+        Control: Size controlled by Xms (initial) and Xmx (max) flags.
+
+        Divisions:
+
+            Young Generation (New Space): For new objects. Managed by Minor GC.
+
+                Eden Space: Where new objects are initially created.
+
+                Survivor Space (S0 & S1): Objects surviving Minor GC are moved here (two halves, toggling "To" and "From" space).
+
+            Old Generation (Tenured Space): For objects that survived multiple Minor GCs (reached max tenure threshold). Managed by Major GC.
+
+    Thread Stacks:
+
+        Purpose: Stack memory per thread. Stores thread-specific static data, method frames, local variables (primitives), arguments, return values, and pointers to Heap objects.
+
+        Management: Automatically managed by the OS.
+
+        Control: Size controlled by Xss flag.
+
+        Characteristic: Last In First Out (LIFO), very fast. Source of "Stack Overflow" errors.
+
+    Meta Space:
+
+        Purpose: Part of native memory (no upper limit by default). Replaced PermGen Space (pre-JDK 8). Used by class loaders to store class definitions.
+
+        Control: Can set limits using XX:MetaspaceSize and -XX:MaxMetaspaceSize to prevent OS swapping.
+
+    Code Cache:
+
+        Purpose: Stores JIT (Just In Time) compiled code blocks for frequently accessed code, improving performance by avoiding re-interpretation.
+
+    Shared Libraries:
+
+        Purpose: Stores native code for shared libraries, loaded once per process by the OS.
+
+II. JVM Memory Usage (Stack vs. Heap):
+
+    Stack: Stores primitive local variables, method call frames, and pointers (references) to objects located in the Heap. Managed by OS (fast, LIFO).
+
+    Heap: Stores all objects (reference types like String, Integer, Employee instances, arrays, etc.) and global variables. Managed by JVM's GC (slower, dynamic).
+
+III. JVM Memory Management: Garbage Collection (GC):
+
+    Goal: Automatically manage Heap memory by freeing unused (orphan) objects to prevent "Out Of Memory" errors and fragmentation.
+
+    Process: A background daemon thread.
+
+        GC Roots: Objects reachable from "GC Roots" (e.g., active stack frames, static fields) are considered "alive."
+
+        Generational GC: Objects are grouped by age and collected in stages (Young vs. Old).
+
+        Mark & Sweep (Common Algorithm):
+
+            Marking: Identify and mark reachable ("alive") objects.
+
+            Sweeping: Remove unmarked ("orphan") objects, marking space as free.
+
+            Compacting (Optional): Move alive objects together to reduce fragmentation and improve allocation speed.
+
+        "Stop-the-world" pauses: Many GC types temporarily halt application execution during GC, impacting "pause-time."
+
+    GC Goals/Metrics:
+
+        Throughput: High (low GC time relative to app time).
+
+        Pause-time: Low (minimal interruption to app execution).
+
+        Footprint: Low (minimal heap size used).
+
+    GC Collectors (JDK 11+):
+
+        Serial Collector (-XX:+UseSerialGC): Single-threaded, for small datasets, single-processor machines.
+
+        Parallel Collector (-XX:+UseParallelGC): Multi-threaded, high throughput, for multi-processor systems, medium/large datasets.
+
+        Garbage-First (G1) Collector (-XX:+UseG1GC): Mostly concurrent, low pause times, high throughput, default on modern machines with large memory.
+
+        Z Garbage Collector (ZGC) (-XX:+UseZGC): New (experimental JDK 11), scalable, low-latency, fully concurrent, for very large heaps (multi-terabytes).
+
+    GC Process Types:
+
+        Minor GC (Young GC):
+
+            Target: Young Generation (Eden, Survivor spaces).
+
+            Trigger: Eden space full.
+
+            Process: Marks alive objects, moves them to "To Space" (S0 or S1), increments age. Objects reaching "max-age threshold" (default 15) or not fitting are prematurely promoted to Old Gen. Empties Eden and "From Space."
+
+            Characteristic: Fast, negligible pause-time.
+
+        Major GC:
+
+            Target: Old Generation (Tenured Space).
+
+            Trigger: Tenured space full, System.gc() call, or insufficient memory from Minor GC/Metaspace full.
+
+            Process: Marks alive objects in Old Gen (and Young Gen if triggered by Minor GC), removes orphans.
+
+            Full GC: If Heap is empty, JVM reclaims Metaspace as well.
+
+            Characteristic: Can cause more significant pauses.

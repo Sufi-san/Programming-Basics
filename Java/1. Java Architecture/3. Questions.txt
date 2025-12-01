@@ -1,0 +1,15 @@
+What is a virtual machine and how does it simulate a computing environment?
+What are the two main types of virtual machines, and which category does the JVM fall into?
+How does Java’s approach to code execution differ from purely compiled or interpreted languages?
+What components make up the Java architecture, and how do the JDK and JRE differ?
+Is the JVM platform-independent or platform-dependent? Explain why.
+What happens when you run a Java program in terms of JVM instance lifecycle?
+What are the three primary components of the JVM architecture?
+Describe the role of the ClassLoader and its three phases.
+What are the three main ClassLoaders in the JVM and what do they load?
+What happens during the linking phase of class loading in the JVM?
+What is the Runtime Data Area and what are its main sub-areas?
+Which parts of the Runtime Data Area are shared among threads, and which are thread-specific?
+What are the components of the Execution Engine, and how do they contribute to JVM performance?
+How does the Garbage Collector help in managing memory automatically in Java?
+Why was Java’s introduction significant in terms of platform dependence and memory management?

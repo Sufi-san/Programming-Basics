@@ -1,0 +1,11 @@
+Java literals are fixed values like numbers, characters, or strings directly used in code. Identifiers are names for variables, methods, and classes. Octal literals start with 0; hexadecimal with 0x or 0X; binary literals with 0b or 0B. Readability can be improved using underscores in numbers.
+
+Floating-point literals default to double unless suffixed with F/f. Java also supports hexadecimal floating-point notation using P/p for powers of two.
+
+Boolean literals are only true and false; they aren’t numerically equivalent. Strings are treated as objects, not arrays.
+
+The Object class is the universal superclass for all Java classes and provides methods like toString(), equals(), and hashCode(). Wrapper classes like Integer and Float inherit from the abstract Number class and are immutable, they are used to wrap primitive values to make those primitives behave like objects (useful for data handling in structures that require objects as input).
+
+Automatic type conversion occurs when types are compatible and the destination type is larger. Otherwise, explicit casting is needed. Byte, short, and char are promoted to int in expressions, which may cause implicit type mismatches.
+
+Expression evaluation respects type promotion: byte → int → long → float → double, depending on operands.

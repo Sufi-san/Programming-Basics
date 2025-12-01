@@ -1,0 +1,13 @@
+The Java Virtual Machine (JVM) is a crucial part of Java’s architecture that interprets compiled Java bytecode into machine code for execution. Unlike compiled languages like C++, Java uses a hybrid approach where source code compiles into platform-independent bytecode, executed by the JVM which is platform-dependent.
+
+There are two main types of virtual machines: System-based (simulating entire hardware) and Application-based (running single processes like JVM). The JVM falls into the latter category and always comes bundled with the Java Development Kit (JDK) or Java Runtime Environment (JRE).
+
+The JVM specification defines how it should operate, but implementations vary by OS (e.g., HotSpot, IBM’s J9). Each running Java program creates its own JVM instance, which starts execution from the mandatory public static void main() method and shuts down when all non-daemon threads finish or System.exit() is called.
+
+JVM architecture consists of three main components:
+
+ClassLoader: Loads classes in phases (loading, linking, initialization) and manages core, extension, and application classes using delegation.
+Runtime Data Area: Divides memory into Method Area, Heap, Stack, Program Counter (PC) registers, and Native Method Area, with some areas shared among threads and others unique.
+Execution Engine: Converts bytecode to machine code through an Interpreter or speeds execution with a Just-In-Time (JIT) compiler; includes Garbage Collector to automatically manage memory.
+
+Java’s JVM abstracts platform differences and manual memory management, enabling platform-independent code execution and simplifying developer workload.

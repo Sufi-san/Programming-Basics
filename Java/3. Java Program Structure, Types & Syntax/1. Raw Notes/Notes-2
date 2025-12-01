@@ -1,0 +1,59 @@
+Literals in Java are fixed values assigned to variables. They represent boolean, character, numeric, or string data directly in the code. Example: 4 is an integer literal.
+
+Octal literals start with a leading 0 (zero). For example, 07 is valid, but 09 is invalid because 9 is not a valid octal digit (range is 0–7).
+Hexadecimal values are denoted with a prefix 0x or 0X. The digits range from 0 to 15, where A–F (or a–f) represent 10–15.
+A literal can be assigned to byte or short if within range. To explicitly declare a long literal, use L or l suffix.
+From JDK 7 onwards, binary literals are supported. Prefix them with 0b or 0B. Example: int x = 0b1010; (represents 10)
+Underscores can be used in numeric literals for readability. Example: int x = 123_456_789 is equivalent to 123456789.
+Floating-point literals default to double. Append f or F to denote float type. Example: float pi = 3.14f;
+Hexadecimal floating-point literals use P or p instead of E/e. Example: 0x12.2P2 represents 72.5.
+Boolean literals in Java are only true and false. They are not convertible to 1 and 0 like in C or JavaScript.
+Strings in Java are not character arrays like C/C++; they are objects. This enables powerful string handling features.
+
+Identifiers are names assigned to Java elements like variables, methods, classes, interfaces, and packages.
+Class names should start with uppercase letters.
+
+Type conversion in Java happens in two ways: automatic and explicit (casting).
+
+Automatic type conversion occurs when:
+
+    Types are compatible.
+    Destination type is larger than source type.
+
+Example: int to long is automatic. Also, assigning literal integers to byte, short, or char is allowed if within range.
+
+Casting is required for narrowing conversions (e.g., int to byte). Example: byte b = (byte) a;
+Floating-point to integer conversions result in truncation (removal of fractional part).
+Java promotes operands to int in expressions involving byte, short, and char. Example: byte b = 50; b = b * 2; causes error due to promotion of b * 2 to int.
+
+Promotion rules:
+
+    byte, short, char → promoted to int
+
+    if any operand is long → result is long
+
+    if any operand is float → result is float
+
+    if any operand is double → result is double
+
+In expression: double result = (f * b) + (i / c) - (d * s);
+
+    f * b → float
+
+    i / c → int
+
+    d * s → double
+
+    float + int = float → float - double = double
+    
+The remainder operation (a % b) satisfies the equation: (a / b) * b + a % b = a. Example: -15 % 2 = -1 and 15 % -2 = 1    
+    
+Object class is the superclass of all classes in Java. Located in java.lang package. If a class doesn’t explicitly extend another class, it inherits from Object directly. Methods in Object include: toString(), hashCode(), equals(), getClass(), clone(), finalize(), etc.
+
+The Number class in java.lang is an abstract class that has sub-classes: Byte, Short, Integer, Long, Float, and Double. These are immutable wrapper classes for primitive number types.
+
+To see where applications are loaded from, use: echo $PATH (on terminal)
+To inspect control flow and variable changes, use breakpoints and debugger. Values can be edited in the debugger to test scenarios.
+Command-click (Mac) or Ctrl-click (Windows) on class names to view their source file in IDEs like IntelliJ or Eclipse.
+javac -d . cmd.java compiles cmd.java and stores the class file in the current directory structure.
+    

@@ -1,0 +1,38 @@
+Revision Questions (Capture the Crux):
+
+    Core Components: List the main memory areas within the JVM (JDK 11 onwards) and briefly describe what each is primarily used for.
+
+    Stack vs. Heap:
+
+        What kind of data is stored in the Stack vs. the Heap?
+        How is memory managed in each?
+        What are the performance characteristics and limitations of each (e.g., speed, size, error types)?
+        How do objects (reference types) and primitives interact with Stack and Heap memory?
+
+    Garbage Collection (GC) Fundamentals:
+
+        What is the primary purpose of JVM's Garbage Collection?
+        What are "GC Roots," and why are they important in GC?
+        Explain the two (or three) main phases of a Mark & Sweep GC.
+        What are the three main goals or metrics used to evaluate GC performance?
+
+    Generational GC:
+
+        Explain the concept of "generational" garbage collection in JVM.
+        Describe the difference between "Young Generation" and "Old Generation" in the Heap.
+
+    Minor vs. Major GC:
+
+        When is a Minor GC typically triggered, and what memory areas does it primarily clean?
+        When is a Major GC typically triggered, and what memory areas does it clean?
+        What is "premature promotion" during Minor GC?
+
+    GC Collectors (JDK 11+):
+
+        Name at least three different GC algorithms available in JDK 11 and state their primary focus (e.g., throughput, low pause).
+        Which GC is often the default on modern machines with large memory?
+        Which experimental GC in JDK 11 aims for extremely low latency for very large heaps?
+
+    Memory Tuning: What JVM flags can be used to control the initial and maximum size of the Heap, and the stack size per thread?
+
+    Metaspace: What is Metaspace, and why is it important to consider its size and potential for growth?

@@ -1,0 +1,30 @@
+* Theoretical:
+
+What are literals in Java? Give examples.
+How is an octal literal represented in Java?
+Why does the value 09 cause a compile-time error?
+What is the range of hexadecimal digits and how are they represented?
+How do you define a long literal in Java?
+What prefix is used to specify a binary literal?
+How can underscores be used in numeric literals?
+What suffix is needed to declare a float literal?
+What is the significance of 'P' in hexadecimal floating-point literals?
+What values can a boolean literal take in Java?
+How are strings implemented differently in Java compared to C/C++?
+Explain the rule: (a / b) * b + a % b = a using an example.
+How can you view the actual class source from an IDE?
+What is the use of javac -d . cmd.java?
+What is the Object class and why is it important in Java?
+Name a few methods available in the Object class.
+What is the Number class and what are its sub-classes?
+What are the two conditions for automatic type conversion in Java?
+When is explicit casting needed? Give an example.
+What happens when a float is converted to an int?
+Why does byte b = b * 2; produce an error?
+What are Java’s type promotion rules in expressions?
+In the expression (f * b) + (i / c) - (d * s), explain the type promotion sequence.
+Why are wrapper classes like Integer and Float considered immutable?
+
+* Practice:
+
+

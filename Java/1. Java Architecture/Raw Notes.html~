@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Understanding How the Java Virtual Machine (JVM) Works</title>
+<style>
+body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; max-width: 900px; }
+h1, h2, h3, h4 { color: #2c3e50; }
+ul { margin-top: 0; }
+img { max-width: 100%; height: auto; margin: 20px 0; border: 1px solid #ddd; padding: 5px; background: #f9f9f9; }
+code { background: #eee; padding: 2px 4px; border-radius: 4px; font-family: monospace; }
+</style>
+</head>
+<body>
+
+<h1>Understanding How the Java Virtual Machine (JVM) Works</h1>
+<a target="blank" href=”https://hasithas.medium.com/understanding-how-java-virtual-machine-jvm-works-a1b07c0c399a”>Source Article</a>
+
+<p>Most developers treat the JVM as a black box: you write code, compile it, and then get your output. But if you're a Java software engineer, understanding how the Java Virtual Machine actually operates can be incredibly valuable. To grasp the JVM, you first need to understand what a virtual machine is.</p>
+
+<p>The term "virtual machine" consists of two parts:</p>
+<ul>
+<li><strong>Virtual</strong> — something that seems to exist but doesn’t physically.</li>
+<li><strong>Machine</strong> — a device or system designed to make tasks easier.</li>
+</ul>
+
+<p>So, what exactly is a virtual machine when you combine these ideas? Simply put, a virtual machine is an environment that doesn’t physically exist but simulates real hardware or software, making it feel as if it does.</p>
+
+<p>There are two main types of virtual machines:</p>
+<ul>
+<li><strong>System-based Virtual Machines (SVMs)</strong></li>
+<li><strong>Application-based Virtual Machines (AVMs)</strong></li>
+</ul>
+
+<p>System-based VMs act as substitutes for physical computers. They run on a host machine and share its hardware resources, allowing multiple independent VMs to operate simultaneously on the same hardware. Examples include Hypervisor and Xen.</p>
+
+<p>In contrast, Application-based VMs run a single process as an application on the host OS without directly interacting with hardware. These are also called process-based virtual machines. The JVM falls under this category. For those familiar with C#, the Common Language Runtime (CLR) is a comparable example of an AVM.</p>
+
+<h2>Java Architecture</h2>
+
+<p>Languages like C and C++ compile source code directly into OS-specific machine code, so they’re called compiled languages. Conversely, languages like JavaScript and Python execute code directly without compilation, making them interpreted languages.</p>
+
+<p>Java is unique because it blends both compilation and interpretation. Java source code first compiles into bytecode stored in class files. This bytecode is then executed by the JVM using an interpreter or a Just-In-Time (JIT) compiler.</p>
+
+<p>Notably, the JVM isn’t a standalone installation you can download. It always comes bundled with the Java Development Kit (JDK) or Java Runtime Environment (JRE). To clarify this, let’s break down the three major components of the Java architecture:</p>
+
+<ol>
+<li><strong>Java Development Kit (JDK)</strong></li>
+<li><strong>Java Runtime Environment (JRE)</strong></li>
+<li><strong>Java Virtual Machine (JVM)</strong></li>
+</ol>
+
+<h4>JDK vs. JRE</h4>
+<ul>
+<li><strong>JDK:</strong> Provides the tools necessary to develop and run Java programs. It includes the JRE along with compilers and debuggers. Java developers use the JDK.</li>
+<li><strong>JRE:</strong> Offers the environment required to run Java applications but does not include development tools. It’s intended for users who only want to execute Java programs.</li>
+</ul>
+
+<img src="https://miro.medium.com/v2/resize:fit:378/1*c4YlQwhIcM1rgwSu_IK0rw.png" alt="Java Development Kit (JDK)" />
+
+<h2>What is JVM?</h2>
+
+<p>The JVM is not a program but a specification that defines how a Java Virtual Machine should function and be implemented. Anyone can build their own JVM based on this specification. Popular JVM implementations include IBM’s J9, HotSpot VM, and previously JRockit and Dalvik (now discontinued).</p>
+
+<h4>Is JVM Platform Independent?</h4>
+
+<p>The answer is no—JVM is platform-dependent. When you install the JRE on Windows, it sets up the JVM tailored to Windows OS. Likewise, on Linux, it configures the JVM for that environment. So, while Java code is platform-independent, JVM implementations are specific to their operating systems.</p>
+
+<img src="https://miro.medium.com/v2/resize:fit:573/1*GX-qoxfahR3F3OHRMSsYRA.png" alt="JVM Platform Dependence" />
+
+<h2>JVM Instance Lifecycle</h2>
+
+<p>Consider a simple HelloWorld program. You compile it using <code>javac HelloWorld.java</code> to generate bytecode, then run it with <code>java HelloWorld</code>. When you execute the latter command, the OS launches a JVM instance to run your program.</p>
+
+<p>Your Java class must contain a <code>public static void main</code> method, as this acts as the entry point for the JVM to start execution. Each running Java program corresponds to its own JVM instance. Running three separate Java programs means three JVM instances on your computer. When no Java applications are running, no JVM instances exist.</p>
+
+<p>JVM instances terminate in one of two ways:</p>
+<ol>
+<li>When all non-daemon threads finish execution (the JVM shuts down only if no active non-daemon threads remain).</li>
+<li>When the <code>System.exit()</code> method is called.</li>
+</ol>
+
+<p>We’ll explore daemon vs. non-daemon threads in detail later. For now, let’s dive into the architecture of the JVM.</p>
+
+<h2>JVM Architecture</h2>
+
+<p>The JVM consists of three primary components:</p>
+<ul>
+<li><strong>ClassLoader</strong></li>
+<li><strong>Runtime Data Area (Memory Area)</strong></li>
+<li><strong>Execution Engine</strong></li>
+</ul>
+
+<img src="https://miro.medium.com/v2/resize:fit:624/1*r0J1iNrB8pqow-FjPCBvwg.png" alt="JVM Architecture" />
+
+<h4>ClassLoader</h4>
+
+<p>When the JVM needs a class, the ClassLoader loads it into memory using its fully qualified name. However, no single ClassLoader loads all classes; they load classes based on type and path. Typically, the class containing the <code>main()</code> method loads first. If the required classes aren’t found, the JVM throws <code>NoClassDefFoundError</code> or <code>ClassNotFoundException</code>.</p>
+
+<p>The ClassLoader operates in three phases:</p>
+<ol>
+<li><strong>Loading</strong></li>
+<li><strong>Linking</strong></li>
+<li><strong>Initialization</strong></li>
+</ol>
+
+<p><strong>Loading:</strong><br />
+The JVM reads class metadata such as:</p>
+<ul>
+<li>Fully qualified class name (FQCN)</li>
+<li>Instance variables</li>
+<li>Parent class info</li>
+<li>Type (class, interface, enum)</li>
+</ul>
+
+<p>Then, it creates a special object of type <code>Class</code> for each loaded class, stored in the heap. If the class is loaded again, the JVM reuses the existing <code>Class</code> object.</p>
+
+<p>There are three main ClassLoaders:</p>
+<ul>
+<li><strong>Bootstrap ClassLoader:</strong> The root loader, loading core Java libraries from the JRE.</li>
+<li><strong>Extension ClassLoader:</strong> Loads standard extensions from the JRE’s <code>lib/ext</code> directory.</li>
+<li><strong>Application ClassLoader:</strong> Loads classes from the application’s classpath, usually the current directory.</li>
+</ul>
+
+<p>The ClassLoader follows three principles: delegation, visibility, and uniqueness, which we will explore later.</p>
+
+<img src="https://miro.medium.com/v2/resize:fit:624/1*X2ZrGzcC51fHsek_I1BCjA.png" alt="Class Loader" />
+
+<p><strong>Linking:</strong><br />
+This phase has three steps:</p>
+<ul>
+<li><strong>Verification:</strong> Ensures the bytecode is valid and safe to run. The bytecode verifier checks that the code originates from a trustworthy compiler and maintains proper structure. If verification fails, the JVM throws a runtime <code>VerifierException</code>.</li>
+<li><strong>Preparation:</strong> Allocates memory for static variables and assigns them default values, not the ones specified in the code. For example, a static int is set to 0 by default here.</li>
+<li><strong>Resolution:</strong> Translates symbolic references (like class and method names) into actual memory addresses, making the code ready for execution.</li>
+</ul>
+
+<p><strong>Initialization:</strong><br />
+Finally, variables receive their actual values from the code, and any static blocks execute. While some steps in linking can occur concurrently or sequentially, every class must be initialized before being actively used.</p>
+
+<h4>Runtime Data Area</h4>
+
+<p>The Runtime Data Area is the JVM’s memory, divided into five sub-areas:</p>
+<ul>
+<li><strong>Method Area:</strong> Stores class-level data like method code and constructors.</li>
+<li><strong>Heap:</strong> Stores all instantiated objects.</li>
+<li><strong>Stack:</strong> Holds stack frames, each representing method calls and their local variables.</li>
+<li><strong>Program Counter (PC) Registers:</strong> Keep track of the next instruction for the current thread.</li>
+<li><strong>Native Method Area:</strong> Supports native methods written in other languages like C or C++.</li>
+</ul>
+
+<p>Method Area and Heap are shared across the entire JVM, while Stack, PC registers, and Native Method Area are unique to each thread.</p>
+
+<img src="https://miro.medium.com/v2/resize:fit:624/1*OEOawTvVHF-BcqW1Z4Iy3Q.png" alt="Runtime Data Area" />
+
+<h4>Execution Engine</h4>
+
+<p>The Execution Engine has three components:</p>
+<ul>
+<li><strong>Interpreter:</strong> Reads bytecode line-by-line and converts it into machine code. While quick for single instructions, it’s slower over time because it reinterprets repeated code.</li>
+<li><strong>JIT Compiler (Just-In-Time Compiler):</strong> To speed things up, if a method is called repeatedly, the JIT compiles the entire bytecode of that method into native machine code, which runs faster. It includes an Intermediate Code Generator, Code Optimizer, Target Code Generator, and Profiler.</li>
+<li><strong>Garbage Collector (GC):</strong> Unlike languages where developers manually manage memory, Java’s GC runs in the background, automatically reclaiming memory from objects no longer in use, preventing memory leaks and crashes like <code>OutOfMemoryError</code>.</li>
+</ul>
+
+<img src="https://miro.medium.com/v2/resize:fit:624/1*JRZ-0Trwsm5ecouvdx9bOw.png" alt="Execution Engine" />
+
+<p>When Java launched in 1996, software was typically platform-dependent, and memory management was manual. Java changed the game by abstracting these complexities, allowing developers to focus on coding rather than low-level details.</p>
+
+</body>
+</html>
